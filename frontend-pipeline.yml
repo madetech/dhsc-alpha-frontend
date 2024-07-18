@@ -15,7 +15,7 @@ variables:
   imageRepository: 'dapalpha'
   containerRegistry: 'dapalpha.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'latest'
   azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
 
   # Agent VM image name
