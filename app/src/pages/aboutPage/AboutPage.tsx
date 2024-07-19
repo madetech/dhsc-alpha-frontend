@@ -3,8 +3,8 @@ import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
 import { Link } from 'react-router-dom';
 
-function AboutPage() {
-    const pageHeader = 'This is a about page to test routing';
+const AboutPage: React.FC = () => {
+    const pageHeader: String = 'This is a about page to test routing';
 
     return (
         <>
@@ -19,6 +19,6 @@ function AboutPage() {
             </Layout>
         </>
     );
-}
+};
 
 export default AboutPage;

@@ -11,7 +11,7 @@ export function manageFocus(element: HTMLElement): void {
                 e.preventDefault();
                 element.removeAttribute('tabIndex');
             },
-            { once: true },
+            { once: true }
         );
     }
 
@@ -19,7 +19,6 @@ export function manageFocus(element: HTMLElement): void {
 }
 
 export function focusLayoutDiv() {
-
     const layoutDiv = document?.querySelector('div#layout');
     if (layoutDiv) {
         manageFocus(layoutDiv as HTMLDivElement);

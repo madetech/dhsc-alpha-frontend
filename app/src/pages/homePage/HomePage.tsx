@@ -3,7 +3,7 @@ import Layout from '../../components/layout/Layout';
 import { Link } from 'react-router-dom';
 import * as GovUK from 'govuk-react';
 
-function HomePage() {
+const HomePage: React.FC = () => {
     const pageHeader = 'Welcome to the dhsc-alpha-frontend application.';
 
     return (
@@ -17,6 +17,6 @@ function HomePage() {
             </Layout>
         </>
     );
-}
+};
 
 export default HomePage;
