@@ -35,12 +35,14 @@ stages:
                       key: 'npm | "$(Agent.OS)" | package-lock.json'
                       restoreKeys: |
                           npm | "$(Agent.OS)"
-                      path: '$(Build.SourcesDirectory)/node_modules'
+                      path: '$(Build.SourcesDirectory)/app/node_modules'
                 - script: |
+                      cd app
                       echo "Running npm ci..."
                       npm ci
                   displayName: 'Install dependencies'
                 - script: |
+                      cd app
                       echo "Running tests..."
                       npm test
                   displayName: 'Run tests'
