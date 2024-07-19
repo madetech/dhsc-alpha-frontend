@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
             <Layout>
                 <GovUK.H1>{pageHeader}</GovUK.H1>
                 <GovUK.Paragraph> Welcome to the Example App</GovUK.Paragraph>
-                <GovUK.Link as={Link} to="/about-page">
+                <GovUK.Link as={Link} to="/about">
                     About us
                 </GovUK.Link>
             </Layout>
