@@ -4,59 +4,85 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- main
+    - main
 
 resources:
-- repo: self
+    - repo: self
 
 variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'b91f7c94-ac1f-4b09-9b6d-d83d12085985'
-  imageRepository: 'dapalpha'
-  containerRegistry: 'dapalpha.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
-  tag: '$(Build.BuildId)'
-  azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
+    # Container registry service connection established during pipeline creation
+    dockerRegistryServiceConnection: 'b91f7c94-ac1f-4b09-9b6d-d83d12085985'
+    imageRepository: 'dapalpha'
+    containerRegistry: 'dapalpha.azurecr.io'
+    dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
+    tag: '$(Build.BuildId)'
+    azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+    # Agent VM image name
+    vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+    - stage: Test
+      displayName: Run tests
+      jobs:
+          - job: Test
+            displayName: Run unit tests
+            pool:
+                vmImage: $(vmImageName)
+            steps:
+                - task: Cache@2
+                  inputs:
+                      key: 'npm | "$(Agent.OS)" | package-lock.json'
+                      restoreKeys: |
+                          npm | "$(Agent.OS)"
+                      path: '$(Build.SourcesDirectory)/node_modules'
+                - script: |
+                      echo "Running npm ci..."
+                      npm ci
+                  displayName: 'Install dependencies'
+                - script: |
+                      echo "Running tests..."
+                      npm test
+                  displayName: 'Run tests'
 
-- stage: Deploy
-  displayName: Deploy to Azure Web App
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'dapalpha-dev-app'
-    pool:
-      vmImage: 'ubuntu-latest'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebAppContainer@1
-            inputs:
-              appType: 'webAppLinux'
-              appName: 'dapalpha-dev-app'
-              azureSubscription: $(azureSubscription)
-              containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+stage:
+    - stage: Build
+      displayName: Build and push stage
+      dependsOn: Test
+      condition: succeeded('Test')
+      jobs:
+          - job: Build
+            displayName: Build
+            pool:
+                vmImage: $(vmImageName)
+            steps:
+                - task: Docker@2
+                  displayName: Build and push an image to container registry
+                  inputs:
+                      command: buildAndPush
+                      repository: $(imageRepository)
+                      dockerfile: $(dockerfilePath)
+                      containerRegistry: $(dockerRegistryServiceConnection)
+                      tags: |
+                          $(tag)
+
+    - stage: Deploy
+      displayName: Deploy to Azure Web App
+      dependsOn: Build
+      condition: succeeded()
+      jobs:
+          - deployment: Deploy
+            displayName: Deploy
+            environment: 'dapalpha-dev-app'
+            pool:
+                vmImage: 'ubuntu-latest'
+            strategy:
+                runOnce:
+                    deploy:
+                        steps:
+                            - task: AzureWebAppContainer@1
+                              inputs:
+                                  appType: 'webAppLinux'
+                                  appName: 'dapalpha-dev-app'
+                                  azureSubscription: $(azureSubscription)
+                                  containers: '$(containerRegistry)/$(imageRepository):$(tag)'
