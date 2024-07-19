@@ -2,6 +2,7 @@ import React, { MouseEvent, useRef } from 'react';
 import type { ReactNode } from 'react';
 import * as GovUK from 'govuk-react';
 import { manageFocus } from '../../helpers/ManageFocus';
+import { Link } from 'react-router-dom';
 
 type Props = {
     children: ReactNode;
@@ -41,8 +42,17 @@ const Layout: React.FC<Props> = ({ children }) => {
             >
                 Skip to main content
             </GovUK.SkipLink>
-            <GovUK.TopNav />
+            <GovUK.TopNav
+                serviceTitle={
+                    <GovUK.TopNav.Anchor as={Link} to="/">
+                        DHSC Data Access Tool Alpha
+                    </GovUK.TopNav.Anchor>
+                }
+            />
             <GovUK.Page.WidthContainer>
+                <GovUK.PhaseBanner level="alpha">
+                    This part of GOV.UK is being built
+                </GovUK.PhaseBanner>
                 <GovUK.Page.Main>
                     <div ref={mainRef}>{children}</div>
                 </GovUK.Page.Main>
