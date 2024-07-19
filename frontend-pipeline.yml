@@ -45,7 +45,6 @@ stages:
                       npm test
                   displayName: 'Run tests'
 
-stage:
     - stage: Build
       displayName: Build and push stage
       dependsOn: Test
