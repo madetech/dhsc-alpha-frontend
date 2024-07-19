@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef } from 'react';
+import React, { MouseEvent, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { SkipLink, TopNav, GlobalStyle, Page, Footer } from 'govuk-react';
 import { manageFocus } from '../../helpers/ManageFocus';
