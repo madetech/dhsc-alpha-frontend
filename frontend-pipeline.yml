@@ -57,8 +57,8 @@ stages:
                   displayName: 'Run tests'
     - ${{ each environment in parameters.environments}}:
         - stage: Build_${{environment.name}}
-          displayName: Build and push stage
-          dependsOn: Test
+          displayName: Build and push stage - ${{environment.name}} 
+          #dependsOn: Test
           condition: succeeded('Test')
           jobs:
               - deployment: Build
@@ -81,8 +81,8 @@ stages:
                                       $(tag)
                                       latest
         - stage: Deploy_${{environment.name}}
-          displayName: Deploy to Azure Web App
-          dependsOn: Build_${{environment.name}}
+          displayName: Deploy to Azure Web App - ${{environment.name}}
+          #dependsOn: Build_${{environment.name}}
           condition: succeeded()
           jobs:
               - deployment: Deploy
