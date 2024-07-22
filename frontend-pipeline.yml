@@ -18,8 +18,8 @@ variables:
   tag: '$(Build.BuildId)'
   azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
 
-    # Agent VM image name
-    vmImageName: 'ubuntu-latest'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
 stages:
     - stage: Test
