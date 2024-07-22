@@ -38,7 +38,7 @@ stages:
                 - script: |
                       cd app
                       echo "Running tests..."
-                      npm test
+                      npm test -- --watchAll=false --coverage
                   displayName: 'Run tests'
 
     - stage: Build
