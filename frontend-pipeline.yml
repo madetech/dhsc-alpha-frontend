@@ -61,21 +61,25 @@ stages:
           dependsOn: Test
           condition: succeeded('Test')
           jobs:
-              - job: Build
+              - deployment: Build
                 displayName: Build
+                environment: '${{environment.name}}'
                 pool:
                     vmImage: $(vmImageName)
-                steps:
-                    - task: Docker@2
-                      displayName: Build and push an image to container registry
-                      inputs:
-                          command: buildAndPush
-                          repository: $(imageRepository)
-                          dockerfile: $(dockerfilePath)
-                          containerRegistry: ${{environment.acr_connection}}
-                          tags: |
-                              $(tag)
-                              latest
+                strategy:
+                    runOnce:
+                        deploy:
+                            steps:
+                            - task: Docker@2
+                              displayName: Build and push an image to container registry
+                              inputs:
+                                  command: buildAndPush
+                                  repository: $(imageRepository)
+                                  dockerfile: $(dockerfilePath)
+                                  containerRegistry: ${{environment.acr_connection}}
+                                  tags: |
+                                      $(tag)
+                                      latest
         - stage: Deploy_${{environment.name}}
           displayName: Deploy to Azure Web App
           dependsOn: Build_${{environment.name}}
@@ -83,7 +87,7 @@ stages:
           jobs:
               - deployment: Deploy
                 displayName: Deploy
-                environment: 'dapalpha-${{environment.name}}-app'
+                environment: '${{environment.name}}'
                 pool:
                     vmImage: 'ubuntu-latest'
                 strategy:
