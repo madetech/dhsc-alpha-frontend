@@ -10,16 +10,31 @@ resources:
     - repo: self
 
 variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '5fe63a98-2eb0-44da-9795-da091e593ae6'
-  imageRepository: 'dapalphaacrdev'
-  containerRegistry: 'dapalphaacrdev.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
-  tag: '$(Build.BuildId)'
-  azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
+# Container registry service connection established during pipeline creation
+- group: acr_service_connection
+- group: arm_service_connection
+- name: imageRepository
+  value: 'dapalpha'
+- name: dockerfilePath
+  value: '$(Build.SourcesDirectory)/app/Dockerfile'
+- name: tag
+  value: '$(Build.BuildId)'
+- name: vmImageName
+  value: 'ubuntu-latest'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+parameters:
+- name: environments
+  type: object
+  default:
+  - name: dev
+    arm_connection: '$(dev_arm_service_connections)'
+    acr_connection: '$(dev_acr_connection)'
+    acr_name: '$(dev_acr_name)'
+  - name: prod
+    arm_connection: '$(prod_arm_service_connections)'
+    acr_connection: '$(prod_acr_connection)'
+    acr_name: '$(prod_acr_name)'
+
 
 stages:
     - stage: Test
@@ -40,44 +55,44 @@ stages:
                       echo "Running tests..."
                       npm test -- --watchAll=false --coverage
                   displayName: 'Run tests'
-
-    - stage: Build
-      displayName: Build and push stage
-      dependsOn: Test
-      condition: succeeded('Test')
-      jobs:
-          - job: Build
-            displayName: Build
-            pool:
-                vmImage: $(vmImageName)
-            steps:
-                - task: Docker@2
-                  displayName: Build and push an image to container registry
-                  inputs:
-                      command: buildAndPush
-                      repository: $(imageRepository)
-                      dockerfile: $(dockerfilePath)
-                      containerRegistry: $(dockerRegistryServiceConnection)
-                      tags: |
-                          $(tag)
-
-    - stage: Deploy
-      displayName: Deploy to Azure Web App
-      dependsOn: Build
-      condition: succeeded()
-      jobs:
-          - deployment: Deploy
-            displayName: Deploy
-            environment: 'dapalpha-dev-app'
-            pool:
-                vmImage: 'ubuntu-latest'
-            strategy:
-                runOnce:
-                    deploy:
-                        steps:
-                            - task: AzureWebAppContainer@1
-                              inputs:
-                                  appType: 'webAppLinux'
-                                  appName: 'dapalpha-dev-app'
-                                  azureSubscription: $(azureSubscription)
-                                  containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+    - ${{ each environment in parameters.environments}}:
+        - stage: Build_${{environment.name}}
+          displayName: Build and push stage
+          dependsOn: Test
+          condition: succeeded('Test')
+          jobs:
+              - job: Build
+                displayName: Build
+                pool:
+                    vmImage: $(vmImageName)
+                steps:
+                    - task: Docker@2
+                      displayName: Build and push an image to container registry
+                      inputs:
+                          command: buildAndPush
+                          repository: $(imageRepository)
+                          dockerfile: $(dockerfilePath)
+                          containerRegistry: ${{environment.acr_connection}}
+                          tags: |
+                              $(tag)
+                              latest
+        - stage: Deploy_${{environment.name}}
+          displayName: Deploy to Azure Web App
+          dependsOn: Build_${{environment.name}}
+          condition: succeeded()
+          jobs:
+              - deployment: Deploy
+                displayName: Deploy
+                environment: 'dapalpha-${{environment.name}}-app'
+                pool:
+                    vmImage: 'ubuntu-latest'
+                strategy:
+                    runOnce:
+                        deploy:
+                            steps:
+                                - task: AzureWebAppContainer@1
+                                  inputs:
+                                      appType: 'webAppLinux'
+                                      appName: 'dapalpha-${{environment.name}}-app'
+                                      azureSubscription: ${{environment.arm_connection}}
+                                      containers: '${{environment.acr_name}}.azurecr.io/$(imageRepository):$(tag)'
