@@ -11,9 +11,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'b91f7c94-ac1f-4b09-9b6d-d83d12085985'
-  imageRepository: 'dapalpha'
-  containerRegistry: 'dapalpha.azurecr.io'
+  dockerRegistryServiceConnection: '5fe63a98-2eb0-44da-9795-da091e593ae6'
+  imageRepository: 'dapalphaacrdev'
+  containerRegistry: 'dapalphaacrdev.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   tag: '$(Build.BuildId)'
   azureSubscription: 'Alpha DEV(2466c36e-08aa-4500-80a1-68f1a1492de9)'
