@@ -39,7 +39,7 @@ const Ascofbarchart: React.FC = () => {
     // Set dimensions and margins
     const width = 1000;
     const height = 400;
-    const margin = { top: 30, right: 30, bottom: 120, left: 80 };
+    const margin = { top: 30, right: 150, bottom: 120, left: 80 };
 
     // Clear any existing SVG elements
     d3.select(ref.current).selectAll("*").remove();
@@ -53,6 +53,9 @@ const Ascofbarchart: React.FC = () => {
     const filteredData = data.filter(
       (d) => d.measure_group_description === selectedMetric
     );
+
+    // Calculate the median
+    const median = d3.median(filteredData, (d) => d.outcome)!;
 
     // Define the x and y scales
     const x = d3.scaleBand()
@@ -124,6 +127,49 @@ const Ascofbarchart: React.FC = () => {
       .style("font-weight", "bold")
       .text("2023 ASCOF - Metric Visualisation")
       .attr("class", "chart-title");
+
+    // Add median line
+    svg.append("line")
+      .attr("x1", margin.left)
+      .attr("x2", width - margin.right)
+      .attr("y1", y(median))
+      .attr("y2", y(median))
+      .attr("stroke", "#808000")
+      .attr("stroke-width", 2)
+      .attr("stroke-dasharray", "5,5")
+      .attr("class", "median-line");
+
+    // Add legend group
+    const legendGroup = svg.append("g")
+      .attr("transform", `translate(${width - margin.right + 20},${margin.top})`);
+
+    // Add legend box
+    legendGroup.append("rect")
+      .attr("x", -10)
+      .attr("y", -10)
+      .attr("width", 120)
+      .attr("height", 30)
+      .attr("fill", "#f9f9f9")
+      .attr("stroke", "#000000")
+      .attr("stroke-width", 1);
+
+    // Legend line
+    legendGroup.append("line")
+      .attr("x1", 0)
+      .attr("x2", 40)
+      .attr("y1", 5)
+      .attr("y2", 5)
+      .attr("stroke", "#808000")
+      .attr("stroke-width", 2)
+      .attr("stroke-dasharray", "5,5");
+
+    // Legend text
+    legendGroup.append("text")
+      .attr("x", 50)
+      .attr("y", 5)
+      .text("Median")
+      .style("font-size", "14px")
+      .attr("alignment-baseline", "middle");
 
   }, [data, selectedMetric]);
 
