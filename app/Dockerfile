@@ -15,7 +15,4 @@ ARG CONTAINER_PORT
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/build .
-WORKDIR /etc/nginx
-COPY --from=builder ./app/nginx.conf ./nginx.conf.template
-RUN sed "s/\$CONTAINER_PORT/${CONTAINER_PORT}/g" ./nginx.conf.template > ./nginx.conf
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
