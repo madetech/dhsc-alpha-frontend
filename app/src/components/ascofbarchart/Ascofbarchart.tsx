@@ -1,7 +1,8 @@
 import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
+import GetAscofJsonTest from "../../api/api";
 
-interface ASCOFData {
+export interface ASCOFData {
   geographical_description: string;
   measure_group_description: string;
   outcome: number;
@@ -13,17 +14,27 @@ const Ascofbarchart: React.FC = () => {
   const [metrics, setMetrics] = useState<string[]>([]);
   const [selectedMetric, setSelectedMetric] = useState<string>("");
 
+async function getAscofData () {
+  const ascofData: ASCOFData[] = await GetAscofJsonTest()
+  return ascofData
+}
+
   useEffect(() => {
+    const data = getAscofData()
+    console.log(data)
+
     // Load the data
-    d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json")
-      .then((data) => {
-        if (data) {
+    //TODO - remove this 
+    // d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json") 
+    getAscofData()
+      .then((data) => {        
+        if(data){
           // Extract unique metrics for the dropdown
           const metrics = Array.from(
             new Set(data.map((d) => d.measure_group_description))
           );
-
           setData(data);
+          console.log("data", data) // TODO Logging test - remove
           setMetrics(metrics);
           setSelectedMetric(metrics[0]); // Initialize with the first metric
         }
