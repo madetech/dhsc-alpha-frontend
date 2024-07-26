@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 
 // TODO Make more generic and reusable
@@ -9,22 +9,21 @@ import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 // };
 
 
-async function GetAscofJsonTest<ASCOFData>(){   
+async function GetAscofJsonTest(): Promise<ASCOFData[]> {   
     const headers = {
-            "Content-Type": "application/json",         
-          }; 
-    const ascofData:ASCOFData[] = 
-                await axios.get('https://dap-sql-connection.azurewebsites.net/api/sql_test', {headers})
+        "Content-Type": "application/json",         
+    };
 
-    // console.log("ascof", ascofData)
-    // const newAscof = [ascofData.data]
-    // return newAscof
-    return ascofData
-
+    try {
+        const response: AxiosResponse<ASCOFData[]> = await axios.get('https://dap-sql-connection.azurewebsites.net/api/sql_test', { headers });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ASCOF data:', error);
+        throw error;
+    }
 }
 
-
-export default GetAscofJsonTest
+export default GetAscofJsonTest;
 
 // export default axios.create({
 //     baseURL: constants.api.baseURL,

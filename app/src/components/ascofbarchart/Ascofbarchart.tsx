@@ -19,7 +19,7 @@ const Ascofbarchart: React.FC = () => {
     // Load the data
     //TODO - remove this 
     // d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json") 
-    GetAscofJsonTest<ASCOFData>()
+    GetAscofJsonTest()
       .then((data) => {
         if(data){
           // Extract unique metrics for the dropdown
