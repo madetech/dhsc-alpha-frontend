@@ -14,20 +14,12 @@ const Ascofbarchart: React.FC = () => {
   const [metrics, setMetrics] = useState<string[]>([]);
   const [selectedMetric, setSelectedMetric] = useState<string>("");
 
-async function getAscofData () {
-  const ascofData: ASCOFData[] = await GetAscofJsonTest()
-  return ascofData
-}
-
   useEffect(() => {
-    const data = getAscofData()
-    console.log(data)
-
     // Load the data
     //TODO - remove this 
     // d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json") 
-    getAscofData()
-      .then((data) => {        
+    GetAscofJsonTest()
+      .then((data) => { 
         if(data){
           // Extract unique metrics for the dropdown
           const metrics = Array.from(
