@@ -6,6 +6,7 @@ export interface ASCOFData {
   geographical_description: string;
   measure_group_description: string;
   outcome: number;
+  data: []
 }
 
 const Ascofbarchart: React.FC = () => {
@@ -18,12 +19,12 @@ const Ascofbarchart: React.FC = () => {
     // Load the data
     //TODO - remove this 
     // d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json") 
-    GetAscofJsonTest()
-      .then((data) => { 
+    GetAscofJsonTest<ASCOFData>()
+      .then((data) => {
         if(data){
           // Extract unique metrics for the dropdown
           const metrics = Array.from(
-            new Set(data.map((d) => d.measure_group_description))
+            new Set(data.map((d) => d.measure_group_description))            
           );
           setData(data);
           console.log("data", data) // TODO Logging test - remove

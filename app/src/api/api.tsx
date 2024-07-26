@@ -9,18 +9,17 @@ import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 // };
 
 
-async function GetAscofJsonTest(){   
+async function GetAscofJsonTest<ASCOFData>(){   
     const headers = {
             "Content-Type": "application/json",         
           }; 
-    const ascofData = 
+    const ascofData:ASCOFData[] = 
                 await axios.get('https://dap-sql-connection.azurewebsites.net/api/sql_test', {headers})
 
-    console.log("ascof", ascofData)
-
-    const newAscof = [ascofData.data]
-    return newAscof
-    // return ascofData.data
+    // console.log("ascof", ascofData)
+    // const newAscof = [ascofData.data]
+    // return newAscof
+    return ascofData
 
 }
 
