@@ -32,11 +32,12 @@ stages:
           versionSpec: '3.9'
           architecture: 'x64'
       - bash: |
+          cd functions
           if [ -f extensions.csproj ]
           then
               dotnet build extensions.csproj --output ./bin
           fi
-          pip install --target="./.python_packages/lib/site-packages" -r ./functions/requirements.txt
+          pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
       - task: ArchiveFiles@2
         displayName: "Archive files"
         inputs:
