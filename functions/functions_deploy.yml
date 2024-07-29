@@ -29,7 +29,7 @@ stages:
       - task: UsePythonVersion@0
         displayName: "Set Python version to 3.9"
         inputs:
-          versionSpec: '3.9'
+          versionSpec: '3.11'
           architecture: 'x64'
       - bash: |
           cd functions
