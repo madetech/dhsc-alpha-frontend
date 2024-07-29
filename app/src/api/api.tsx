@@ -9,7 +9,7 @@ import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 // };
 
 
-async function GetAscofJsonTest(): Promise<ASCOFData[]> {   
+async function GetAscofData(): Promise<ASCOFData[]> {   
     const headers = {
         "Content-Type": "application/json",         
     };
@@ -23,9 +23,4 @@ async function GetAscofJsonTest(): Promise<ASCOFData[]> {
     }
 }
 
-export default GetAscofJsonTest;
-
-// export default axios.create({
-//     baseURL: constants.api.baseURL,
-//     headers:{}
-// })
+export default GetAscofData;

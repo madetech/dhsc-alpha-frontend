@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
-import GetAscofJsonTest from "../../api/api";
+import GetAscofData from "../../api/api";
 import { LoadingBox } from "govuk-react";
 
 export interface ASCOFData {
@@ -19,10 +19,8 @@ const Ascofbarchart: React.FC = () => {
 
   useEffect(() => {
     // Load the data
-    //TODO - remove this 
-    // d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json") 
     setIsLoading(true)
-    GetAscofJsonTest()
+    GetAscofData()
       .then((data) => {
         if(data){
           // Extract unique metrics for the dropdown
