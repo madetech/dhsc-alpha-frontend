@@ -1,1 +1,53 @@
+trigger:
+- main
 
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: arm_service_connection
+- group: subscription_id
+
+parameters:
+- name: environments
+  type: object
+  default:
+  - name: dev
+    arm_connection: '$(dev_arm_service_connections)'
+    subscription_id: '$(dev_subscription_id)'
+#  - name: prod
+#    arm_connection: '$(prod_arm_service_connections)'
+#    subscription_id: '$(prod_subscription_id)'
+#
+
+steps:
+- task: UsePythonVersion@0
+  displayName: "Set Python version to 3.9"
+  inputs:
+    versionSpec: '3.9'
+    architecture: 'x64'
+- bash: |
+    if [ -f extensions.csproj ]
+    then
+        dotnet build extensions.csproj --output ./bin
+    fi
+    pip install --target="./.python_packages/lib/site-packages" -r ./functions/requirements.txt
+- task: ArchiveFiles@2
+  displayName: "Archive files"
+  inputs:
+    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/functions"
+    includeRootFolder: false
+    archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
+    artifactName: 'FunctionsBuild'
+
+#stages:
+#- ${{ each environment in parameters.environments}}:
+#  - stage: FunctionDeploy${{environment.name}}
+#    jobs:
+#    - job: Deploy
+#      steps:
+#      - checkout: self
+#        displayName: 'Checkout repo'
