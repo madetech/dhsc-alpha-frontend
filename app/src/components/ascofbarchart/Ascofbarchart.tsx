@@ -1,10 +1,13 @@
 import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
+import GetAscofData from "../../api/api";
+import { LoadingBox } from "govuk-react";
 
-interface ASCOFData {
+export interface ASCOFData {
   geographical_description: string;
   measure_group_description: string;
   outcome: number;
+  data: []
 }
 
 const Ascofbarchart: React.FC = () => {
@@ -12,22 +15,24 @@ const Ascofbarchart: React.FC = () => {
   const [data, setData] = useState<ASCOFData[]>([]);
   const [metrics, setMetrics] = useState<string[]>([]);
   const [selectedMetric, setSelectedMetric] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     // Load the data
-    d3.json<ASCOFData[]>("/ascof_data/ascof_region_data.json")
+    setIsLoading(true)
+    GetAscofData()
       .then((data) => {
-        if (data) {
+        if(data){
           // Extract unique metrics for the dropdown
           const metrics = Array.from(
-            new Set(data.map((d) => d.measure_group_description))
+            new Set(data.map((d) => d.measure_group_description))            
           );
-
           setData(data);
           setMetrics(metrics);
           setSelectedMetric(metrics[0]); // Initialize with the first metric
         }
       })
+      .finally(() => {setIsLoading(false)})
       .catch((error) => {
         console.error("Error loading or parsing data:", error);
       });
@@ -174,6 +179,7 @@ const Ascofbarchart: React.FC = () => {
   }, [data, selectedMetric]);
 
   return (
+    <LoadingBox loading = {isLoading}>
     <div>
       <div style={{ margin: "20px 0" }}>
         <label htmlFor="metric-select">Select metric:</label>
@@ -191,6 +197,7 @@ const Ascofbarchart: React.FC = () => {
       </div>
       <svg ref={ref}></svg>
     </div>
+    </LoadingBox>
   );
 };
 
