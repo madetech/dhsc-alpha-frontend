@@ -48,7 +48,14 @@ const Layout: React.FC<Props> = ({ children }) => {
                         DHSC Data Access Tool Alpha
                     </GovUK.TopNav.Anchor>
                 }
-            />
+            >
+                <GovUK.TopNav.NavLink as={Link} to="/ascof">
+                    ASCOF Data Charts
+                </GovUK.TopNav.NavLink>
+                <GovUK.TopNav.NavLink as={Link} to="/about">
+                    About Us
+                </GovUK.TopNav.NavLink>
+            </GovUK.TopNav>
             <GovUK.Page.WidthContainer>
                 <GovUK.PhaseBanner level="alpha">
                     This part of GOV.UK is being built
