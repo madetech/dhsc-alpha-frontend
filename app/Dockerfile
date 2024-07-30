@@ -15,4 +15,5 @@ ARG CONTAINER_PORT
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/build .
+COPY --from=builder ./app/nginx.conf ./nginx.conf.template
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
