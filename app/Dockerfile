@@ -16,4 +16,6 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/build .
 COPY --from=builder ./app/nginx.conf ./nginx.conf.template
+RUN sed "s/\$CONTAINER_PORT/${CONTAINER_PORT}/g" ./nginx.conf.template > ./nginx.conf
+EXPOSE ${CONTAINER_PORT}
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
