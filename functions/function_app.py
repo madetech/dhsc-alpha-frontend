@@ -38,7 +38,7 @@ conn = pyodbc.connect(connection_string, attrs_before={SQL_COPT_SS_ACCESS_TOKEN:
 def sql_test(req: func.HttpRequest) -> func.HttpResponse:
     # df = pd.read_sql("SELECT TOP 100 * FROM ASCOF.all_metrics", conn)
     # df = pd.read_sql("select * from ASCOF.all_metrics WHERE geographical_level='Region' AND fiscal_year='2023'", conn)
-    df = pd.read_sql("select geographical_description, measure_group_description, outcome FROM ASCOF.all_metrics WHERE geographical_level='Region' AND fiscal_year='2023'", conn)
+    df = pd.read_sql("select geographical_description, measure_group_description, outcome FROM ASCOF.all_metrics WHERE geographical_level='Region' AND disaggregation_level = 'Total' AND fiscal_year='2023'", conn)
     
     return func.HttpResponse(
         df.to_json(orient="records"),
