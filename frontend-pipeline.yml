@@ -75,9 +75,9 @@ stages:
                               steps:
                                   - checkout: self
                                   - task: Docker@2
-                                    displayName: Build and push an image to container registry
+                                    displayName: Build an image
                                     inputs:
-                                        command: buildAndPush
+                                        command: build
                                         repository: $(imageRepository)
                                         dockerfile: $(dockerfilePath)
                                         containerRegistry: ${{environment.acr_connection}}
@@ -86,6 +86,15 @@ stages:
                                             latest
                                         buildArguments: |
                                             CONTAINER_PORT=$(CONTAINER_PORT)
+                                  - task: Docker@2
+                                    displayName: Push an image to container registry
+                                    inputs:
+                                        command: push
+                                        repository: $(imageRepository)
+                                        containerRegistry: ${{environment.acr_connection}}
+                                        tags: |
+                                            $(tag)
+                                            latest
           # Deploy
           - stage: Deploy_${{environment.name}}
             displayName: '${{environment.name}}: Deploy to Azure Web App'
