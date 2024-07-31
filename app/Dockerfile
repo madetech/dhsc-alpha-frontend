@@ -17,14 +17,6 @@ RUN rm -rf ./*
 COPY --from=builder /app/build .
 WORKDIR /etc/nginx
 COPY --from=builder ./app/nginx.conf ./nginx.conf.template
-
-# Debugging step: Print the value of CONTAINER_PORT
-RUN echo "CONTAINER_PORT: ${CONTAINER_PORT}"
-
-# Ensure that CONTAINER_PORT has a default value if not provided
-RUN : "${CONTAINER_PORT:=80}" && \
-    sed "s/\$CONTAINER_PORT/${CONTAINER_PORT}/g" ./nginx.conf.template > ./nginx.conf && \
-    cat ./nginx.conf # Debugging step: Print the generated nginx.conf
-
+RUN sed "s/\$CONTAINER_PORT/${CONTAINER_PORT}/g" ./nginx.conf.template > ./nginx.conf
 EXPOSE ${CONTAINER_PORT}
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
