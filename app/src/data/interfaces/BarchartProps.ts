@@ -1,7 +1,13 @@
 import { ASCOFData } from './ASCOFData';
 
+export interface ChartData {
+    x_axis_value: string;
+    metric: string;
+    value: number;
+}
+
 export interface BarchartProps {
-    data: ASCOFData[];
+    data: ChartData[];
     width?: number;
     height?: number;
     margin?: { top: number; right: number; bottom: number; left: number };
@@ -14,5 +20,4 @@ export interface BarchartProps {
     medianLineDash?: string;
     title?: string;
     showMedian?: boolean;
-    onBarClick?: (data: ASCOFData) => void;
 }

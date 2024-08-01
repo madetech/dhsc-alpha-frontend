@@ -3,15 +3,11 @@ import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
 import Barchart from '../../components/barchart/Barchart';
 import GetAscofData from '../../api/api';
-
-interface ASCOFData {
-    geographical_description: string;
-    measure_group_description: string;
-    outcome: number;
-}
+import { ASCOFData } from '../../data/interfaces/ASCOFData';
+import { ChartData } from '../../data/interfaces/BarchartProps';
 
 const AscofPage: React.FC = () => {
-    const [data, setData] = useState<ASCOFData[]>([]);
+    const [data, setData] = useState<ChartData[]>([]);
     const [metrics, setMetrics] = useState<string[]>([]);
     const [selectedMetric, setSelectedMetric] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -26,9 +22,18 @@ const AscofPage: React.FC = () => {
                             responseData.map((d) => d.measure_group_description)
                         )
                     );
-                    setData(responseData);
                     setMetrics(uniqueMetrics);
                     setSelectedMetric(uniqueMetrics[0]);
+
+                    const transformedData: ChartData[] = responseData.map(
+                        (d) => ({
+                            x_axis_value: d.geographical_description,
+                            metric: d.measure_group_description,
+                            value: d.outcome,
+                        })
+                    );
+
+                    setData(transformedData);
                 }
             } catch (error) {
                 console.error('Error loading or parsing data:', error);
@@ -46,9 +51,7 @@ const AscofPage: React.FC = () => {
         setSelectedMetric(event.target.value);
     };
 
-    const filteredData = data.filter(
-        (d) => d.measure_group_description === selectedMetric
-    );
+    const filteredData = data.filter((d) => d.metric === selectedMetric);
 
     return (
         <>
@@ -96,16 +99,11 @@ const AscofPage: React.FC = () => {
                         </div>
                         <Barchart
                             data={filteredData}
-                            xKey="geographical_description"
-                            yKey="outcome"
+                            xKey="x_axis_value"
+                            yKey="value"
                             xLabel="Region"
                             yLabel="Value"
                             title={`2023 ASCOF - ${selectedMetric} Visualisation`}
-                            onBarClick={(data) =>
-                                alert(
-                                    `You clicked on: ${data.geographical_description}`
-                                )
-                            }
                         />
                     </div>
                 </GovUK.LoadingBox>
