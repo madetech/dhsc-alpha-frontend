@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { ASCOFData } from '../../data/interfaces/ASCOFData';
-import { BarchartProps } from '../../data/interfaces/BarchartProps';
+import { BarchartProps, ChartData } from '../../data/interfaces/BarchartProps';
 
 const Barchart: React.FC<BarchartProps> = ({
     data,
@@ -17,7 +16,6 @@ const Barchart: React.FC<BarchartProps> = ({
     medianLineDash = '5,5',
     title = 'Barchart',
     showMedian = true,
-    onBarClick,
 }) => {
     const ref = useRef<SVGSVGElement>(null);
 
@@ -32,12 +30,12 @@ const Barchart: React.FC<BarchartProps> = ({
             .attr('height', height);
 
         const median = showMedian
-            ? d3.median(data, (d) => d[yKey as keyof ASCOFData] as number)!
+            ? d3.median(data, (d) => d[yKey as keyof ChartData] as number)!
             : null;
 
         const x = d3
             .scaleBand()
-            .domain(data.map((d) => d[xKey as keyof ASCOFData] as string))
+            .domain(data.map((d) => d[xKey as keyof ChartData] as string))
             .range([margin.left, width - margin.right])
             .padding(0.1);
 
@@ -45,34 +43,29 @@ const Barchart: React.FC<BarchartProps> = ({
             .scaleLinear()
             .domain([
                 0,
-                d3.max(data, (d) => d[yKey as keyof ASCOFData] as number)!,
+                d3.max(data, (d) => d[yKey as keyof ChartData] as number)!,
             ])
             .nice()
             .range([height - margin.bottom, margin.top]);
 
         const bars = svg
-            .selectAll<SVGRectElement, ASCOFData>('rect')
-            .data(data, (d: ASCOFData) => d[xKey as keyof ASCOFData] as string);
+            .selectAll<SVGRectElement, ChartData>('rect')
+            .data(data, (d: ChartData) => d[xKey as keyof ChartData] as string);
 
         bars.enter()
             .append('rect')
             .merge(bars)
-            .attr('x', (d) => x(d[xKey as keyof ASCOFData] as string)!)
-            .attr('y', (d) => y(d[yKey as keyof ASCOFData] as number)!)
+            .attr('x', (d) => x(d[xKey as keyof ChartData] as string)!)
+            .attr('y', (d) => y(d[yKey as keyof ChartData] as number)!)
             .attr('width', x.bandwidth())
             .attr(
                 'height',
                 (d) =>
                     height -
                     margin.bottom -
-                    y(d[yKey as keyof ASCOFData] as number)!
+                    y(d[yKey as keyof ChartData] as number)!
             )
-            .attr('fill', barColor)
-            .on('click', (event, d) => {
-                if (onBarClick) {
-                    onBarClick(d);
-                }
-            });
+            .attr('fill', barColor);
 
         bars.exit().remove();
 
@@ -146,7 +139,6 @@ const Barchart: React.FC<BarchartProps> = ({
         medianLineDash,
         title,
         showMedian,
-        onBarClick,
     ]);
 
     return <svg ref={ref}></svg>;
