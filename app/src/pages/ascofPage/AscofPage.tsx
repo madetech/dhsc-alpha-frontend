@@ -45,7 +45,7 @@ const AscofPage: React.FC = () => {
 
     const transformToChartData = (data: ASCOFData[]): ChartData[] => {
         return data.map((entry: ASCOFData) => ({
-            x_axis_value: entry.geographical_description,
+            xAxisValue: entry.geographical_description,
             metric: entry.measure_group_description,
             value: entry.outcome,
         }));
@@ -118,8 +118,6 @@ const AscofPage: React.FC = () => {
                         </div>
                         <Barchart
                             data={filteredAscofData}
-                            xKey="x_axis_value"
-                            yKey="value"
                             xLabel="Region"
                             yLabel="Value"
                             title={`2023 ASCOF - ${selectedAscofMetric} Visualisation`}
