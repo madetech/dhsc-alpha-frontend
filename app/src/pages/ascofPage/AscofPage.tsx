@@ -3,7 +3,6 @@ import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
 import Barchart from '../../components/barchart/Barchart';
 import GetAscofData from '../../api/api';
-import { ASCOFData } from '../../data/interfaces/ASCOFData';
 import { ChartData } from '../../data/interfaces/BarchartProps';
 
 const AscofPage: React.FC = () => {
@@ -41,7 +40,6 @@ const AscofPage: React.FC = () => {
                 setIsLoading(false);
             }
         };
-
         fetchData();
     }, []);
 
@@ -89,6 +87,7 @@ const AscofPage: React.FC = () => {
                                 id="metric-select"
                                 value={selectedMetric}
                                 onChange={handleMetricChange}
+                                style={{ marginTop: '5px' }}
                             >
                                 {metrics.map((metric) => (
                                     <option key={metric} value={metric}>

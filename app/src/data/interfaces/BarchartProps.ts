@@ -1,5 +1,3 @@
-import { ASCOFData } from './ASCOFData';
-
 export interface ChartData {
     x_axis_value: string;
     metric: string;
@@ -20,4 +18,5 @@ export interface BarchartProps {
     medianLineDash?: string;
     title?: string;
     showMedian?: boolean;
+    showLegend?: boolean;
 }

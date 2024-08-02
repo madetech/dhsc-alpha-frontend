@@ -16,6 +16,7 @@ const Barchart: React.FC<BarchartProps> = ({
     medianLineDash = '5,5',
     title = 'Barchart',
     showMedian = true,
+    showLegend = true,
 }) => {
     const ref = useRef<SVGSVGElement>(null);
 
@@ -124,6 +125,43 @@ const Barchart: React.FC<BarchartProps> = ({
                 .attr('stroke-width', 2)
                 .attr('stroke-dasharray', medianLineDash)
                 .attr('class', 'median-line');
+        }
+
+        if (showLegend) {
+            const legendGroup = svg
+                .append('g')
+                .attr(
+                    'transform',
+                    `translate(${width - margin.right + 20},${margin.top})`
+                );
+
+            legendGroup
+                .append('rect')
+                .attr('x', -10)
+                .attr('y', -10)
+                .attr('width', 120)
+                .attr('height', 30)
+                .attr('fill', '#f9f9f9')
+                .attr('stroke', '#000000')
+                .attr('stroke-width', 1);
+
+            legendGroup
+                .append('line')
+                .attr('x1', 0)
+                .attr('x2', 40)
+                .attr('y1', 5)
+                .attr('y2', 5)
+                .attr('stroke', medianLineColor)
+                .attr('stroke-width', 2)
+                .attr('stroke-dasharray', medianLineDash);
+
+            legendGroup
+                .append('text')
+                .attr('x', 50)
+                .attr('y', 5)
+                .text('Median')
+                .style('font-size', '14px')
+                .attr('alignment-baseline', 'middle');
         }
     }, [
         data,
