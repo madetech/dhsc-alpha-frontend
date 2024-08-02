@@ -177,6 +177,7 @@ const Barchart: React.FC<BarchartProps> = ({
         medianLineDash,
         title,
         showMedian,
+        showLegend,
     ]);
 
     return <svg ref={ref}></svg>;
