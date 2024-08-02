@@ -4,52 +4,72 @@ import * as GovUK from 'govuk-react';
 import Barchart from '../../components/barchart/Barchart';
 import GetAscofData from '../../api/api';
 import { ChartData } from '../../data/interfaces/BarchartProps';
+import { ASCOFData } from '../../data/interfaces/ASCOFData';
 
 const AscofPage: React.FC = () => {
-    const [data, setData] = useState<ChartData[]>([]);
-    const [metrics, setMetrics] = useState<string[]>([]);
-    const [selectedMetric, setSelectedMetric] = useState<string>('');
+    const [ascofData, setAscofData] = useState<ChartData[]>([]);
+    const [ascofMetrics, setAscofMetrics] = useState<string[]>([]);
+    const [selectedAscofMetric, setSelectedAscofMetric] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchAndProcessData = async (): Promise<void> => {
             try {
-                const responseData = await GetAscofData();
-                if (responseData) {
-                    const uniqueMetrics = Array.from(
-                        new Set(
-                            responseData.map((d) => d.measure_group_description)
-                        )
-                    );
-                    setMetrics(uniqueMetrics);
-                    setSelectedMetric(uniqueMetrics[0]);
+                const ascofApiResponse: ASCOFData[] = await GetAscofData();
+                if (ascofApiResponse) {
+                    const metrics: string[] =
+                        extractUniqueMetrics(ascofApiResponse);
 
-                    const transformedData: ChartData[] = responseData.map(
-                        (d) => ({
-                            x_axis_value: d.geographical_description,
-                            metric: d.measure_group_description,
-                            value: d.outcome,
-                        })
-                    );
+                    const transformedData: ChartData[] =
+                        transformToChartData(ascofApiResponse);
 
-                    setData(transformedData);
+                    updateState(metrics, transformedData);
                 }
             } catch (error) {
-                console.error('Error loading or parsing data:', error);
+                handleError(error);
             } finally {
                 setIsLoading(false);
             }
         };
-        fetchData();
+
+        fetchAndProcessData();
     }, []);
+
+    const extractUniqueMetrics = (data: ASCOFData[]): string[] => {
+        return Array.from(
+            new Set(
+                data.map((entry: ASCOFData) => entry.measure_group_description)
+            )
+        );
+    };
+
+    const transformToChartData = (data: ASCOFData[]): ChartData[] => {
+        return data.map((entry: ASCOFData) => ({
+            x_axis_value: entry.geographical_description,
+            metric: entry.measure_group_description,
+            value: entry.outcome,
+        }));
+    };
+
+    const updateState = (metrics: string[], data: ChartData[]): void => {
+        setAscofMetrics(metrics);
+        setSelectedAscofMetric(metrics[0]);
+        setAscofData(data);
+    };
+
+    const handleError = (error: unknown): void => {
+        console.error('Error loading or parsing data:', error);
+    };
 
     const handleMetricChange = (
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
-        setSelectedMetric(event.target.value);
+        setSelectedAscofMetric(event.target.value);
     };
 
-    const filteredData = data.filter((d) => d.metric === selectedMetric);
+    const filteredAscofData = ascofData.filter(
+        (ascofEntry) => ascofEntry.metric === selectedAscofMetric
+    );
 
     return (
         <>
@@ -85,11 +105,11 @@ const AscofPage: React.FC = () => {
                             </label>
                             <select
                                 id="metric-select"
-                                value={selectedMetric}
+                                value={selectedAscofMetric}
                                 onChange={handleMetricChange}
                                 style={{ marginTop: '5px' }}
                             >
-                                {metrics.map((metric) => (
+                                {ascofMetrics.map((metric) => (
                                     <option key={metric} value={metric}>
                                         {metric}
                                     </option>
@@ -97,12 +117,12 @@ const AscofPage: React.FC = () => {
                             </select>
                         </div>
                         <Barchart
-                            data={filteredData}
+                            data={filteredAscofData}
                             xKey="x_axis_value"
                             yKey="value"
                             xLabel="Region"
                             yLabel="Value"
-                            title={`2023 ASCOF - ${selectedMetric} Visualisation`}
+                            title={`2023 ASCOF - ${selectedAscofMetric} Visualisation`}
                         />
                     </div>
                 </GovUK.LoadingBox>
