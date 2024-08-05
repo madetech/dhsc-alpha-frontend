@@ -17,13 +17,17 @@ async function GetAscofData(): Promise<ASCOFData[]> {
     //    return accessToken as string;
     //});
     //console.log(token);
-
+    console.log("fetching data")
     try {
         const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me')
-            .then(response => { return response.json() })
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
             .then(data => {
-                const token = data[0].id_token
-                console.log(token)
+                console.log("fetching token")
+                const token = data[0].id_token;
+                console.log(token);
                 return token
             });
         const headers = {
