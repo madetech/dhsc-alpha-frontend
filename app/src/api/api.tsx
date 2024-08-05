@@ -16,7 +16,7 @@ async function GetAscofData(): Promise<ASCOFData[]> {
         const accessToken = response.headers.get('x-ms-token-aad-access-token');
         return accessToken as string;
     });
-
+    console.log(token);
     const headers = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
