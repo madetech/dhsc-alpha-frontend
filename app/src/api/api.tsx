@@ -12,17 +12,24 @@ import { Request } from 'express';
 async function GetAscofData(): Promise<ASCOFData[]> {
     //const accessToken = req.headers['x-ms-token-aad-access-token'];
 
-    const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me').then(response => {
-        const accessToken = response.headers.get('x-ms-token-aad-access-token');
-        return accessToken as string;
-    });
-    console.log(token);
-    const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-    };
+    //const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me').then(response => {
+    //    const accessToken = response.headers.get('x-ms-token-aad-access-token');
+    //    return accessToken as string;
+    //});
+    //console.log(token);
 
     try {
+        const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me')
+            .then(response => { return response.json() })
+            .then(data => {
+                const token = data[0].id_token
+                console.log(token)
+                return token
+            });
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
         const response: AxiosResponse<ASCOFData[]> = await axios.get('https://dapalpha-func-app-dev.azurewebsites.net/api/sql_test', { headers });
         return response.data;
     } catch (error) {
