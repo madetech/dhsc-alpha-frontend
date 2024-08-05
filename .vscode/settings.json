@@ -5,6 +5,5 @@
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.projectLanguageModel": 2,
-    "cSpell.words": ["Barchart"]
+    "azureFunctions.projectLanguageModel": 2
 }
