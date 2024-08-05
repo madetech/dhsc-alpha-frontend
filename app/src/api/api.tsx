@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
+import { Request } from 'express';
 
 // TODO Make more generic and reusable
 // const constants = {
@@ -8,10 +9,17 @@ import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 //     },
 // };
 
-
 async function GetAscofData(): Promise<ASCOFData[]> {
+    //const accessToken = req.headers['x-ms-token-aad-access-token'];
+
+    const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me').then(response => {
+        const accessToken = response.headers.get('x-ms-token-aad-access-token');
+        return accessToken as string;
+    });
+
     const headers = {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
     };
 
     try {
