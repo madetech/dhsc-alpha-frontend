@@ -10,13 +10,7 @@ import { Request } from 'express';
 // };
 
 async function GetAscofData(): Promise<ASCOFData[]> {
-    //const accessToken = req.headers['x-ms-token-aad-access-token'];
 
-    //const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me').then(response => {
-    //    const accessToken = response.headers.get('x-ms-token-aad-access-token');
-    //    return accessToken as string;
-    //});
-    //console.log(token);
     console.log("fetching data")
     try {
         const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me')
