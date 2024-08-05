@@ -11,7 +11,7 @@ import {
     renderLabels,
     renderMedianLine,
     renderLegend,
-} from './barchartHelpers';
+} from '../utils/barchartHelpers';
 
 const Barchart: React.FC<BarchartProps> = ({
     data,

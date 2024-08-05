@@ -15,8 +15,8 @@ const router = createBrowserRouter([
     },
     {
         path: 'ascof',
-        element:    <AscofPage />,
-    }
+        element: <AscofPage />,
+    },
 ]);
 
 export default router;
