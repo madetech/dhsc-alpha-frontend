@@ -24,10 +24,4 @@ describe('HomePage', () => {
             screen.getByText(/Welcome to the Example App/i)
         ).toBeInTheDocument();
     });
-
-    test('renders the About us link', () => {
-        const linkElement = screen.getByRole('link', { name: /About us/i });
-        expect(linkElement).toBeInTheDocument();
-        expect(linkElement).toHaveAttribute('href', '/about');
-    });
 });

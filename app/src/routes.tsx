@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/homePage/HomePage';
 import AboutPage from './pages/aboutPage/AboutPage';
 import AscofPage from './pages/ascofPage/AscofPage';
+import ChartPlaceholderPage from './pages/chartPlaceholderPage/ChartPlaceholderPage';
 
 const router = createBrowserRouter([
     {
@@ -15,8 +16,12 @@ const router = createBrowserRouter([
     },
     {
         path: 'ascof',
-        element:    <AscofPage />,
-    }
+        element: <AscofPage />,
+    },
+    {
+        path: 'chart-placeholders',
+        element: <ChartPlaceholderPage />,
+    },
 ]);
 
 export default router;
