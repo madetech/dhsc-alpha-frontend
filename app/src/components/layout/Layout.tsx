@@ -55,6 +55,9 @@ const Layout: React.FC<Props> = ({ children }) => {
                 <GovUK.TopNav.NavLink as={Link} to="/about">
                     About Us
                 </GovUK.TopNav.NavLink>
+                <GovUK.TopNav.NavLink as={Link} to="/chart-placeholders">
+                    Chart Placeholders
+                </GovUK.TopNav.NavLink>
             </GovUK.TopNav>
             <GovUK.Page.WidthContainer>
                 <GovUK.PhaseBanner level="alpha">

@@ -5,8 +5,6 @@ import Barchart from '../../components/barchart/Barchart';
 import GetAscofData from '../../api/api';
 import { ChartData } from '../../data/interfaces/BarchartProps';
 import { ASCOFData } from '../../data/interfaces/ASCOFData';
-import { LinechartData } from '../../data/interfaces/LinechartProps';
-import Linechart from '../../components/linechart/Linechart';
 
 const AscofPage: React.FC = () => {
     const [ascofData, setAscofData] = useState<ChartData[]>([]);
@@ -73,15 +71,6 @@ const AscofPage: React.FC = () => {
         (ascofEntry) => ascofEntry.metric === selectedAscofMetric
     );
 
-    const lineChartData: LinechartData[] = [
-        { x: new Date('2023-01-01'), y: 20 },
-        { x: new Date('2023-02-01'), y: 25 },
-        { x: new Date('2023-03-01'), y: 22 },
-        { x: new Date('2023-04-01'), y: 30 },
-        { x: new Date('2023-05-01'), y: 28 },
-        { x: new Date('2023-06-01'), y: 35 },
-    ];
-
     return (
         <>
             <Layout>
@@ -132,12 +121,6 @@ const AscofPage: React.FC = () => {
                             xLabel="Region"
                             yLabel="Value"
                             title={`2023 ASCOF - ${selectedAscofMetric} Visualisation`}
-                        />
-                        <Linechart
-                            data={lineChartData}
-                            xLabel="Date"
-                            yLabel="Value"
-                            title="Monthly Value Changes"
                         />
                     </div>
                 </GovUK.LoadingBox>
