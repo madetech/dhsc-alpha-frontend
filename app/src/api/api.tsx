@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
+import { Request } from 'express';
 
 // TODO Make more generic and reusable
 // const constants = {
@@ -8,14 +9,23 @@ import { ASCOFData } from '../components/ascofbarchart/Ascofbarchart';
 //     },
 // };
 
+async function GetAscofData(): Promise<ASCOFData[]> {
 
-async function GetAscofData(): Promise<ASCOFData[]> {   
-    const headers = {
-        "Content-Type": "application/json",         
-    };
-
+    console.log("fetching data")
     try {
-        const response: AxiosResponse<ASCOFData[]> = await axios.get('https://dap-sql-connection.azurewebsites.net/api/sql_test', { headers });
+        const token: string = await fetch('https://dapalpha-dev-app.azurewebsites.net/.auth/me')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                const token = data[0].id_token;
+                return token
+            });
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+        const response: AxiosResponse<ASCOFData[]> = await axios.get('https://dapalpha-func-app-dev.azurewebsites.net/api/sql_test', { headers });
         return response.data;
     } catch (error) {
         console.error('Error fetching ASCOF data:', error);
