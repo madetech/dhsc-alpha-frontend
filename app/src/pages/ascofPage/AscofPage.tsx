@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
 import Barchart from '../../components/barchart/Barchart';
-import GetAscofData from '../../api/api';
+import RawAscofApiResponse from '../../response.json';
 import { ChartData } from '../../data/interfaces/BarchartProps';
 import { ASCOFData } from '../../data/interfaces/ASCOFData';
 
@@ -15,7 +15,7 @@ const AscofPage: React.FC = () => {
     useEffect(() => {
         const fetchAndProcessData = async (): Promise<void> => {
             try {
-                const ascofApiResponse: ASCOFData[] = await GetAscofData();
+                const ascofApiResponse: ASCOFData[] = RawAscofApiResponse;
                 if (ascofApiResponse) {
                     const metrics: string[] =
                         extractUniqueMetrics(ascofApiResponse);
