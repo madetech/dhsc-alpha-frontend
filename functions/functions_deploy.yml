@@ -15,10 +15,10 @@ parameters:
   - name: dev
     arm_connection: '$(dev_arm_service_connections)'
     subscription_id: '$(dev_subscription_id)'
-#  - name: prod
-#    arm_connection: '$(prod_arm_service_connections)'
-#    subscription_id: '$(prod_subscription_id)'
-#
+  - name: prod
+    arm_connection: '$(prod_arm_service_connections)'
+    subscription_id: '$(prod_subscription_id)'
+
 
 stages:
   - stage: Build
