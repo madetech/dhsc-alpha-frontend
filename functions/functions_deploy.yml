@@ -60,9 +60,9 @@ stages:
               targetPath: '$(Pipeline.Workspace)'
           - task: AzureFunctionApp@2
             inputs:
-              connectedServiceNameARM: 'AlphaDevARM'
+              connectedServiceNameARM: '${{environment.arm_connection}}'
               appType: 'functionAppLinux'
-              appName: 'dapalpha-func-app-dev'
+              appName: 'dapalpha-func-app-${{environment.name}}'
               package: '$(Pipeline.Workspace)/build$(Build.BuildId).zip'
               runtimeStack: 'PYTHON|3.11'
               deploymentMethod: 'auto'
