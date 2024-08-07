@@ -10,7 +10,7 @@ load_dotenv()
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-connection_string="Driver={ODBC Driver 18 for SQL Server};Server=tcp:dapalpha-sql-data-dev.database.windows.net,1433;Database=Analytical_Datastore;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30"
+connection_string="Driver={ODBC Driver 18 for SQL Server};Server=tcp:dapalpha-sql-data-" + os.getenv("ENVIRONMENT") + ".database.windows.net,1433;Database=Analytical_Datastore;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30"
 credential = ManagedIdentityCredential(client_id=os.getenv("MANAGED_IDENTITY_CLIENT_ID"))
 # credential=DefaultAzureCredential()
 token_bytes = credential.get_token("https://database.windows.net/.default").token.encode("UTF-16-LE")
