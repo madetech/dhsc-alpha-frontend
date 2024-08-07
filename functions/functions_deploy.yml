@@ -15,10 +15,10 @@ parameters:
   - name: dev
     arm_connection: '$(dev_arm_service_connections)'
     subscription_id: '$(dev_subscription_id)'
-#  - name: prod
-#    arm_connection: '$(prod_arm_service_connections)'
-#    subscription_id: '$(prod_subscription_id)'
-#
+  - name: prod
+    arm_connection: '$(prod_arm_service_connections)'
+    subscription_id: '$(prod_subscription_id)'
+
 
 stages:
   - stage: Build
@@ -52,6 +52,8 @@ stages:
   - ${{ each environment in parameters.environments}}:
     - stage: FunctionDeploy${{environment.name}}
       jobs:
+      - deployment: DeployFunction
+        environment: ${{environment.name}}
       - job: Deploy
         steps:
           - task: DownloadPipelineArtifact@2
@@ -60,9 +62,9 @@ stages:
               targetPath: '$(Pipeline.Workspace)'
           - task: AzureFunctionApp@2
             inputs:
-              connectedServiceNameARM: 'AlphaDevARM'
+              connectedServiceNameARM: '${{environment.arm_connection}}'
               appType: 'functionAppLinux'
-              appName: 'dapalpha-func-app-dev'
+              appName: 'dapalpha-func-app-${{environment.name}}'
               package: '$(Pipeline.Workspace)/build$(Build.BuildId).zip'
               runtimeStack: 'PYTHON|3.11'
               deploymentMethod: 'auto'
