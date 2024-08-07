@@ -52,6 +52,8 @@ stages:
   - ${{ each environment in parameters.environments}}:
     - stage: FunctionDeploy${{environment.name}}
       jobs:
+      - deployment: DeployFunction
+        environment: ${{environment.name}}
       - job: Deploy
         steps:
           - task: DownloadPipelineArtifact@2
