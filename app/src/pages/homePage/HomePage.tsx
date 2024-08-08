@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
         <>
             <Layout>
                 <GovUK.H1>{pageHeader}</GovUK.H1>
-                <GovUK.Paragraph> Welcome to the Example App</GovUK.Paragraph>
+                <GovUK.Paragraph>Welcome to the Example App</GovUK.Paragraph>
             </Layout>
         </>
     );

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BarchartProps } from '../../data/interfaces/BarchartProps';
+import * as GovUK from 'govuk-react';
 import {
     initializeSvg,
     createXAxisScale,
@@ -27,6 +28,8 @@ const Barchart: React.FC<BarchartProps> = ({
     showMedian = true,
     showLegend = true,
 }) => {
+    const [showAsTable, setShowAsTable] = useState(false);
+    const toggleShowAsTable = () => setShowAsTable(!showAsTable);
     const ref = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
@@ -87,7 +90,51 @@ const Barchart: React.FC<BarchartProps> = ({
         showLegend,
     ]);
 
-    return <svg ref={ref}></svg>;
+    return (
+        <>
+            <GovUK.Button onClick={toggleShowAsTable} buttonColour="#1d70b8">
+                {!showAsTable ? 'Table View' : 'Graph View'}
+            </GovUK.Button>
+            <div role="img" aria-labelledby="barchart-title barchart-desc">
+                {!showAsTable ? (
+                    <svg ref={ref}>
+                        <title id="barchart-title">{title}</title>
+                        <desc id="barchart-desc">
+                            A bar chart showing {title}. The x-axis represents{' '}
+                            {xLabel}, and the y-axis represents {yLabel}.
+                        </desc>
+                    </svg>
+                ) : (
+                    <div className="chart-summary">
+                        <GovUK.Table
+                            caption={title}
+                            head={
+                                <GovUK.Table.Row>
+                                    <GovUK.Table.CellHeader setWidth="three-quarters">
+                                        {xLabel}
+                                    </GovUK.Table.CellHeader>
+                                    <GovUK.Table.CellHeader setWidth="one-quarter">
+                                        {yLabel}
+                                    </GovUK.Table.CellHeader>
+                                </GovUK.Table.Row>
+                            }
+                        >
+                            {data.map((dataItem, index) => (
+                                <GovUK.Table.Row key={index}>
+                                    <GovUK.Table.Cell>
+                                        {dataItem.xAxisValue}
+                                    </GovUK.Table.Cell>
+                                    <GovUK.Table.Cell>
+                                        {dataItem.value}
+                                    </GovUK.Table.Cell>
+                                </GovUK.Table.Row>
+                            ))}
+                        </GovUK.Table>
+                    </div>
+                )}
+            </div>
+        </>
+    );
 };
 
 export default Barchart;
