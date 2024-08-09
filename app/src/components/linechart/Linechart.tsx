@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LinechartProps } from '../../data/interfaces/LinechartProps';
+import * as GovUK from 'govuk-react';
 import {
     initializeSvg,
     createXAxisScale,
@@ -23,6 +24,8 @@ const LineChart: React.FC<LinechartProps> = ({
     pointRadius = 3,
     title = 'Line Chart',
 }) => {
+    const [showAsTable, setShowAsTable] = useState(false);
+    const toggleShowAsTable = () => setShowAsTable(!showAsTable);
     const ref = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
@@ -57,7 +60,53 @@ const LineChart: React.FC<LinechartProps> = ({
         title,
     ]);
 
-    return <svg ref={ref}></svg>;
+    return (
+        <>
+            <GovUK.Button onClick={toggleShowAsTable} buttonColour="#1d70b8">
+                {!showAsTable ? 'View As Table' : 'View As Graph'}
+            </GovUK.Button>
+            <div role="img" aria-labelledby="linechart-title linechart-desc">
+                {!showAsTable ? (
+                    <svg ref={ref}>
+                        <title id="linechart-title">{title}</title>
+                        <desc id="linechart-desc">
+                            A line chart showing {title}. The x-axis represents
+                            {xLabel}, and the y-axis represents {yLabel}.
+                        </desc>
+                    </svg>
+                ) : (
+                    <div className="chart-summary">
+                        <GovUK.Table
+                            caption={title}
+                            head={
+                                <GovUK.Table.Row>
+                                    <GovUK.Table.CellHeader setWidth="three-quarters">
+                                        {xLabel}
+                                    </GovUK.Table.CellHeader>
+                                    <GovUK.Table.CellHeader setWidth="one-quarter">
+                                        {yLabel}
+                                    </GovUK.Table.CellHeader>
+                                </GovUK.Table.Row>
+                            }
+                        >
+                            {data.map((dataItem, index) => (
+                                <GovUK.Table.Row key={index}>
+                                    <GovUK.Table.Cell>
+                                        {dataItem.x instanceof Date
+                                            ? dataItem.x.toLocaleDateString()
+                                            : dataItem.x.toLocaleString()}
+                                    </GovUK.Table.Cell>
+                                    <GovUK.Table.Cell>
+                                        {dataItem.y}
+                                    </GovUK.Table.Cell>
+                                </GovUK.Table.Row>
+                            ))}
+                        </GovUK.Table>
+                    </div>
+                )}
+            </div>
+        </>
+    );
 };
 
 export default LineChart;

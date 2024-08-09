@@ -93,7 +93,7 @@ const Barchart: React.FC<BarchartProps> = ({
     return (
         <>
             <GovUK.Button onClick={toggleShowAsTable} buttonColour="#1d70b8">
-                {!showAsTable ? 'Table View' : 'Graph View'}
+                {!showAsTable ? 'View As Table' : 'View As Graph'}
             </GovUK.Button>
             <div role="img" aria-labelledby="barchart-title barchart-desc">
                 {!showAsTable ? (
