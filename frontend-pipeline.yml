@@ -88,7 +88,7 @@ stages:
                           $(tag)
                           latest
                         buildArguments: |
-                          CONTAINER_PORT=${{environment.container_port}}
+                          CONTAINER_PORT=8080
                     - task: Docker@2
                       displayName: Push an image to container registry
                       inputs:
