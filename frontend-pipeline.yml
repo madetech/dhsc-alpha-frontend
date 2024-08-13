@@ -84,11 +84,11 @@ stages:
                         repository: $(imageRepository)
                         dockerfile: $(dockerfilePath)
                         containerRegistry: ${{environment.acr_connection}}
+                        arguments: "--build-arg CONTAINER_PORT=8080"
                         tags: |
                           $(tag)
                           latest
-                        buildArguments: |
-                          CONTAINER_PORT=8080
+
                     - task: Docker@2
                       displayName: Push an image to container registry
                       inputs:
