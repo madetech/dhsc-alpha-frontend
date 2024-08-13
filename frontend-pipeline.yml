@@ -84,7 +84,7 @@ stages:
                         repository: $(imageRepository)
                         dockerfile: $(dockerfilePath)
                         containerRegistry: ${{environment.acr_connection}}
-                        arguments: "--build-arg CONTAINER_PORT=80"
+                        arguments: "--build-arg CONTAINER_PORT=${{environment.container_port}}"
                         tags: |
                           $(tag)
                           latest
