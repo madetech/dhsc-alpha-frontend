@@ -20,9 +20,6 @@ COPY --from=builder /app/build .
 WORKDIR /etc/nginx
 COPY --from=builder ./app/nginx.conf ./nginx.conf.template
 
-# Output the CONTAINER_PORT to ensure it's set correctly
-RUN echo "CONTAINER_PORT is set to ${CONTAINER_PORT}"
-
 RUN sed "s/\$CONTAINER_PORT/${CONTAINER_PORT}/g" ./nginx.conf.template > ./nginx.conf
 
 EXPOSE ${CONTAINER_PORT}
