@@ -45,7 +45,7 @@ export function calculateMedian(
     showMedian: boolean
 ): number | null {
     return showMedian
-        ? d3.median(data, (dataItem) => dataItem.value) ?? null
+        ? (d3.median(data, (dataItem) => dataItem.value) ?? null)
         : null;
 }
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
 import Barchart from '../../components/barchart/Barchart';
-import GetAscofData from '../../api/api';
 import { ChartData } from '../../data/interfaces/BarchartProps';
 import { ASCOFData } from '../../data/interfaces/ASCOFData';
+import GetAscofData from '../../api/api';
 
 const AscofPage: React.FC = () => {
     const [ascofData, setAscofData] = useState<ChartData[]>([]);
@@ -99,28 +99,24 @@ const AscofPage: React.FC = () => {
                 <GovUK.H4>ASCOF Data Visualisation</GovUK.H4>
                 <GovUK.LoadingBox loading={isLoading}>
                     <div data-testid="ascof-barchart">
-                        <div style={{ margin: '20px 0' }}>
-                            <label htmlFor="metric-select">
-                                Select metric:
-                            </label>
-                            <select
-                                id="metric-select"
-                                value={selectedAscofMetric}
-                                onChange={handleMetricChange}
-                                style={{ marginTop: '5px' }}
-                            >
-                                {ascofMetrics.map((metric) => (
-                                    <option key={metric} value={metric}>
-                                        {metric}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <GovUK.Select
+                            label="Select metric:"
+                            mb={5}
+                            input={{
+                                onChange: handleMetricChange,
+                            }}
+                        >
+                            {ascofMetrics.map((metric) => (
+                                <option key={metric} value={metric}>
+                                    {metric}
+                                </option>
+                            ))}
+                        </GovUK.Select>
                         <Barchart
                             data={filteredAscofData}
                             xLabel="Region"
                             yLabel="Value"
-                            title={`2023 ASCOF - ${selectedAscofMetric} Visualisation`}
+                            title={`2023 ASCOF - ${selectedAscofMetric}`}
                         />
                     </div>
                 </GovUK.LoadingBox>
