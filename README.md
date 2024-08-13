@@ -1,5 +1,7 @@
 # dhsc-alpha-frontend
 
+[![Build Status](https://dev.azure.com/DHSCSCDAPAlpha/DAP%20Alpha/_apis/build/status%2FFrontend?branchName=main)](https://dev.azure.com/DHSCSCDAPAlpha/DAP%20Alpha/_build/latest?definitionId=4&branchName=main)
+
 ## Contents
 
 - [About This Project](#about-this-project)
