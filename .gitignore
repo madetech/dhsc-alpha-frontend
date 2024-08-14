@@ -114,6 +114,9 @@ venv.bak/
 # mkdocs documentation
 /site
 
+# Cypress
+app/cypress/screenshots/*
+
 # mypy
 .mypy_cache/
 .dmypy.json
