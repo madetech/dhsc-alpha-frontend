@@ -2,7 +2,7 @@ import React, { MouseEvent, useRef } from 'react';
 import type { ReactNode } from 'react';
 import * as GovUK from 'govuk-react';
 import { manageFocus } from '../../helpers/ManageFocus';
-import { Link } from 'react-router-dom';
+import Navbar from '../navbar/Navbar';
 
 type Props = {
     children: ReactNode;
@@ -12,10 +12,6 @@ const focusMainContent = (
     e: MouseEvent<HTMLAnchorElement>,
     mainRef: React.RefObject<HTMLDivElement>
 ) => {
-    /**
-     * Note: This function relies on the `document` object.
-     * In case if we migrate to SSR approach in the future, we will need to review the logic here.
-     */
     e.preventDefault();
 
     const firstHeadingElement = document?.getElementsByTagName('h1')?.[0];
@@ -27,8 +23,6 @@ const focusMainContent = (
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
-    // re-focus the layout on route change, so that skip link become the next focusable element
-
     const layoutRef = useRef<HTMLDivElement | null>(null);
     const mainRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,23 +36,7 @@ const Layout: React.FC<Props> = ({ children }) => {
             >
                 Skip to main content
             </GovUK.SkipLink>
-            <GovUK.TopNav
-                serviceTitle={
-                    <GovUK.TopNav.Anchor as={Link} to="/">
-                        DHSC Data Access Tool Alpha
-                    </GovUK.TopNav.Anchor>
-                }
-            >
-                <GovUK.TopNav.NavLink as={Link} to="/ascof">
-                    ASCOF Data Charts
-                </GovUK.TopNav.NavLink>
-                <GovUK.TopNav.NavLink as={Link} to="/about">
-                    About Us
-                </GovUK.TopNav.NavLink>
-                <GovUK.TopNav.NavLink as={Link} to="/chart-placeholders">
-                    Chart Placeholders
-                </GovUK.TopNav.NavLink>
-            </GovUK.TopNav>
+            <Navbar />
             <GovUK.Page.WidthContainer>
                 <GovUK.PhaseBanner level="alpha">
                     This part of GOV.UK is being built
