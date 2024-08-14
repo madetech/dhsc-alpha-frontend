@@ -1,8 +1,6 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Layout from './Layout';
-import '@testing-library/jest-dom/extend-expect';
 
 describe('Layout', () => {
     beforeEach(() => {
