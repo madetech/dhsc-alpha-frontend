@@ -6,7 +6,6 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
 
-# VARIABLES
 ARG REACT_APP_ENV
 ENV REACT_APP_ENV=${REACT_APP_ENV}
 
