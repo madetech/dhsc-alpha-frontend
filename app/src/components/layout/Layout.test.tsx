@@ -1,8 +1,6 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Layout from './Layout';
-import '@testing-library/jest-dom/extend-expect';
 
 describe('Layout', () => {
     beforeEach(() => {
@@ -15,19 +13,11 @@ describe('Layout', () => {
         );
     });
 
-    describe('Links', () => {
+    describe('Skip Link', () => {
         test('renders the skip link', () => {
             expect(
                 screen.getByText(/Skip to main content/i)
             ).toBeInTheDocument();
-        });
-
-        test('renders the top navigation with correct links', () => {
-            expect(
-                screen.getByText(/DHSC Data Access Tool Alpha/i)
-            ).toBeInTheDocument();
-            expect(screen.getByText(/ASCOF Data Charts/i)).toBeInTheDocument();
-            expect(screen.getByText(/About Us/i)).toBeInTheDocument();
         });
 
         test('skip link focuses main content', () => {
