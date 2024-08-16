@@ -84,7 +84,7 @@ stages:
                         repository: $(imageRepository)
                         dockerfile: $(dockerfilePath)
                         containerRegistry: ${{environment.acr_connection}}
-                        arguments: |
+                        arguments: >
                           "--build-arg CONTAINER_PORT=${{environment.container_port}}"
                           "--build-arg REACT_APP_ENV=${{environment.name}}"
                         tags: |
