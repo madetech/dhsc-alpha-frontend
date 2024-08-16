@@ -85,8 +85,8 @@ stages:
                         dockerfile: $(dockerfilePath)
                         containerRegistry: ${{environment.acr_connection}}
                         arguments: >
-                          "--build-arg CONTAINER_PORT=${{environment.container_port}}"
-                          "--build-arg REACT_APP_ENV=${{environment.name}}"
+                          --build-arg CONTAINER_PORT=${{environment.container_port}}
+                          --build-arg REACT_APP_ENV=${{environment.name}}
                         tags: |
                           $(tag)
                           latest
