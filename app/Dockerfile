@@ -6,11 +6,15 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
 
+ARG REACT_APP_ENV
+ENV REACT_APP_ENV=${REACT_APP_ENV}
+
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
 # Host the App
 FROM nginx:latest
+
 ARG CONTAINER_PORT
 ENV CONTAINER_PORT=${CONTAINER_PORT}
 
