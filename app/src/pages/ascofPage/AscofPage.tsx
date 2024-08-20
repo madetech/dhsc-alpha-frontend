@@ -5,6 +5,7 @@ import Barchart from '../../components/barchart/Barchart';
 import { ChartData } from '../../data/interfaces/BarchartProps';
 import { ASCOFData } from '../../data/interfaces/ASCOFData';
 import GetAscofData from '../../api/api';
+import Data from '../../data.json';
 
 const AscofPage: React.FC = () => {
     const [ascofData, setAscofData] = useState<ChartData[]>([]);
@@ -15,7 +16,8 @@ const AscofPage: React.FC = () => {
     useEffect(() => {
         const fetchAndProcessData = async (): Promise<void> => {
             try {
-                const ascofApiResponse: ASCOFData[] = await GetAscofData();
+                // const ascofApiResponse: ASCOFData[] = await GetAscofData();
+                const ascofApiResponse: ASCOFData[] = Data;
                 if (ascofApiResponse) {
                     const metrics: string[] =
                         extractUniqueMetrics(ascofApiResponse);

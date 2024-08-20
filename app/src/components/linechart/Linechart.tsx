@@ -10,7 +10,7 @@ import {
     renderXAxis,
     renderYAxis,
     renderTitle,
-} from '../utils/linechartHelpers';
+} from '../utils/charts/linechartHelpers';
 
 const LineChart: React.FC<LinechartProps> = ({
     data,
