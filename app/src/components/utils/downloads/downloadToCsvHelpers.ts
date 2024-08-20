@@ -2,10 +2,12 @@ export function parseInputData(input: any): any[] {
     return typeof input !== 'object' ? JSON.parse(input) : input;
 }
 
-export function createCSVHeaders(dataRows: any[]): string {
-    const headers = Object.keys(dataRows[0]);
+const createCSVHeaders = (dataRows: any[], xLabel: string): string => {
+    const headers = Object.keys(dataRows[0])
+        .filter((key) => key !== 'metric')
+        .map((key) => (key === 'xAxisValue' ? xLabel : key));
     return headers.join(',') + '\r\n';
-}
+};
 
 export function convertObjRowToCSVRow(dataRowObj: any): string {
     let csvRow = '';
@@ -16,12 +18,17 @@ export function convertObjRowToCSVRow(dataRowObj: any): string {
     return csvRow;
 }
 
-export function generateCSVRows(dataRowsObj: any[]): string {
-    let csvRows = '';
-    for (const row of dataRowsObj) {
-        csvRows += convertObjRowToCSVRow(row) + '\r\n';
-    }
-    return csvRows;
+export function generateCSVRows(dataRows: any[]): string {
+    return (
+        dataRows
+            .map((dataRow) => {
+                return Object.keys(dataRow)
+                    .filter((key) => key !== 'metric')
+                    .map((key) => dataRow[key])
+                    .join(',');
+            })
+            .join('\r\n') + '\r\n'
+    );
 }
 
 export function createCSVBlob(csvData: string): Blob {
@@ -45,4 +52,18 @@ export function initiateDownload(downloadLink: HTMLAnchorElement) {
     downloadLink.click();
     document.body.removeChild(downloadLink);
     URL.revokeObjectURL(downloadLink.href);
+}
+
+export function convertToCSV(objArray: any[], xLabel: string): string {
+    const dataRows = parseInputData(objArray);
+    let csvContent = createCSVHeaders(dataRows, xLabel);
+    csvContent += generateCSVRows(dataRows);
+    return csvContent;
+}
+
+export function downloadCSV(data: any[], filename: string, xLabel: string) {
+    const csvData = convertToCSV(data, xLabel);
+    const csvBlob = createCSVBlob(csvData);
+    const downloadLink = createDownloadLink(csvBlob, filename);
+    initiateDownload(downloadLink);
 }
