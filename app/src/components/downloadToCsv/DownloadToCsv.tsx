@@ -3,6 +3,9 @@ import {
     parseInputData,
     createCSVHeaders,
     generateCSVRows,
+    createCSVBlob,
+    createDownloadLink,
+    initiateDownload,
 } from '../utils/downloads/downloadToCsvHelpers';
 
 type DownloadToCsvProps = {
@@ -23,23 +26,22 @@ const DownloadToCsv: React.FC<DownloadToCsvProps> = ({
         return csvContent;
     };
 
-    const downloadCSV = () => {
-        const csv = convertToCSV(data);
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
+    const downloadCSV = (data: any[], filename: string) => {
+        const csvData = convertToCSV(data);
+        const csvBlob = createCSVBlob(csvData);
+        const downloadLink = createDownloadLink(csvBlob, filename);
+        initiateDownload(downloadLink);
+    };
 
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        link.style.visibility = 'hidden';
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handleDownloadClick = (
+        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    ) => {
+        event.preventDefault();
+        downloadCSV(data, filename);
     };
 
     return (
-        <a href="#" onClick={downloadCSV}>
+        <a href="#" onClick={handleDownloadClick}>
             {children || 'Download CSV'}
         </a>
     );
