@@ -91,8 +91,6 @@ const Barchart: React.FC<BarchartProps> = ({
         showLegend,
     ]);
 
-    console.log(data);
-
     return (
         <>
             <GovUK.Button onClick={toggleShowAsTable} buttonColour="#1d70b8">
