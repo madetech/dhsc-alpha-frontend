@@ -12,7 +12,8 @@ import {
     renderLabels,
     renderMedianLine,
     renderLegend,
-} from '../utils/barchartHelpers';
+} from '../utils/charts/barchartHelpers';
+import DownloadToCsv from '../downloadToCsv/DownloadToCsv';
 
 const Barchart: React.FC<BarchartProps> = ({
     data,
@@ -132,6 +133,11 @@ const Barchart: React.FC<BarchartProps> = ({
                         </GovUK.Table>
                     </div>
                 )}
+                <DownloadToCsv data={data} filename={title} xLabel={xLabel}>
+                    <GovUK.Button buttonColour="#1d70b8">
+                        Download To Csv
+                    </GovUK.Button>
+                </DownloadToCsv>
             </div>
         </>
     );

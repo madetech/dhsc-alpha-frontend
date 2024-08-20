@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { LinechartData } from '../../data/interfaces/LinechartProps';
+import { LinechartData } from '../../../data/interfaces/LinechartProps';
 
 export function initializeSvg(
     ref: React.RefObject<SVGSVGElement>,

@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { ChartData } from '../../data/interfaces/BarchartProps';
+import { ChartData } from '../../../data/interfaces/BarchartProps';
 
 export function initializeSvg(
     ref: React.RefObject<SVGSVGElement>,
