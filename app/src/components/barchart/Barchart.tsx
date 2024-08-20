@@ -133,15 +133,13 @@ const Barchart: React.FC<BarchartProps> = ({
                                 </GovUK.Table.Row>
                             ))}
                         </GovUK.Table>
-                        <DownloadToCsv
-                            data={data}
-                            filename={title}
-                            xLabel={xLabel}
-                        >
-                            <GovUK.Link>Download Data</GovUK.Link>
-                        </DownloadToCsv>
                     </div>
                 )}
+                <DownloadToCsv data={data} filename={title} xLabel={xLabel}>
+                    <GovUK.Button buttonColour="#1d70b8">
+                        Download To Csv
+                    </GovUK.Button>
+                </DownloadToCsv>
             </div>
         </>
     );
