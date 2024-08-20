@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+    parseInputData,
+    createCSVHeaders,
+    generateCSVRows,
+} from '../utils/downloads/downloadToCsvHelpers';
 
 type DownloadToCsvProps = {
     data: any[];
@@ -12,24 +17,10 @@ const DownloadToCsv: React.FC<DownloadToCsvProps> = ({
     children,
 }) => {
     const convertToCSV = (objArray: any[]): string => {
-        const array =
-            typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-        let str = '';
-
-        const headers = Object.keys(array[0]);
-        str += headers.join(',') + '\r\n';
-
-        for (let i = 0; i < array.length; i++) {
-            let line = '';
-            for (const index in array[i]) {
-                if (line !== '') line += ',';
-
-                line += array[i][index];
-            }
-            str += line + '\r\n';
-        }
-
-        return str;
+        const dataRows = parseInputData(objArray);
+        let csvContent = createCSVHeaders(dataRows);
+        csvContent += generateCSVRows(dataRows);
+        return csvContent;
     };
 
     const downloadCSV = () => {
