@@ -149,6 +149,46 @@ export function renderLabels(
         .attr('class', 'chart-title');
 }
 
+export function addTooltip(
+    chartSvg: d3.Selection<SVGGElement, unknown, null, undefined>,
+    tooltipColor = '#000',
+    tooltipBackgroundColor = '#fff'
+): void {
+    const tooltip = d3
+        .select('body')
+        .append('div')
+        .style('position', 'absolute')
+        .style('visibility', 'hidden')
+        .style('background-color', tooltipBackgroundColor)
+        .style('border', '1px solid #ddd')
+        .style('border-radius', '4px')
+        .style('padding', '8px')
+        .style('font-size', '12px')
+        .style('color', tooltipColor)
+        .style('pointer-events', 'none')
+        .style('box-shadow', '0px 2px 10px rgba(0, 0, 0, 0.1)');
+
+    chartSvg
+        .selectAll<SVGRectElement, ChartData>('rect')
+        .on('mouseover', function (event, dataItem) {
+            tooltip
+                .style('visibility', 'visible')
+                .text(`${dataItem.xAxisValue}: ${dataItem.value}`)
+                .style('left', `${event.pageX + 10}px`)
+                .style('top', `${event.pageY - 28}px`);
+            d3.select(this).style('fill-opacity', 0.7);
+        })
+        .on('mousemove', function (event) {
+            tooltip
+                .style('left', `${event.pageX + 10}px`)
+                .style('top', `${event.pageY - 28}px`);
+        })
+        .on('mouseout', function () {
+            tooltip.style('visibility', 'hidden');
+            d3.select(this).style('fill-opacity', 1);
+        });
+}
+
 export function renderMedianLine(
     chartSvg: d3.Selection<SVGGElement, unknown, null, undefined>,
     median: number,

@@ -12,6 +12,7 @@ import {
     renderLabels,
     renderMedianLine,
     renderLegend,
+    addTooltip,
 } from '../utils/charts/barchartHelpers';
 import DownloadToCsv from '../downloadToCsv/DownloadToCsv';
 
@@ -54,6 +55,7 @@ const Barchart: React.FC<BarchartProps> = ({
         renderXAxis(chartSvg, xAxisScale, height, margin);
         renderYAxis(chartSvg, yAxisScale, margin);
         renderLabels(chartSvg, width, height, margin, xLabel, yLabel, title);
+        addTooltip(chartSvg);
 
         if (showMedian && median !== null) {
             renderMedianLine(
