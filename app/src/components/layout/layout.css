@@ -1,0 +1,9 @@
+.footer {
+    margin-top: auto;
+}
+
+.main {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}

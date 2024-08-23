@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import * as GovUK from 'govuk-react';
 import { manageFocus } from '../../helpers/ManageFocus';
 import Navbar from '../navbar/Navbar';
+import './layout.css';
 
 type Props = {
     children: ReactNode;
@@ -41,11 +42,11 @@ const Layout: React.FC<Props> = ({ children }) => {
                 <GovUK.PhaseBanner level="alpha">
                     This part of GOV.UK is being built
                 </GovUK.PhaseBanner>
-                <GovUK.Page.Main>
+                <GovUK.Page.Main className="main">
                     <div ref={mainRef}>{children}</div>
                 </GovUK.Page.Main>
             </GovUK.Page.WidthContainer>
-            <GovUK.Footer />
+            <GovUK.Footer className="footer" />
         </div>
     );
 };
