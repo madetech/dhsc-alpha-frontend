@@ -1,19 +1,24 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import HomePage from './pages/homePage/HomePage';
+import React from 'react';
 import AboutPage from './pages/aboutPage/AboutPage';
 import AscofPage from './pages/ascofPage/AscofPage';
 import ChartPlaceholderPage from './pages/chartPlaceholderPage/ChartPlaceholderPage';
-import FirstNameAndLastNamePage from './pages/registrationFlow/firstNameAndLastNamePage/FirstNameAndLastNamePage';
+import HomePage from './pages/homePage/HomePage';
+import LoginPage from './pages/loginPage/LoginPage';
+import AccountConformationPage from './pages/registrationFlow/accountConformationPage/AccountConformationPage';
+import CreatePasswordPage from './pages/registrationFlow/createPasswordPage/CreatePasswordPage';
 import EmailAddressPage from './pages/registrationFlow/emailAddressPage/EmailAddressPage';
 import EmailVerificationPage from './pages/registrationFlow/emailVerificationPage/EmailVerificationPage';
-import CreatePasswordPage from './pages/registrationFlow/createPasswordPage/CreatePasswordPage';
-import AccountConformationPage from './pages/registrationFlow/accountConformationPage/AccountConformationPage';
+import FirstNameAndLastNamePage from './pages/registrationFlow/firstNameAndLastNamePage/FirstNameAndLastNamePage';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
     },
     {
         path: '/registration',
