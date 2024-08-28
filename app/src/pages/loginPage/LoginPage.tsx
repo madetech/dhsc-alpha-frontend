@@ -1,13 +1,13 @@
 import * as GovUK from 'govuk-react';
 import React, { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
 
 const validateEmail: (value?: string) => string | undefined = (value) =>
-    value ? undefined : 'Please enter a first name';
+    value ? undefined : 'Please enter a email address';
 
 const validatePassword: (value?: string) => string | undefined = (value) =>
-    value ? undefined : 'Please enter a last name';
+    value ? undefined : 'Please enter a password';
 
 function isNotEmpty(obj: any) {
     return Object.keys(obj).some((key) => obj[key]?.length > 0);
@@ -45,6 +45,7 @@ const LoginPage: React.FC = () => {
                 setHasSubmitted(true);
                 setIsSubmitting(false);
             }, 1000);
+            sessionStorage.setItem('isLoggedIn', 'true');
             navigate('/');
         }
     }, [isSubmitting, email, password]);

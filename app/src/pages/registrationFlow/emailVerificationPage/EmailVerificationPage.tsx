@@ -14,7 +14,6 @@ function isNotEmpty(obj: any) {
 
 const EmailVerification: React.FC = () => {
     const navigate = useNavigate();
-    const { state } = useLocation();
     const [isCorrectEmail, setIsCorrectEmail] = useState<string>();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -38,7 +37,9 @@ const EmailVerification: React.FC = () => {
                 setHasSubmitted(true);
                 setIsSubmitting(false);
             }, 1000);
-            navigate('/registration/create-password');
+            isCorrectEmail === 'yes'
+                ? navigate('/registration/create-password')
+                : navigate('/registration/email');
         }
     }, [isSubmitting, isCorrectEmail]);
 
@@ -49,7 +50,7 @@ const EmailVerification: React.FC = () => {
                     Back
                 </GovUK.BackLink>
                 <GovUK.H2>Is your email address correct?</GovUK.H2>
-                <GovUK.H6>{state}</GovUK.H6>
+                <GovUK.H6>{sessionStorage.getItem('emailAddress')}</GovUK.H6>
                 {!hasSubmitted && (
                     <GovUK.LoadingBox loading={isSubmitting}>
                         <GovUK.Fieldset>

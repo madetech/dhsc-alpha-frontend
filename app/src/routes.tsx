@@ -10,6 +10,7 @@ import CreatePasswordPage from './pages/registrationFlow/createPasswordPage/Crea
 import EmailAddressPage from './pages/registrationFlow/emailAddressPage/EmailAddressPage';
 import EmailVerificationPage from './pages/registrationFlow/emailVerificationPage/EmailVerificationPage';
 import FirstNameAndLastNamePage from './pages/registrationFlow/firstNameAndLastNamePage/FirstNameAndLastNamePage';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
     {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     },
     {
         path: 'ascof',
-        element: <AscofPage />,
+        element: <ProtectedRoute element={<AscofPage />} />,
     },
     {
         path: 'chart-placeholders',

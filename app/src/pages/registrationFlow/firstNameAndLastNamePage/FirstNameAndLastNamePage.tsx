@@ -45,6 +45,8 @@ const FirstNameAndLastNamePage: React.FC = () => {
                 setHasSubmitted(true);
                 setIsSubmitting(false);
             }, 1000);
+            sessionStorage.setItem('firstName', firstName);
+            sessionStorage.setItem('lastName', lastName);
             navigate('/registration/email');
         }
     }, [isSubmitting, firstName, lastName]);

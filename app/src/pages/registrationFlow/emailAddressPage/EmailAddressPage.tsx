@@ -36,9 +36,8 @@ const EmailAddressPage: React.FC = () => {
                 setHasSubmitted(true);
                 setIsSubmitting(false);
             }, 1000);
-            navigate('/registration/email-verification', {
-                state: emailAddress,
-            });
+            sessionStorage.setItem('emailAddress', emailAddress);
+            navigate('/registration/email-verification');
         }
     }, [isSubmitting, emailAddress]);
 
