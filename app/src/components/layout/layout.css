@@ -1,9 +1,7 @@
-.footer {
-    margin-top: auto;
+#footer {
+    box-shadow: 0 100vh 0 100vh #f3f2f1;
 }
 
 .main {
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 100px;
 }

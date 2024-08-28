@@ -48,7 +48,7 @@ const Layout: React.FC<Props> = ({ children }) => {
                     <div ref={mainRef}>{children}</div>
                 </GovUK.Page.Main>
             </GovUK.Page.WidthContainer>
-            <GovUK.Footer className="footer" />
+            <GovUK.Footer id="footer" />
         </div>
     );
 };
