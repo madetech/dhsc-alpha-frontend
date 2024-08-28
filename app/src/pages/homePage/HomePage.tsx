@@ -1,7 +1,7 @@
-import React from 'react';
-import Layout from '../../components/layout/Layout';
 import * as GovUK from 'govuk-react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Layout from '../../components/layout/Layout';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -55,19 +55,20 @@ const HomePage: React.FC = () => {
                         <div>
                             <GovUK.GridRow className="subsection-heading-row">
                                 <GovUK.H3 className="subsection-heading">
-                                    Subsection
+                                    Quick Links
                                 </GovUK.H3>
                             </GovUK.GridRow>
                             <GovUK.GridRow mb={3}>
-                                <GovUK.Link size="XL" as={Link} to="/about">
-                                    About Us
+                                <GovUK.Link as={Link} to="/login">
+                                    Login
                                 </GovUK.Link>
                             </GovUK.GridRow>
                             <GovUK.GridRow mb={3}>
-                                <GovUK.Link as={Link} to="/#">
-                                    Related Link
+                                <GovUK.Link as={Link} to="/about">
+                                    About Us
                                 </GovUK.Link>
                             </GovUK.GridRow>
+
                             <GovUK.GridRow>
                                 <GovUK.Link as={Link} to="/#">
                                     <strong>More</strong>

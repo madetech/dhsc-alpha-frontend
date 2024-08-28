@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
 import * as GovUK from 'govuk-react';
-import Layout from '../../../components/layout/Layout';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../../../components/layout/Layout';
 
 const validateEmailAddress: (value?: string) => string | undefined = (value) =>
     value ? undefined : 'Please enter your email address';
@@ -45,6 +45,12 @@ const EmailAddressPage: React.FC = () => {
     return (
         <Layout>
             <section>
+                <GovUK.BackLink
+                    mb={6}
+                    href="/registration/first-name-last-name"
+                >
+                    Back
+                </GovUK.BackLink>
                 <GovUK.H2>What is your email address?</GovUK.H2>
                 <GovUK.Paragraph>
                     You&apos;ll need this email address to sign in to your

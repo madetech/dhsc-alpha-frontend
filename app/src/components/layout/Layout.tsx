@@ -1,6 +1,6 @@
-import React, { MouseEvent, useRef } from 'react';
-import type { ReactNode } from 'react';
 import * as GovUK from 'govuk-react';
+import type { ReactNode } from 'react';
+import React, { MouseEvent, useRef } from 'react';
 import { manageFocus } from '../../helpers/ManageFocus';
 import Navbar from '../navbar/Navbar';
 import './layout.css';
@@ -40,7 +40,9 @@ const Layout: React.FC<Props> = ({ children }) => {
             <Navbar />
             <GovUK.Page.WidthContainer>
                 <GovUK.PhaseBanner level="alpha">
-                    This part of GOV.UK is being built
+                    This is a new service - your{' '}
+                    <GovUK.Link href="/#">feedback</GovUK.Link> will help us to
+                    improve it.
                 </GovUK.PhaseBanner>
                 <GovUK.Page.Main className="main">
                     <div ref={mainRef}>{children}</div>

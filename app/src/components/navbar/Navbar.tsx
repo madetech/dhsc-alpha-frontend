@@ -1,5 +1,5 @@
-import React from 'react';
 import * as GovUK from 'govuk-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
@@ -7,20 +7,10 @@ const Navbar: React.FC = () => {
         <GovUK.TopNav
             serviceTitle={
                 <GovUK.TopNav.Anchor as={Link} to="/">
-                    DHSC Data Access Tool Alpha
+                    Adult social care data access portal
                 </GovUK.TopNav.Anchor>
             }
-        >
-            <GovUK.TopNav.NavLink as={Link} to="/ascof">
-                ASCOF Data Charts
-            </GovUK.TopNav.NavLink>
-            <GovUK.TopNav.NavLink as={Link} to="/about">
-                About Us
-            </GovUK.TopNav.NavLink>
-            <GovUK.TopNav.NavLink as={Link} to="/chart-placeholders">
-                Chart Placeholders
-            </GovUK.TopNav.NavLink>
-        </GovUK.TopNav>
+        ></GovUK.TopNav>
     );
 };
 

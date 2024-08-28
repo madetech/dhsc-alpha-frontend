@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
 import * as GovUK from 'govuk-react';
-import Layout from '../../../components/layout/Layout';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../../../components/layout/Layout';
 
 const validateFirstName: (value?: string) => string | undefined = (value) =>
     value ? undefined : 'Please enter a first name';
@@ -52,6 +52,9 @@ const FirstNameAndLastNamePage: React.FC = () => {
     return (
         <>
             <Layout>
+                <GovUK.BackLink mb={6} href="/">
+                    Back
+                </GovUK.BackLink>
                 <GovUK.H2>What is your name?</GovUK.H2>
                 <GovUK.Paragraph>
                     You&apos;ll need to create an account to access most of the

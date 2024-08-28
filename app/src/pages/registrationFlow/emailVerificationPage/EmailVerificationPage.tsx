@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
 import * as GovUK from 'govuk-react';
-import Layout from '../../../components/layout/Layout';
+import React, { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Layout from '../../../components/layout/Layout';
 import './emailVerificationPage.css';
 
 export const validateIsCorrectEmail: (value?: string) => string | undefined = (
@@ -45,6 +45,9 @@ const EmailVerification: React.FC = () => {
     return (
         <Layout>
             <section>
+                <GovUK.BackLink mb={6} href="/registration/email">
+                    Back
+                </GovUK.BackLink>
                 <GovUK.H2>Is your email address correct?</GovUK.H2>
                 <GovUK.H6>{state}</GovUK.H6>
                 {!hasSubmitted && (
