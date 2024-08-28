@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
     return (
         <GovUK.TopNav
             serviceTitle={
-                <GovUK.TopNav.Anchor as={Link} to="/">
+                <GovUK.TopNav.Anchor as={Link} to="/home">
                     Adult social care data access portal
                 </GovUK.TopNav.Anchor>
             }

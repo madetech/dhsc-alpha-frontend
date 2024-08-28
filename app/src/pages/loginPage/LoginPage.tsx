@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
                 setIsSubmitting(false);
             }, 1000);
             sessionStorage.setItem('isLoggedIn', 'true');
-            navigate('/');
+            navigate('/home');
         }
     }, [isSubmitting, email, password]);
 
@@ -54,6 +54,9 @@ const LoginPage: React.FC = () => {
         <>
             <Layout>
                 <GovUK.H2>Sign in</GovUK.H2>
+                <GovUK.Paragraph>
+                    Sign in or [create an account](./) to get started.
+                </GovUK.Paragraph>
                 {!hasSubmitted && (
                     <GovUK.LoadingBox loading={isSubmitting}>
                         <GovUK.Fieldset>

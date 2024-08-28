@@ -21,6 +21,6 @@ describe('Navbar', () => {
         const link = screen.getByText(
             /Adult social care data access portal/i
         ) as HTMLAnchorElement;
-        expect(link.href).toContain('/');
+        expect(link.href).toContain('/home');
     });
 });

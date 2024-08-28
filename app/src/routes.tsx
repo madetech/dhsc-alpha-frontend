@@ -3,7 +3,7 @@ import React from 'react';
 import AboutPage from './pages/aboutPage/AboutPage';
 import AscofPage from './pages/ascofPage/AscofPage';
 import ChartPlaceholderPage from './pages/chartPlaceholderPage/ChartPlaceholderPage';
-import HomePage from './pages/homePage/HomePage';
+import RegisterPage from './pages/registerPage/RegisterPage';
 import LoginPage from './pages/loginPage/LoginPage';
 import AccountConformationPage from './pages/registrationFlow/accountConformationPage/AccountConformationPage';
 import CreatePasswordPage from './pages/registrationFlow/createPasswordPage/CreatePasswordPage';
@@ -11,11 +11,16 @@ import EmailAddressPage from './pages/registrationFlow/emailAddressPage/EmailAdd
 import EmailVerificationPage from './pages/registrationFlow/emailVerificationPage/EmailVerificationPage';
 import FirstNameAndLastNamePage from './pages/registrationFlow/firstNameAndLastNamePage/FirstNameAndLastNamePage';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import HomePage from './pages/homePage/HomePage';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomePage />,
+        element: <RegisterPage />,
+    },
+    {
+        path: '/home',
+        element: <ProtectedRoute element={<HomePage />} />,
     },
     {
         path: '/login',
