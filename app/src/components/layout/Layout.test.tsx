@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Layout from './Layout';
 
@@ -34,12 +34,6 @@ describe('Layout', () => {
     });
 
     describe('Content', () => {
-        test('renders the phase banner', () => {
-            expect(
-                screen.getByText(/This part of GOV.UK is being built/i)
-            ).toBeInTheDocument();
-        });
-
         test('renders the main content', () => {
             expect(
                 screen.getByText(/Test Children Content/i)

@@ -6,6 +6,9 @@ const AboutPage: React.FC = () => {
     return (
         <>
             <Layout>
+                <GovUK.BackLink mb={6} href="/">
+                    Back
+                </GovUK.BackLink>
                 <GovUK.H1>About us</GovUK.H1>
                 <GovUK.Paragraph>
                     We support ministers in leading the nation’s health and

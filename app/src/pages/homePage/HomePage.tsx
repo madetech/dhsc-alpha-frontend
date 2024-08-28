@@ -1,15 +1,13 @@
+import * as GovUK from 'govuk-react';
 import React from 'react';
 import Layout from '../../components/layout/Layout';
-import * as GovUK from 'govuk-react';
 
 const HomePage: React.FC = () => {
-    const pageHeader = 'Welcome to the dhsc-alpha-frontend application.';
-
     return (
         <>
             <Layout>
-                <GovUK.H1>{pageHeader}</GovUK.H1>
-                <GovUK.Paragraph>Welcome to the Example App</GovUK.Paragraph>
+                <GovUK.H1>Home placeholder page</GovUK.H1>
+                <GovUK.Link href="/ascof">Ascof Page Link</GovUK.Link>
             </Layout>
         </>
     );
