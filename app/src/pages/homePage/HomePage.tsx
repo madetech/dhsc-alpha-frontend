@@ -7,6 +7,7 @@ const HomePage: React.FC = () => {
         <>
             <Layout>
                 <GovUK.H1>Home placeholder page</GovUK.H1>
+                <GovUK.Link href="/ascof">Ascof Page Link</GovUK.Link>
             </Layout>
         </>
     );
