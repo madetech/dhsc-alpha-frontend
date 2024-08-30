@@ -1,10 +1,66 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
+import ButtonWithArrow from "../../components/buttons/button-with-arrow/ButtonWithArrow";
+import "./registerPage.scss";
+
 const RegisterPage: React.FC = () => {
   return (
     <>
       <Layout>
-        <h1>Hello world</h1>
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">
+            <h1 className="govuk-heading-l">
+              Adult social care data access portal
+            </h1>
+            <p className="govuk-body">Use this service to:</p>
+            <ul className="govuk-list govuk-list--bullet">
+              <li>view Adult Social Care summary data</li>
+              <li>view Quality of Care metrics</li>
+              <li>view capacity within and between areas</li>
+            </ul>
+            <p className="govuk-body govuk-!-padding-bottom-1">
+              Registering takes around 2 minutes
+            </p>
+            <ButtonWithArrow buttonString="Start" />
+            <h2 className="govuk-heading-m">Before you start</h2>
+            <p className="govuk-body">
+              You can also{" "}
+              <a className="govuk-link" href="#">
+                register
+              </a>{" "}
+              if...
+            </p>
+            <p className="govuk-body">
+              The online service is also available in{" "}
+              <a className="govuk-link" href="#">
+                Welsh (Cymraeg)
+              </a>{" "}
+            </p>
+            <p className="govuk-body">
+              You cannot register for this service if ..
+            </p>
+          </div>
+          <div className="govuk-grid-column-one-third">
+            <h2 className="govuk-heading-m quick-links-header">Quick Links</h2>
+            <ul className="govuk-list">
+              <li>
+                <a className="govuk-link" href="/login">
+                  Login
+                </a>
+              </li>
+              <li>
+                <a className="govuk-link" href="/about">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a className="govuk-link" href="#">
+                  More
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </Layout>
     </>
   );

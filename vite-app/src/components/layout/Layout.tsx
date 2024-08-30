@@ -35,7 +35,6 @@ const Layout: React.FC<Props> = ({ children }) => {
           <div id="main-content">{children}</div>
         </main>
       </div>
-
       <Footer />
     </div>
   );
