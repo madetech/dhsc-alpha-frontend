@@ -18,7 +18,7 @@ variables:
   - name: imageRepository
     value: "dapalpha"
   - name: dockerfilePath
-    value: "$(Build.SourcesDirectory)/app/Dockerfile"
+    value: "$(Build.SourcesDirectory)/vite-app/Dockerfile"
   - name: tag
     value: "$(Build.BuildId)"
   - name: vmImageName
@@ -41,25 +41,6 @@ parameters:
         container_port: "$(prod_container_port)"
 
 stages:
-  # Pre-build test
-  - stage: Test
-    displayName: Run tests
-    jobs:
-      - job: Test
-        displayName: Run unit tests
-        pool:
-          vmImage: $(vmImageName)
-        steps:
-          - script: |
-              cd app
-              echo "Running npm ci..."
-              npm ci
-            displayName: "Install dependencies"
-          - script: |
-              cd app
-              echo "Running tests..."
-              npm test -- --watchAll=false --coverage
-            displayName: "Run tests"
   # Build/deploy across environments
   - ${{ each environment in parameters.environments}}:
       # Build

@@ -6,7 +6,7 @@ const Header: React.FC = () => {
       <div className="govuk-header__container govuk-width-container">
         <div className="govuk-header__logo">
           <a
-            href="#"
+            href="/"
             className="govuk-header__link govuk-header__link--homepage"
           >
             <svg
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           </a>
         </div>
         <div className="govuk-header__content">
-          <a href="#" className="govuk-header__link govuk-header__service-name">
+          <a href="/" className="govuk-header__link govuk-header__service-name">
             Adult social care data access portal
           </a>
         </div>
