@@ -1,8 +1,9 @@
 import React from "react";
+import "./footer.scss";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="govuk-footer">
+    <footer id="footer" className="govuk-footer">
       <div className="govuk-width-container">
         <div className="govuk-footer__meta">
           <div className="govuk-footer__meta-item govuk-footer__meta-item--grow">

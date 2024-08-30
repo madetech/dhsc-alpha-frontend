@@ -2,12 +2,13 @@ import React from "react";
 
 type Props = {
   buttonString: string;
+  buttonUrl: string;
 };
 
-const ButtonWithArrow: React.FC<Props> = ({ buttonString }) => {
+const ButtonWithArrow: React.FC<Props> = ({ buttonString, buttonUrl }) => {
   return (
     <a
-      href="#"
+      href={buttonUrl}
       role="button"
       draggable="false"
       className="govuk-button govuk-button--start"

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
-import ButtonWithArrow from "../../components/buttons/button-with-arrow/ButtonWithArrow";
+import ButtonWithArrow from "../../components/buttons/navigation/button-with-arrow/ButtonWithArrow";
 import "./registerPage.scss";
 
 const RegisterPage: React.FC = () => {
@@ -21,7 +21,7 @@ const RegisterPage: React.FC = () => {
             <p className="govuk-body govuk-!-margin-bottom-5">
               Registering takes around 2 minutes
             </p>
-            <ButtonWithArrow buttonString="Start" />
+            <ButtonWithArrow buttonString="Start" buttonUrl="#" />
             <h2 className="govuk-heading-m">Before you start</h2>
             <p className="govuk-body">
               You can also{" "}
