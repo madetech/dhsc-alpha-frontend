@@ -18,7 +18,7 @@ const RegisterPage: React.FC = () => {
               <li>view Quality of Care metrics</li>
               <li>view capacity within and between areas</li>
             </ul>
-            <p className="govuk-body govuk-!-padding-bottom-1">
+            <p className="govuk-body govuk-!-margin-bottom-5">
               Registering takes around 2 minutes
             </p>
             <ButtonWithArrow buttonString="Start" />
@@ -41,14 +41,16 @@ const RegisterPage: React.FC = () => {
             </p>
           </div>
           <div className="govuk-grid-column-one-third">
-            <h2 className="govuk-heading-m quick-links-header">Quick Links</h2>
+            <h2 className="govuk-heading-m quick-links-header govuk-!-padding-top-2">
+              Quick Links
+            </h2>
             <ul className="govuk-list">
-              <li>
+              <li className="govuk-!-margin-bottom-2">
                 <a className="govuk-link" href="/login">
                   Login
                 </a>
               </li>
-              <li>
+              <li className="govuk-!-margin-bottom-2">
                 <a className="govuk-link" href="/about">
                   About Us
                 </a>
