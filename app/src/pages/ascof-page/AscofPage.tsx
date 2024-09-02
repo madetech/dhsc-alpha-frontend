@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import Barchart from "../../components/barchart/Barchart";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import { AscofData } from "../../data/interfaces/AscofData";
 import { LoaderData } from "../../data/types/LoaderData";
+import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
 
 const extractUniqueMetrics = (data: AscofData[]): string[] => {
   return Array.from(
@@ -22,6 +23,8 @@ const transformToChartData = (data: AscofData[]): BarchartData[] => {
 
 const AscofPage: React.FC = () => {
   const { ascofData } = useLoaderData() as LoaderData;
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
   const [transformedAscofData, setTransformedAscofData] = useState<
     BarchartData[]
   >([]);
@@ -45,6 +48,7 @@ const AscofPage: React.FC = () => {
 
   return (
     <Layout>
+      {isLoading && <LoadingSpinner />}
       <h1 className="govuk-heading-l">ASCOF Data Charts</h1>
       <p className="govuk-body">
         The Adult Social Care Outcomes Framework (ASCOF) measures how well care
