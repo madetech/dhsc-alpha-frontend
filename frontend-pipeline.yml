@@ -18,7 +18,7 @@ variables:
   - name: imageRepository
     value: "dapalpha"
   - name: dockerfilePath
-    value: "$(Build.SourcesDirectory)/vite-app/Dockerfile"
+    value: "$(Build.SourcesDirectory)/app/Dockerfile"
   - name: tag
     value: "$(Build.BuildId)"
   - name: vmImageName

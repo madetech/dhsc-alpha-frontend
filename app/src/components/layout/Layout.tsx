@@ -1,56 +1,43 @@
-import * as GovUK from 'govuk-react';
-import type { ReactNode } from 'react';
-import React, { MouseEvent, useRef } from 'react';
-import { manageFocus } from '../../helpers/ManageFocus';
-import Navbar from '../navbar/Navbar';
-import './layout.css';
+import React, { MouseEvent, ReactNode, useEffect, useRef } from "react";
+import { initAll } from "../../assets/js/govuk-frontend.min.js";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
+import { focusMainContent } from "../../helpers/ManageFocus.js";
+import PhaseBanner from "../phase-banner/PhaseBanner.js";
 
 type Props = {
-    children: ReactNode;
-};
-
-const focusMainContent = (
-    e: MouseEvent<HTMLAnchorElement>,
-    mainRef: React.RefObject<HTMLDivElement>
-) => {
-    e.preventDefault();
-
-    const firstHeadingElement = document?.getElementsByTagName('h1')?.[0];
-    if (firstHeadingElement) {
-        manageFocus(firstHeadingElement);
-    } else if (mainRef.current) {
-        manageFocus(mainRef.current);
-    }
+  children: ReactNode;
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
-    const layoutRef = useRef<HTMLDivElement | null>(null);
-    const mainRef = useRef<HTMLDivElement | null>(null);
+  const layoutRef = useRef<HTMLDivElement | null>(null);
+  const mainRef = useRef<HTMLDivElement | null>(null);
 
-    return (
-        <div ref={layoutRef} tabIndex={-1} id="layout">
-            <GovUK.GlobalStyle />
-            <GovUK.SkipLink
-                onClick={(e: MouseEvent<HTMLAnchorElement>) =>
-                    focusMainContent(e, mainRef)
-                }
-            >
-                Skip to main content
-            </GovUK.SkipLink>
-            <Navbar />
-            <GovUK.Page.WidthContainer>
-                <GovUK.PhaseBanner level="alpha">
-                    This is a new service - your{' '}
-                    <GovUK.Link href="/#">feedback</GovUK.Link> will help us to
-                    improve it.
-                </GovUK.PhaseBanner>
-                <GovUK.Page.Main className="main">
-                    <div ref={mainRef}>{children}</div>
-                </GovUK.Page.Main>
-            </GovUK.Page.WidthContainer>
-            <GovUK.Footer id="footer" />
-        </div>
-    );
+  useEffect(() => {
+    initAll();
+  }, []);
+
+  return (
+    <div ref={layoutRef} tabIndex={-1} id="layout">
+      <a
+        href="#"
+        className="govuk-skip-link"
+        onClick={(e: MouseEvent<HTMLAnchorElement>) =>
+          focusMainContent(e, mainRef)
+        }
+      >
+        Skip to main content
+      </a>
+      <Header />
+      <div className="govuk-width-container">
+        <PhaseBanner />
+        <main className="govuk-main-wrapper govuk-main-wrapper--auto-spacing">
+          <div id="main-content">{children}</div>
+        </main>
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 export default Layout;
