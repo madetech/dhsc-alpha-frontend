@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
-import { AscofData } from "../../data/interfaces/AscofData";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import Barchart from "../../components/barchart/Barchart";
 import { useLoaderData } from "react-router-dom";
+import { AscofData } from "../../data/interfaces/AscofData";
 import { LoaderData } from "../../data/types/LoaderData";
 
 const extractUniqueMetrics = (data: AscofData[]): string[] => {
