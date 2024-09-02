@@ -1,26 +1,35 @@
-export function manageFocus(element: HTMLElement): void {
-    if (document?.activeElement === element) {
-        return;
-    }
+import React, { MouseEvent } from "react";
 
-    if (!element.hasAttribute('tabIndex')) {
-        element.setAttribute('tabIndex', '-1');
-        element.addEventListener(
-            'blur',
-            (e) => {
-                e.preventDefault();
-                element.removeAttribute('tabIndex');
-            },
-            { once: true }
-        );
-    }
+export function focusMainContent(
+  e: MouseEvent<HTMLAnchorElement>,
+  mainRef: React.RefObject<HTMLDivElement>
+) {
+  e.preventDefault();
 
-    element.focus();
+  const firstHeadingElement = document?.getElementsByTagName("h1")?.[0];
+  if (firstHeadingElement) {
+    manageFocus(firstHeadingElement);
+  } else if (mainRef.current) {
+    manageFocus(mainRef.current);
+  }
 }
 
-export function focusLayoutDiv() {
-    const layoutDiv = document?.querySelector('div#layout');
-    if (layoutDiv) {
-        manageFocus(layoutDiv as HTMLDivElement);
-    }
+function manageFocus(element: HTMLElement): void {
+  if (document?.activeElement === element) {
+    return;
+  }
+
+  if (!element.hasAttribute("tabIndex")) {
+    element.setAttribute("tabIndex", "-1");
+    element.addEventListener(
+      "blur",
+      (e) => {
+        e.preventDefault();
+        element.removeAttribute("tabIndex");
+      },
+      { once: true }
+    );
+  }
+
+  element.focus();
 }

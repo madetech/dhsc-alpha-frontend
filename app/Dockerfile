@@ -6,8 +6,8 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
 
-ARG REACT_APP_ENV
-ENV REACT_APP_ENV=${REACT_APP_ENV}
+ARG VITE_APP_ENV
+ENV VITE_APP_ENV=${VITE_APP_ENV}
 
 RUN npm install --legacy-peer-deps
 RUN npm run build
@@ -20,7 +20,7 @@ ENV CONTAINER_PORT=${CONTAINER_PORT}
 
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
-COPY --from=builder /app/build .
+COPY --from=builder /app/dist .
 WORKDIR /etc/nginx
 COPY --from=builder ./app/nginx.conf ./nginx.conf.template
 

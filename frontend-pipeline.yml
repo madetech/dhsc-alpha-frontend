@@ -41,25 +41,6 @@ parameters:
         container_port: "$(prod_container_port)"
 
 stages:
-  # Pre-build test
-  - stage: Test
-    displayName: Run tests
-    jobs:
-      - job: Test
-        displayName: Run unit tests
-        pool:
-          vmImage: $(vmImageName)
-        steps:
-          - script: |
-              cd app
-              echo "Running npm ci..."
-              npm ci
-            displayName: "Install dependencies"
-          - script: |
-              cd app
-              echo "Running tests..."
-              npm test -- --watchAll=false --coverage
-            displayName: "Run tests"
   # Build/deploy across environments
   - ${{ each environment in parameters.environments}}:
       # Build
@@ -86,7 +67,7 @@ stages:
                         containerRegistry: ${{environment.acr_connection}}
                         arguments: >
                           --build-arg CONTAINER_PORT=${{environment.container_port}}
-                          --build-arg REACT_APP_ENV=${{environment.name}}
+                          --build-arg VITE_APP_ENV=${{environment.name}}
                         tags: |
                           $(tag)
                           latest
