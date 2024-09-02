@@ -3,7 +3,8 @@ import Layout from "../../components/layout/Layout";
 import { AscofData } from "../../data/interfaces/AscofData";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import Barchart from "../../components/barchart/Barchart";
-import GetAscofData from "../../api/api";
+import { useLoaderData } from "react-router-dom";
+import { LoaderData } from "../../data/types/LoaderData";
 
 const extractUniqueMetrics = (data: AscofData[]): string[] => {
   return Array.from(
@@ -20,6 +21,7 @@ const transformToChartData = (data: AscofData[]): BarchartData[] => {
 };
 
 const AscofPage: React.FC = () => {
+  const { ascofData } = useLoaderData() as LoaderData;
   const [transformedAscofData, setTransformedAscofData] = useState<
     BarchartData[]
   >([]);
@@ -27,22 +29,11 @@ const AscofPage: React.FC = () => {
   const [selectedAscofMetric, setSelectedAscofMetric] = useState<string>("");
 
   useEffect(() => {
-    const fetchAndProcessData = async (): Promise<void> => {
-      try {
-        const ascofData: AscofData[] = await GetAscofData();
-        if (ascofData) {
-          const metrics: string[] = extractUniqueMetrics(ascofData);
-          setAscofMetrics(metrics);
-          setSelectedAscofMetric(metrics[0]);
-          setTransformedAscofData(transformToChartData(ascofData));
-        }
-      } catch (error) {
-        console.error("Error loading or parsing data:", error);
-      }
-    };
-
-    fetchAndProcessData();
-  }, []);
+    const metrics: string[] = extractUniqueMetrics(ascofData);
+    setAscofMetrics(metrics);
+    setSelectedAscofMetric(metrics[0]);
+    setTransformedAscofData(transformToChartData(ascofData));
+  }, [ascofData]);
 
   const handleMetricChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedAscofMetric(event.target.value);
