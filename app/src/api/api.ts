@@ -3,8 +3,6 @@ import { AscofData } from "../data/interfaces/AscofData";
 import RawAscofData from "../ascof_region_data.json";
 
 async function GetAscofData(): Promise<AscofData[]> {
-  console.log(import.meta.env.VITE_APP_ENV);
-
   if (import.meta.env.VITE_APP_ENV == "local") {
     return RawAscofData;
   } else {
