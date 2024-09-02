@@ -12,7 +12,7 @@ import {
   renderLegend,
   addTooltip,
 } from "./barchartHelpers";
-import DownloadToCsv from "../downloadToCsv/DownloadToCsv";
+import DownloadToCsv from "../download-to-csv/DownloadToCsv";
 import { BarchartProps } from "../../data/interfaces/BarchartData";
 import StandardButton from "../buttons/functionality/standard-button/StandardButton";
 
