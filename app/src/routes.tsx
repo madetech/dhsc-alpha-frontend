@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, defer } from "react-router-dom";
 import RegisterPage from "./pages/register-page/RegisterPage";
 import LoginPage from "./pages/login-page/LoginPage";
 import AscofPage from "./pages/ascof-page/AscofPage";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     element: <ProtectedRoute element={<AscofPage />} />,
     loader: async () => {
       const ascofData = await GetAscofData();
-      return { ascofData };
+      return defer({ ascofData });
     },
   },
 ]);
