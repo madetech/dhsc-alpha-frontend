@@ -4,6 +4,7 @@ import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
 import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPanel";
 import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
+import RecentPublicationsPanel from "../../components/recent-publications-panel/RecentPublicationsPanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -27,6 +28,7 @@ const HomePage: React.FC = () => {
               <DataCategoriesPanel />
               <YourMetricsPanel />
               <MetadataPanel />
+              <RecentPublicationsPanel />
             </div>
           </div>
         </div>

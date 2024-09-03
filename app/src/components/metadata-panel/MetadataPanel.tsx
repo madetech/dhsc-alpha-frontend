@@ -6,7 +6,7 @@ const MetadataPanel: React.FC = () => {
   return (
     <div className="dhsc-grey-panel-container">
       <h1 className="govuk-heading-s">Metadata</h1>
-      <p className="govuk-body">
+      <p className="govuk-body-s">
         Background information on all the data sources we hold
       </p>
       <Details link="View the metadata" contents={detailContents} />
