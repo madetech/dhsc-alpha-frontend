@@ -11,6 +11,7 @@ import LoginInformation from "../login-information/LoginInformation.js";
 type Props = {
   children: ReactNode;
   breadcrumbs?: Array<Breadcrumb>;
+  autoSpaceMainContent?: boolean;
   showLoginInformation: boolean;
 };
 
@@ -18,6 +19,7 @@ const Layout: React.FC<Props> = ({
   children,
   breadcrumbs,
   showLoginInformation,
+  autoSpaceMainContent = true,
 }) => {
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const mainRef = useRef<HTMLDivElement | null>(null);
@@ -49,7 +51,13 @@ const Layout: React.FC<Props> = ({
           </div>
         </div>
 
-        <main className="govuk-main-wrapper govuk-main-wrapper--auto-spacing">
+        <main
+          className={
+            autoSpaceMainContent
+              ? "govuk-main-wrapper govuk-main-wrapper--auto-spacing"
+              : ""
+          }
+        >
           <div id="main-content">{children}</div>
         </main>
       </div>
