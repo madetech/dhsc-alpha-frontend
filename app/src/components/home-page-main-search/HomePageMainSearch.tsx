@@ -25,7 +25,7 @@ const HomePageMainSearch: React.FC = () => {
             </select>
           </div>
         </div>
-        <div className="govuk-grid-column-one-quarter govuk-!-text-align-right">
+        <div className="govuk-!-text-align-right govuk-!-margin-right-3">
           <button
             type="submit"
             className="govuk-button govuk-button--secondary govuk-!-margin-bottom-2"
