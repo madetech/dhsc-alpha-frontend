@@ -6,6 +6,7 @@ import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPan
 import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
 import RecentPublicationsPanel from "../../components/recent-publications-panel/RecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-main-search/HomePageMainSearch";
+import HomePageOrganisationFilter from "../../components/home-page-organisation-filter/HomePageOrganisationFilter";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -35,6 +36,8 @@ const HomePage: React.FC = () => {
         </div>
         <div className="govuk-grid-column-two-thirds">
           <HomePageMainSearch />
+          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
+          <HomePageOrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible"></hr>
         </div>
       </div>
