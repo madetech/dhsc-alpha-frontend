@@ -5,6 +5,7 @@ import DataCategoriesPanel from "../../components/data-categories-panel/DataCate
 import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPanel";
 import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
 import RecentPublicationsPanel from "../../components/recent-publications-panel/RecentPublicationsPanel";
+import HomePageMainSearch from "../../components/home-page-main-search/HomePageMainSearch";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -31,6 +32,10 @@ const HomePage: React.FC = () => {
               <RecentPublicationsPanel />
             </div>
           </div>
+        </div>
+        <div className="govuk-grid-column-two-thirds">
+          <HomePageMainSearch />
+          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible"></hr>
         </div>
       </div>
     </Layout>
