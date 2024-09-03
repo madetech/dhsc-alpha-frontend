@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <HomePage />,
+    element: <ProtectedRoute element={<HomePage />} />,
   },
   {
     path: "/ascof",

@@ -6,7 +6,7 @@ import "./registerPage.scss";
 const RegisterPage: React.FC = () => {
   return (
     <>
-      <Layout>
+      <Layout showLoginInformation={false}>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
             <h1 className="govuk-heading-l">
@@ -21,7 +21,7 @@ const RegisterPage: React.FC = () => {
             <p className="govuk-body govuk-!-margin-bottom-5">
               Registering takes around 2 minutes
             </p>
-            <ButtonWithArrow buttonString="Start" buttonUrl="#" />
+            <ButtonWithArrow buttonString="Start" buttonUrl="/home" />
             <h2 className="govuk-heading-m">Before you start</h2>
             <p className="govuk-body">
               You can also{" "}

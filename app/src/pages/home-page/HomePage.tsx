@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <Layout breadcrumbs={breadcrumbs}>
+    <Layout breadcrumbs={breadcrumbs} showLoginInformation={true}>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-one-third">
           <div className="govuk-grid-row">
