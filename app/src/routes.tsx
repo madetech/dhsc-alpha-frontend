@@ -4,6 +4,7 @@ import LoginPage from "./pages/login-page/LoginPage";
 import AscofPage from "./pages/ascof-page/AscofPage";
 import GetAscofData from "./api/api";
 import ProtectedRoute from "./components/protected-route/ProtectedRoute";
+import HomePage from "./pages/home-page/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
   },
   {
     path: "/ascof",
