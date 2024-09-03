@@ -1,5 +1,4 @@
 import React from "react";
-import "./dataCategoriesPanel.scss";
 
 const DataCategoriesPanel: React.FC = () => {
   const dataCategories: Array<string> = [
@@ -12,7 +11,7 @@ const DataCategoriesPanel: React.FC = () => {
   ];
 
   return (
-    <div className="dhsc-data-category-panel-container">
+    <div className="dhsc-blue-panel-container">
       <h1 className="govuk-heading-m dhsc-!-text-white">Data categories</h1>
       <ul className="govuk-list govuk-list--bullet">
         {dataCategories.map((dataCategory) => (
