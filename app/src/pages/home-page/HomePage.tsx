@@ -3,6 +3,7 @@ import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
 import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPanel";
+import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -25,6 +26,7 @@ const HomePage: React.FC = () => {
               <h1 className="govuk-heading-l">Homepage</h1>
               <DataCategoriesPanel />
               <YourMetricsPanel />
+              <MetadataPanel />
             </div>
           </div>
         </div>
