@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
+import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -23,6 +24,7 @@ const HomePage: React.FC = () => {
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Homepage</h1>
               <DataCategoriesPanel />
+              <YourMetricsPanel />
             </div>
           </div>
         </div>
