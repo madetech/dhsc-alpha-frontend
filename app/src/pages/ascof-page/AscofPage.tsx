@@ -44,7 +44,7 @@ const AscofPage: React.FC = () => {
   );
 
   return (
-    <Layout>
+    <Layout showLoginInformation={false}>
       <h1 className="govuk-heading-l">ASCOF Data Charts</h1>
       <p className="govuk-body">
         The Adult Social Care Outcomes Framework (ASCOF) measures how well care

@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
   }, [email]);
 
   return (
-    <Layout>
+    <Layout showLoginInformation={false}>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds">
           <h1 className="govuk-heading-l">Sign In</h1>
