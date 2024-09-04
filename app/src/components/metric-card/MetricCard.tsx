@@ -1,32 +1,33 @@
 import React from "react";
 import Details from "../details/Details";
-import cardPlaceHolderImage from "../../assets/images/metricCardPlaceholder.svg";
+import { MetricCardData } from "../../data/interfaces/MetricCardData";
 
-const MetricCard: React.FC = () => {
+type Props = {
+  data: MetricCardData;
+};
+
+const MetricCard: React.FC<Props> = ({ data }) => {
   return (
     <div className="dhsc-grey-panel-container">
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-full">
-          <h3 className="govuk-heading-s">Qol by expenditure</h3>
+          <h3 className="govuk-heading-s">{data.title}</h3>
         </div>
       </div>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-full">
-          <img src={cardPlaceHolderImage} alt="" />
+          <img src={data.svg} alt="" />
         </div>
       </div>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-full">
-          <p className="govuk-body-s">
-            Comparing social care quality of life to total expenditure on care
-            at your authority
-          </p>
+          <p className="govuk-body-s">{data.description}</p>
         </div>
       </div>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-one-half">
           <p className="govuk-body-s">
-            <a href="#" className="govuk-link">
+            <a href={data.metricPageUrl} className="govuk-link">
               View metric
             </a>
           </p>
@@ -34,8 +35,8 @@ const MetricCard: React.FC = () => {
         <div className="govuk-grid-column-one-half govuk-!-text-align-right">
           <p className="govuk-body-s">
             Source:{" "}
-            <a href="#" className="govuk-link">
-              XXX
+            <a href={data.sourceUrl} className="govuk-link">
+              {data.sourceLinkString}
             </a>
           </p>
         </div>
@@ -44,7 +45,7 @@ const MetricCard: React.FC = () => {
         <div className="govuk-grid-column-full">
           <Details
             link="Data limitations"
-            contents="lorem lorem lorem lorem lorem lorem"
+            contents={data.limitationDescription}
           />
         </div>
       </div>
