@@ -7,6 +7,7 @@ import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
 import RecentPublicationsPanel from "../../components/recent-publications-panel/RecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-main-search/HomePageMainSearch";
 import HomePageOrganisationFilter from "../../components/home-page-organisation-filter/HomePageOrganisationFilter";
+import MetricCard from "../../components/metric-card/MetricCard";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -38,7 +39,28 @@ const HomePage: React.FC = () => {
           <HomePageMainSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
           <HomePageOrganisationFilter />
-          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible"></hr>
+          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-full">
+              <h3 className="govuk-heading-s">Headline metrics</h3>
+            </div>
+          </div>
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-one-half">
+              <MetricCard />
+            </div>
+            <div className="govuk-grid-column-one-half">
+              <MetricCard />
+            </div>
+          </div>
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-one-half">
+              <MetricCard />
+            </div>
+            <div className="govuk-grid-column-one-half">
+              <MetricCard />
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
