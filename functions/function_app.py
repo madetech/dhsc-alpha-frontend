@@ -36,3 +36,13 @@ def get_ascof_data(req: func.HttpRequest) -> func.HttpResponse:
         df.to_json(orient="records"),
         status_code=200
     )
+
+
+@app.route(route="get_capacity_tracker_data")
+def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
+    df = pd.read_sql(
+        "select top 1000 * from Capacity_Tracker.all_metrics", conn)
+    return func.HttpResponse(
+        df.to_json(),
+        status_code=200
+    )
