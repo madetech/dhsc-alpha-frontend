@@ -43,6 +43,6 @@ def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
     df = pd.read_sql(
         "select top 1000 * from Capacity_Tracker.all_metrics", conn)
     return func.HttpResponse(
-        df.to_json(),
+        df.to_json(orient="records"),
         status_code=200
     )
