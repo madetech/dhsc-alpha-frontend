@@ -9,7 +9,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = useCallback(() => {
     sessionStorage.setItem("isLoggedIn", "true");
     sessionStorage.setItem("email", email);
-    navigate("/");
+    navigate("/home");
   }, [email]);
 
   return (
