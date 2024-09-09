@@ -28,7 +28,7 @@ async function GetAscofData(): Promise<AscofData[]> {
       const response: AxiosResponse<AscofData[]> = await axios.get(
         `https://dapalpha-func-app-${
           import.meta.env.VITE_APP_ENV
-        }.azurewebsites.net/api/sql_test`,
+        }.azurewebsites.net/api/get_ascof_data`,
         { headers }
       );
 
