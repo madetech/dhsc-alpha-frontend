@@ -1,35 +1,33 @@
 import axios, { AxiosResponse } from "axios";
 import { AscofData } from "../data/interfaces/AscofData";
-import RawAscofData from "../ascof_region_data.json";
+import RawAscofData from "../data/mockResponses/ascof_region_data.json";
+import RawCapacityTrackerAgencyByRegionData from "../data/mockResponses/capacity_tracker_agency_by_region.json";
 
-async function GetAscofData(): Promise<AscofData[]> {
-  if (import.meta.env.VITE_APP_ENV == "local") {
+async function getAuthHeaders(): Promise<Record<string, string>> {
+  const token: string = await fetch(
+    `https://dapalpha-${
+      import.meta.env.VITE_APP_ENV
+    }-app.azurewebsites.net/.auth/me`
+  )
+    .then((response) => response.json())
+    .then((data) => data[0].id_token);
+
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+}
+
+export async function GetAscofData(): Promise<AscofData[]> {
+  if (import.meta.env.VITE_APP_ENV === "local") {
     return RawAscofData;
   } else {
     try {
-      const token: string = await fetch(
-        `https://dapalpha-${
-          import.meta.env.VITE_APP_ENV
-        }-app.azurewebsites.net/.auth/me`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          const token = data[0].id_token;
-          return token;
-        });
-
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-
       const response: AxiosResponse<AscofData[]> = await axios.get(
         `https://dapalpha-func-app-${
           import.meta.env.VITE_APP_ENV
-        }.azurewebsites.net/api/sql_test`,
-        { headers }
+        }.azurewebsites.net/api/get_ascof_data`,
+        { headers: await getAuthHeaders() }
       );
 
       return response.data;
@@ -40,4 +38,24 @@ async function GetAscofData(): Promise<AscofData[]> {
   }
 }
 
-export default GetAscofData;
+export async function getCapacityTrackerData(locationLevel: string) {
+  if (import.meta.env.VITE_APP_ENV === "local") {
+    return RawCapacityTrackerAgencyByRegionData;
+  } else {
+    try {
+      const response = await axios.get(
+        `https://dapalpha-func-app-${
+          import.meta.env.VITE_APP_ENV
+        }.azurewebsites.net/api/get_capacity_tracker_data`,
+        {
+          params: { location_level: locationLevel },
+          headers: await getAuthHeaders(),
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching capacity tracker data:", error);
+      throw error;
+    }
+  }
+}
