@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { AscofData } from "../data/interfaces/AscofData";
-import RawAscofData from "../ascof_region_data.json";
+import RawAscofData from "../data/mockResponses/ascof_region_data.json";
+import RawCapacityTrackerAgencyByRegionData from "../data/mockResponses/capacity_tracker_agency_by_region.json";
 
 async function getAuthHeaders(): Promise<Record<string, string>> {
   const token: string = await fetch(
@@ -39,8 +40,7 @@ export async function GetAscofData(): Promise<AscofData[]> {
 
 export async function getCapacityTrackerData(locationLevel: string) {
   if (import.meta.env.VITE_APP_ENV === "local") {
-    console.log("Local Capacity tracker data");
-    return "Local Capacity tracker data";
+    return RawCapacityTrackerAgencyByRegionData;
   } else {
     try {
       const response = await axios.get(
@@ -52,10 +52,6 @@ export async function getCapacityTrackerData(locationLevel: string) {
           headers: await getAuthHeaders(),
         }
       );
-
-      console.log(response);
-      console.log(response.data);
-
       return response.data;
     } catch (error) {
       console.error("Error fetching capacity tracker data:", error);
