@@ -40,8 +40,11 @@ def get_ascof_data(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="get_capacity_tracker_data")
 def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
-    df = pd.read_sql(
-        "select grandparent_location_name, metric, value from Capacity_Tracker.all_metrics where metric = 'Percentage of total hours worked that are agency'", conn)
+    location_level = req.params.get("location_level")
+    query = "SELECT location_name, metric, value FROM Capacity_Tracker.all_metrics WHERE metric = %s AND location_level = %s"
+    df = pd.read_sql(query, conn, params=(
+        "Percentage of total hours worked that are agency", location_level))
+
     return func.HttpResponse(
         df.to_json(orient="records"),
         status_code=200
