@@ -37,7 +37,7 @@ export async function GetAscofData(): Promise<AscofData[]> {
   }
 }
 
-export async function getCapacityTrackerData() {
+export async function getCapacityTrackerData(locationLevel: string) {
   if (import.meta.env.VITE_APP_ENV === "local") {
     console.log("Local Capacity tracker data");
     return "Local Capacity tracker data";
@@ -47,7 +47,10 @@ export async function getCapacityTrackerData() {
         `https://dapalpha-func-app-${
           import.meta.env.VITE_APP_ENV
         }.azurewebsites.net/api/get_capacity_tracker_data`,
-        { headers: await getAuthHeaders() }
+        {
+          params: { location_level: locationLevel },
+          headers: await getAuthHeaders(),
+        }
       );
 
       console.log(response);

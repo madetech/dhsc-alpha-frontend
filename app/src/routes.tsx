@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     loader: async () => {
       const [ascofData, capacityTrackerData] = await Promise.all([
         GetAscofData(),
-        getCapacityTrackerData(),
+        getCapacityTrackerData("region"),
       ]);
 
       return { ascofData, capacityTrackerData };
