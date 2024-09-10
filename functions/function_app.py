@@ -42,7 +42,6 @@ def get_ascof_data(req: func.HttpRequest) -> func.HttpResponse:
 def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
     try:
         location_level = req.params.get("location_level")
-
         if not location_level:
             return func.HttpResponse(
                 "location_level parameter is required",
@@ -52,10 +51,13 @@ def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
         query = """
             SELECT location_name, metric, value 
             FROM Capacity_Tracker.all_metrics 
-            WHERE metric = %s AND location_level = %s
+            WHERE metric = :metric AND location_level = :location_level
         """
-        df = pd.read_sql(query, conn, params=(
-            "Percentage of total hours worked that are agency", location_level))
+
+        df = pd.read_sql(query, conn, params={
+            "metric": "Percentage of total hours worked that are agency",
+            "location_level": location_level
+        })
 
         return func.HttpResponse(
             df.to_json(orient="records"),
