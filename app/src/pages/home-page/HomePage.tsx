@@ -2,7 +2,7 @@ import React, { FunctionComponentElement, useState } from "react";
 import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import HomePageDataCategoriesPanel from "../../components/home-page-components/home-page-data-categories-panel/HomePageDataCategoriesPanel";
-import YourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/YourMetricsPanel";
+import HomePageYourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/HomePageYourMetricsPanel";
 import MetadataPanel from "../../components/home-page-components/home-page-metadata-panel/MetadataPanel";
 import RecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/RecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Homepage</h1>
               <HomePageDataCategoriesPanel />
-              <YourMetricsPanel />
+              <HomePageYourMetricsPanel />
               <MetadataPanel />
               <RecentPublicationsPanel />
             </div>
