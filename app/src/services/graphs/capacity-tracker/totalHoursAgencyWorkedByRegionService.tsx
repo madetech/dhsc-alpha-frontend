@@ -30,6 +30,7 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
       yLabel: "",
       title: "",
       barColor: "#1d70b8",
+      medianLineColor: "#000000",
       showLegend: false,
       showToolTip: false,
       shortenLabels: true,
