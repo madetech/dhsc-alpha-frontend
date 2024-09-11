@@ -1,12 +1,25 @@
-import React from "react";
+import React, { FunctionComponentElement, useEffect, useRef } from "react";
 import Details from "../details/Details";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
+import "./metricCard.scss";
 
 type Props = {
   data: MetricCardData;
+  onHandleMetricSelect: (component: FunctionComponentElement<any>) => void;
 };
 
-const MetricCard: React.FC<Props> = ({ data }) => {
+const MetricCard: React.FC<Props> = ({ data, onHandleMetricSelect }) => {
+  const svgContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (svgContainerRef.current) {
+      svgContainerRef.current.innerHTML = "";
+      if (data.svg) {
+        svgContainerRef.current.appendChild(data.svg);
+      }
+    }
+  }, [data]);
+
   return (
     <div className="dhsc-grey-panel-container">
       <div className="govuk-grid-row">
@@ -15,8 +28,8 @@ const MetricCard: React.FC<Props> = ({ data }) => {
         </div>
       </div>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-full">
-          <img src={data.svg} alt="" />
+        <div className="govuk-grid-column-full govuk-!-text-align-center">
+          <div ref={svgContainerRef}></div>
         </div>
       </div>
       <div className="govuk-grid-row">
@@ -27,7 +40,10 @@ const MetricCard: React.FC<Props> = ({ data }) => {
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-one-half">
           <p className="govuk-body-s">
-            <a href={data.metricPageUrl} className="govuk-link">
+            <a
+              onClick={() => onHandleMetricSelect(data.component)}
+              className="govuk-link dhsc-view-metric-card-link"
+            >
               View metric
             </a>
           </p>

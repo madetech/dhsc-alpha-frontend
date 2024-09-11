@@ -8,7 +8,6 @@ export interface BarchartProps {
   data: BarchartData[];
   width?: number;
   height?: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
   xLabel: string;
   yLabel: string;
   barColor?: string;
@@ -17,4 +16,8 @@ export interface BarchartProps {
   title?: string;
   showMedian?: boolean;
   showLegend?: boolean;
+  shortenLabels?: boolean;
+  showToolTip?: boolean;
+  tickCount?: number;
+  yAxisAsPercentage?: boolean;
 }

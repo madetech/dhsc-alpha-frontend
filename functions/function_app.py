@@ -29,15 +29,6 @@ conn = pyodbc.connect(connection_string, attrs_before={
                       SQL_COPT_SS_ACCESS_TOKEN: token_struct})
 
 
-@app.route(route="get_ascof_data")
-def get_ascof_data(req: func.HttpRequest) -> func.HttpResponse:
-    df = pd.read_sql("select geographical_description, measure_group_description, outcome FROM ASCOF.all_metrics WHERE geographical_level='Region' AND disaggregation_level = 'Total' AND fiscal_year='2023'", conn)
-    return func.HttpResponse(
-        df.to_json(orient="records"),
-        status_code=200
-    )
-
-
 @app.route(route="get_capacity_tracker_data")
 def get_capacity_tracker_data(req: func.HttpRequest) -> func.HttpResponse:
     try:

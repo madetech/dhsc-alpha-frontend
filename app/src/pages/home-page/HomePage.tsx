@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponentElement, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
@@ -9,13 +9,18 @@ import HomePageMainSearch from "../../components/home-page-main-search/HomePageM
 import HomePageOrganisationFilter from "../../components/home-page-organisation-filter/HomePageOrganisationFilter";
 import MetricCard from "../../components/metric-card/MetricCard";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
-import cardPlaceHolderImage from "../../assets/images/metricCardPlaceholder.svg";
-import cardPlaceholderImageHistogram from "../../assets/images/metricCardPlaceholderHistogram.svg";
 import FavouriteMetricsPanel from "../../components/favourite-metrics-panel/FavouriteMetricsPanel";
 import HomePageDataUpdatesPanel from "../../components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
 import HomePageDataDefinitionsPanel from "../../components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
+import { useLoaderData } from "react-router-dom";
+import { LoaderData } from "../../data/types/LoaderData";
+import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 
 const HomePage: React.FC = () => {
+  const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
+  const [selectedMetricComponent, setSelectedMetricComponent] =
+    useState<FunctionComponentElement<any> | null>(null);
+
   const breadcrumbs: Array<Breadcrumb> = [
     {
       text: "Homepage",
@@ -23,28 +28,19 @@ const HomePage: React.FC = () => {
     },
   ];
 
+  const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
+    useLoaderData() as LoaderData;
+
   const metricCardsData: Array<MetricCardData> = [
-    {
-      title: "Qol by expenditure",
-      svg: cardPlaceHolderImage,
-      description:
-        "Comparing social care quality of life to total expenditure on care at your authority",
-      sourceUrl: "#",
-      sourceLinkString: "XXX",
-      metricPageUrl: "#",
-      limitationDescription: "lorem lorem lorem lorem lorem lorem",
-    },
-    {
-      title: "Size of care providers by area",
-      svg: cardPlaceholderImageHistogram,
-      description:
-        "Care home bed capacity and the sizes of the care homes on the market",
-      sourceUrl: "#",
-      sourceLinkString: "XXX",
-      metricPageUrl: "#",
-      limitationDescription: "lorem lorem lorem lorem lorem lorem",
-    },
+    new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
+      capacityTrackerTotalHoursAgencyWorkedByRegionData
+    ).getMetricCardData(),
   ];
+
+  const handleMetricSelect = (component: FunctionComponentElement<any>) => {
+    setSelectedMetricComponent(() => component);
+    setIsMetricSelected(true);
+  };
 
   return (
     <Layout
@@ -67,33 +63,51 @@ const HomePage: React.FC = () => {
         <div className="govuk-grid-column-two-thirds">
           <HomePageMainSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
-          <HomePageOrganisationFilter />
-          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
-          <div className="govuk-grid-row">
-            <div className="govuk-grid-column-full">
-              <h3 className="govuk-heading-s">Headline metrics</h3>
-            </div>
-          </div>
-          {metricCardsData.map((_, index) => {
-            if (index % 2 === 0) {
-              return (
-                <div className="govuk-grid-row" key={index}>
-                  <div className="govuk-grid-column-one-half">
-                    <MetricCard data={metricCardsData[index]} />
-                  </div>
-                  {metricCardsData[index + 1] && (
-                    <div className="govuk-grid-column-one-half">
-                      <MetricCard data={metricCardsData[index + 1]} />
-                    </div>
-                  )}
+          {isMetricSelected && selectedMetricComponent ? (
+            selectedMetricComponent
+          ) : (
+            <>
+              <HomePageOrganisationFilter />
+              <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
+              <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                  <h3 className="govuk-heading-s">Headline metrics</h3>
                 </div>
-              );
-            }
-            return null;
-          })}
-          <FavouriteMetricsPanel />
-          <HomePageDataUpdatesPanel />
-          <HomePageDataDefinitionsPanel />
+              </div>
+              {metricCardsData.map((_, index) => {
+                if (index % 2 === 0) {
+                  return (
+                    <div className="govuk-grid-row" key={index}>
+                      <div className="govuk-grid-column-one-half">
+                        <MetricCard
+                          data={metricCardsData[index]}
+                          onHandleMetricSelect={() =>
+                            handleMetricSelect(metricCardsData[index].component)
+                          }
+                        />
+                      </div>
+                      {metricCardsData[index + 1] && (
+                        <div className="govuk-grid-column-one-half">
+                          <MetricCard
+                            data={metricCardsData[index + 1]}
+                            onHandleMetricSelect={() =>
+                              handleMetricSelect(
+                                metricCardsData[index + 1].component
+                              )
+                            }
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+              <FavouriteMetricsPanel />
+              <HomePageDataUpdatesPanel />
+              <HomePageDataDefinitionsPanel />
+            </>
+          )}
         </div>
       </div>
     </Layout>

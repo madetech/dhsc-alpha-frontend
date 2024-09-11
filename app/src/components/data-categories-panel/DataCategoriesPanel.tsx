@@ -14,8 +14,8 @@ const DataCategoriesPanel: React.FC = () => {
     <div className="dhsc-blue-panel-container">
       <h1 className="govuk-heading-m dhsc-!-text-white">Data categories</h1>
       <ul className="govuk-list govuk-list--bullet">
-        {dataCategories.map((dataCategory) => (
-          <li className="govuk-!-margin-bottom-0 dhsc-!-text-white">
+        {dataCategories.map((dataCategory, index) => (
+          <li key={index} className="govuk-!-margin-bottom-0 dhsc-!-text-white">
             <a
               className="govuk-link dhsc-!-text-white govuk-!-font-weight-bold"
               href="#"
