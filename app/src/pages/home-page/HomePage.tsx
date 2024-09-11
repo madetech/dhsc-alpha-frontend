@@ -11,6 +11,7 @@ import MetricCard from "../../components/metric-card/MetricCard";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
 import cardPlaceHolderImage from "../../assets/images/metricCardPlaceholder.svg";
 import cardPlaceholderImageHistogram from "../../assets/images/metricCardPlaceholderHistogram.svg";
+import FavouriteMetricsPanel from "../../components/favourite-metrics-panel/FavouriteMetricsPanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -88,6 +89,7 @@ const HomePage: React.FC = () => {
             }
             return null;
           })}
+          <FavouriteMetricsPanel />
         </div>
       </div>
     </Layout>
