@@ -1,3 +1,5 @@
+import { FunctionComponentElement } from "react";
+
 export interface MetricCardData {
   title: string;
   svg: SVGSVGElement | null;
@@ -5,5 +7,5 @@ export interface MetricCardData {
   sourceUrl: string;
   sourceLinkString: string;
   limitationDescription: string;
-  component: React.FC;
+  component: FunctionComponentElement<any>;
 }

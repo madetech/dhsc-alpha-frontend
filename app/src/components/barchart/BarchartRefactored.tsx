@@ -37,7 +37,7 @@ export function generateBarchartSvg({
     top: height * 0.1,
     right: width * 0.1,
     bottom: height * 0.4,
-    left: width * 0.2,
+    left: width * 0.125,
   };
 
   const svgElement = document.createElementNS(

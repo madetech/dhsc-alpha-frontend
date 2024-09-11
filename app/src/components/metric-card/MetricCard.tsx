@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { FunctionComponentElement, useEffect, useRef } from "react";
 import Details from "../details/Details";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
 import "./metricCard.scss";
 
 type Props = {
   data: MetricCardData;
-  onHandleMetricSelect: (component: React.FC) => void;
+  onHandleMetricSelect: (component: FunctionComponentElement<any>) => void;
 };
 
 const MetricCard: React.FC<Props> = ({ data, onHandleMetricSelect }) => {

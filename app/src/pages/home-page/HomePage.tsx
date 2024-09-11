@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FunctionComponentElement, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
@@ -19,7 +19,7 @@ import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
   const [selectedMetricComponent, setSelectedMetricComponent] =
-    useState<React.FC | null>(null);
+    useState<FunctionComponentElement<any> | null>(null);
 
   const breadcrumbs: Array<Breadcrumb> = [
     {
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
     ).getMetricCardData(),
   ];
 
-  const handleMetricSelect = (component: React.FC) => {
+  const handleMetricSelect = (component: FunctionComponentElement<any>) => {
     setSelectedMetricComponent(() => component);
     setIsMetricSelected(true);
   };
@@ -64,7 +64,7 @@ const HomePage: React.FC = () => {
           <HomePageMainSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
           {isMetricSelected && selectedMetricComponent ? (
-            React.createElement(selectedMetricComponent)
+            selectedMetricComponent
           ) : (
             <>
               <HomePageOrganisationFilter />
