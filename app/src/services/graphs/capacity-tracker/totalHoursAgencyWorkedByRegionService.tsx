@@ -1,4 +1,5 @@
 import { generateBarchartSvg } from "../../../components/barchart/BarchartRefactored";
+import PhaseBanner from "../../../components/phase-banner/PhaseBanner";
 import { BarchartData } from "../../../data/interfaces/BarchartData";
 import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../../../data/interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
 import { MetricCardData } from "../../../data/interfaces/MetricCardData";
@@ -32,8 +33,8 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
       description: "lorem lorem lorem lorem lorem lorem lorem lorem",
       sourceUrl: "#",
       sourceLinkString: "XXX",
-      metricPageUrl: "#",
       limitationDescription: "lorem lorem lorem lorem lorem lorem",
+      component: PhaseBanner,
     };
   }
 

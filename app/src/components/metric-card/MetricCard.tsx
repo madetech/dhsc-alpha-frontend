@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import Details from "../details/Details";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
+import "./metricCard.scss";
 
 type Props = {
   data: MetricCardData;
+  onHandleMetricSelect: (component: React.FC) => void;
 };
 
-const MetricCard: React.FC<Props> = ({ data }) => {
+const MetricCard: React.FC<Props> = ({ data, onHandleMetricSelect }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,7 +40,10 @@ const MetricCard: React.FC<Props> = ({ data }) => {
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-one-half">
           <p className="govuk-body-s">
-            <a href={data.metricPageUrl} className="govuk-link">
+            <a
+              onClick={() => onHandleMetricSelect(data.component)}
+              className="govuk-link dhsc-view-metric-card-link"
+            >
               View metric
             </a>
           </p>

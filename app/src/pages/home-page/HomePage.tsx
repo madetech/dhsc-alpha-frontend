@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
@@ -17,6 +17,10 @@ import { LoaderData } from "../../data/types/LoaderData";
 import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/graphs/capacity-tracker/totalHoursAgencyWorkedByRegionService";
 
 const HomePage: React.FC = () => {
+  const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
+  const [selectedMetricComponent, setSelectedMetricComponent] =
+    useState<React.FC | null>(null);
+
   const breadcrumbs: Array<Breadcrumb> = [
     {
       text: "Homepage",
@@ -31,10 +35,12 @@ const HomePage: React.FC = () => {
     new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
       capacityTrackerTotalHoursAgencyWorkedByRegionData
     ).getMetricCardData(),
-    new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
-      capacityTrackerTotalHoursAgencyWorkedByRegionData
-    ).getMetricCardData(),
   ];
+
+  const handleMetricSelect = (component: React.FC) => {
+    setSelectedMetricComponent(() => component);
+    setIsMetricSelected(true);
+  };
 
   return (
     <Layout
@@ -57,33 +63,51 @@ const HomePage: React.FC = () => {
         <div className="govuk-grid-column-two-thirds">
           <HomePageMainSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
-          <HomePageOrganisationFilter />
-          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
-          <div className="govuk-grid-row">
-            <div className="govuk-grid-column-full">
-              <h3 className="govuk-heading-s">Headline metrics</h3>
-            </div>
-          </div>
-          {metricCardsData.map((_, index) => {
-            if (index % 2 === 0) {
-              return (
-                <div className="govuk-grid-row" key={index}>
-                  <div className="govuk-grid-column-one-half">
-                    <MetricCard data={metricCardsData[index]} />
-                  </div>
-                  {metricCardsData[index + 1] && (
-                    <div className="govuk-grid-column-one-half">
-                      <MetricCard data={metricCardsData[index + 1]} />
-                    </div>
-                  )}
+          {isMetricSelected && selectedMetricComponent ? (
+            React.createElement(selectedMetricComponent)
+          ) : (
+            <>
+              <HomePageOrganisationFilter />
+              <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
+              <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                  <h3 className="govuk-heading-s">Headline metrics</h3>
                 </div>
-              );
-            }
-            return null;
-          })}
-          <FavouriteMetricsPanel />
-          <HomePageDataUpdatesPanel />
-          <HomePageDataDefinitionsPanel />
+              </div>
+              {metricCardsData.map((_, index) => {
+                if (index % 2 === 0) {
+                  return (
+                    <div className="govuk-grid-row" key={index}>
+                      <div className="govuk-grid-column-one-half">
+                        <MetricCard
+                          data={metricCardsData[index]}
+                          onHandleMetricSelect={() =>
+                            handleMetricSelect(metricCardsData[index].component)
+                          }
+                        />
+                      </div>
+                      {metricCardsData[index + 1] && (
+                        <div className="govuk-grid-column-one-half">
+                          <MetricCard
+                            data={metricCardsData[index + 1]}
+                            onHandleMetricSelect={() =>
+                              handleMetricSelect(
+                                metricCardsData[index + 1].component
+                              )
+                            }
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+              <FavouriteMetricsPanel />
+              <HomePageDataUpdatesPanel />
+              <HomePageDataDefinitionsPanel />
+            </>
+          )}
         </div>
       </div>
     </Layout>
