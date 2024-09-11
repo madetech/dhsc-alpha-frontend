@@ -13,13 +13,17 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
   public getMetricCardData(): MetricCardData {
     const barchart = generateBarchartSvg({
       data: this.capacityTrackerData,
-      width: 375,
+      width: 270,
       height: 200,
       xLabel: "",
       yLabel: "",
       title: "",
       barColor: "#1d70b8",
       showLegend: false,
+      showToolTip: false,
+      shortenLabels: true,
+      tickCount: 5,
+      yAxisAsPercentage: true,
     });
 
     return {

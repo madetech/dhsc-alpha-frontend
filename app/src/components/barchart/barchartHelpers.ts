@@ -13,7 +13,20 @@ export function initializeSvg(
 
   svg.selectAll("*").remove();
 
+  svg
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "white");
+
   return svg.append("g");
+}
+
+export function truncateLabels(label: string, maxLength: number): string {
+  if (label.length > maxLength) {
+    return label.substring(0, maxLength) + "...";
+  }
+  return label;
 }
 
 export function createXAxisScale(
@@ -101,13 +114,24 @@ export function renderXAxis(
 export function renderYAxis(
   chartSvg: d3.Selection<SVGGElement, unknown, null, undefined>,
   yAxisScale: d3.ScaleLinear<number, number>,
-  margin: { top: number; right: number; bottom: number; left: number }
+  margin: { top: number; right: number; bottom: number; left: number },
+  tickCount?: number,
+  yAxisAsPercentage: boolean = false
 ): void {
+  const yAxis = d3
+    .axisLeft(yAxisScale)
+    .ticks(tickCount ? tickCount : null)
+    .tickSizeOuter(0);
+
+  if (yAxisAsPercentage) {
+    yAxis.tickFormat((d: any) => `${d}%`);
+  }
+
   chartSvg
     .append("g")
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(yAxisScale))
-    .attr("class", "y-axis");
+    .call(yAxis)
+    .selectAll("text");
 }
 
 export function renderLabels(
