@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import { generateBarchartSvg } from "../../services/charts/BarchartService";
+import MetricDetailsFilterBar from "../metric-details-filter-bar/MetricDetailsFilterBar";
+import MetricDetailsDownloadAndShareBar from "../metric-details-download-and-share-bar/MetricDetailsDownloadAndShareBar";
 
 type Props = {
   data: BarchartData[];
@@ -36,13 +38,7 @@ const CapacityTrackerTotalHoursAgencyWorkedByRegionDetails: React.FC<Props> = ({
 
   return (
     <>
-      <div className="govuk-grid-row">
-        <div className="govuk-grid-column-full">
-          <a href="/home" className="govuk-back-link govuk-!-margin-bottom-9">
-            Back
-          </a>
-        </div>
-      </div>
+      <MetricDetailsFilterBar />
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-full">
           <h1 className="govuk-heading-l">
@@ -55,6 +51,7 @@ const CapacityTrackerTotalHoursAgencyWorkedByRegionDetails: React.FC<Props> = ({
           <div ref={svgContainerRef}></div>
         </div>
       </div>
+      <MetricDetailsDownloadAndShareBar />
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-full">
           <h2 className="govuk-heading-m">
