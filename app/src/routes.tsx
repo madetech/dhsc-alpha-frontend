@@ -19,9 +19,9 @@ const router = createBrowserRouter([
     path: "/home",
     element: <ProtectedRoute element={<HomePage />} />,
     loader: async () => {
-      const capacityTrackerTotalHoursAgencyWorkedByRegion =
+      const capacityTrackerTotalHoursAgencyWorkedByRegionData =
         await getCapacityTrackerData("region");
-      return { capacityTrackerTotalHoursAgencyWorkedByRegion };
+      return { capacityTrackerTotalHoursAgencyWorkedByRegionData };
     },
   },
   {

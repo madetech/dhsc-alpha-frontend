@@ -1,7 +1,7 @@
 import { AscofData } from "../interfaces/AscofData";
-import { CapacityTrackerTotalHoursAgencyWorkedByRegion } from "../interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegion";
+import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
 
 export type LoaderData = {
   ascofData: AscofData[];
-  capacityTrackerTotalHoursAgencyWorkedByRegion: CapacityTrackerTotalHoursAgencyWorkedByRegion;
+  capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorkedByRegionData;
 };
