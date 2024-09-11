@@ -1,9 +1,9 @@
 import React from "react";
 import { generateBarchartSvg } from "../charts/BarchartService";
-import CapacityTrackerTotalHoursAgencyWorkedByRegionDetails from "../../components/metric-details/CapacityTrackerTotalHoursAgencyWorkedByRegionDetails";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../../data/interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
+import CapacityTrackerTotalHoursAgencyWorkedByRegionDetails from "../../components/metric-components/metric-details/CapacityTrackerTotalHoursAgencyWorkedByRegionDetails";
 
 class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
   private capacityTrackerData: BarchartData[];

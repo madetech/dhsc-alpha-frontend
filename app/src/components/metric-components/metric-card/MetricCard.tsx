@@ -1,7 +1,7 @@
 import React, { FunctionComponentElement, useEffect, useRef } from "react";
-import Details from "../details/Details";
-import { MetricCardData } from "../../data/interfaces/MetricCardData";
 import "./metricCard.scss";
+import { MetricCardData } from "../../../data/interfaces/MetricCardData";
+import Details from "../../standard-components/details/Details";
 
 type Props = {
   data: MetricCardData;

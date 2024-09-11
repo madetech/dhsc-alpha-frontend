@@ -1,5 +1,5 @@
 import React from "react";
-import Details from "../details/Details";
+import Details from "../../standard-components/details/Details";
 
 const MetadataPanel: React.FC = () => {
   const detailContents = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum";

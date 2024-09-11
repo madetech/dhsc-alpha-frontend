@@ -1,12 +1,12 @@
 import React, { MouseEvent, ReactNode, useEffect, useRef } from "react";
-import { initAll } from "../../assets/js/govuk-frontend.min.js";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { focusMainContent } from "../../helpers/ManageFocus.js";
+import { initAll } from "../../../assets/js/govuk-frontend.min.js";
+import Header from "../header/Header.js";
+import Footer from "../footer/Footer.js";
+import { focusMainContent } from "../../../helpers/ManageFocus.js";
 import PhaseBanner from "../phase-banner/PhaseBanner.js";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs.js";
-import { Breadcrumb } from "../../data/interfaces/Breadcrumb.js";
-import LoginInformation from "../login-information/LoginInformation.js";
+import { Breadcrumb } from "../../../data/interfaces/Breadcrumb.js";
+import LoginInformation from "../../util-components/login-information/LoginInformation.js";
 
 type Props = {
   children: ReactNode;
