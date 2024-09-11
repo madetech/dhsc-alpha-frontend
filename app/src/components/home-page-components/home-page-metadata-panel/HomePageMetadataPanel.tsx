@@ -1,7 +1,7 @@
 import React from "react";
 import Details from "../../standard-components/details/Details";
 
-const MetadataPanel: React.FC = () => {
+const HomePageMetadataPanel: React.FC = () => {
   const detailContents = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum";
   return (
     <div className="dhsc-grey-panel-container">
@@ -14,4 +14,4 @@ const MetadataPanel: React.FC = () => {
   );
 };
 
-export default MetadataPanel;
+export default HomePageMetadataPanel;

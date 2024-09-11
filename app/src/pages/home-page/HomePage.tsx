@@ -3,7 +3,7 @@ import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import HomePageDataCategoriesPanel from "../../components/home-page-components/home-page-data-categories-panel/HomePageDataCategoriesPanel";
 import HomePageYourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/HomePageYourMetricsPanel";
-import MetadataPanel from "../../components/home-page-components/home-page-metadata-panel/MetadataPanel";
+import HomePageMetadataPanel from "../../components/home-page-components/home-page-metadata-panel/HomePageMetadataPanel";
 import RecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/RecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
 import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
               <h1 className="govuk-heading-l">Homepage</h1>
               <HomePageDataCategoriesPanel />
               <HomePageYourMetricsPanel />
-              <MetadataPanel />
+              <HomePageMetadataPanel />
               <RecentPublicationsPanel />
             </div>
           </div>
