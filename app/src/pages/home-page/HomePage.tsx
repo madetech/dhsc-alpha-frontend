@@ -8,13 +8,13 @@ import HomePageRecentPublicationsPanel from "../../components/home-page-componen
 import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
 import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
-import FavouriteMetricsPanel from "../../components/metric-components/metric-favourites-panel/FavouriteMetricsPanel";
 import HomePageDataUpdatesPanel from "../../components/home-page-components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
 import HomePageDataDefinitionsPanel from "../../components/home-page-components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../../data/types/LoaderData";
 import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 import MetricCard from "../../components/metric-components/metric-card/MetricCard";
+import HomePageAddFavouriteMetricsPanel from "../../components/home-page-components/home-page-add-favourite-metrics-panel/FavouriteMetricsPanel";
 
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
                 }
                 return null;
               })}
-              <FavouriteMetricsPanel />
+              <HomePageAddFavouriteMetricsPanel />
               <HomePageDataUpdatesPanel />
               <HomePageDataDefinitionsPanel />
             </>

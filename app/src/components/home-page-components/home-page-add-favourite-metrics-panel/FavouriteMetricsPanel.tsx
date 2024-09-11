@@ -1,6 +1,6 @@
 import React from "react";
 
-const FavouriteMetricsPanel: React.FC = () => {
+const HomePageAddFavouriteMetricsPanel: React.FC = () => {
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-full">
@@ -38,4 +38,4 @@ const FavouriteMetricsPanel: React.FC = () => {
   );
 };
 
-export default FavouriteMetricsPanel;
+export default HomePageAddFavouriteMetricsPanel;
