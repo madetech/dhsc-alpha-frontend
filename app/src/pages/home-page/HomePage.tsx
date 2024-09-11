@@ -4,7 +4,7 @@ import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import HomePageDataCategoriesPanel from "../../components/home-page-components/home-page-data-categories-panel/HomePageDataCategoriesPanel";
 import HomePageYourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/HomePageYourMetricsPanel";
 import HomePageMetadataPanel from "../../components/home-page-components/home-page-metadata-panel/HomePageMetadataPanel";
-import RecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/RecentPublicationsPanel";
+import HomePageRecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/HomePageRecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
 import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
               <HomePageDataCategoriesPanel />
               <HomePageYourMetricsPanel />
               <HomePageMetadataPanel />
-              <RecentPublicationsPanel />
+              <HomePageRecentPublicationsPanel />
             </div>
           </div>
         </div>
