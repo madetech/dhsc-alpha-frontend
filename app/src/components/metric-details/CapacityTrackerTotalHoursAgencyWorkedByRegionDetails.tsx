@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { BarchartData } from "../../data/interfaces/BarchartData";
-import { generateBarchartSvg } from "../barchart/BarchartRefactored";
+import { generateBarchartSvg } from "../../services/charts/BarchartService";
 
 type Props = {
   data: BarchartData[];

@@ -14,7 +14,7 @@ import HomePageDataUpdatesPanel from "../../components/home-page-data-updates-pa
 import HomePageDataDefinitionsPanel from "../../components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../../data/types/LoaderData";
-import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/graphs/capacity-tracker/totalHoursAgencyWorkedByRegionService";
+import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
