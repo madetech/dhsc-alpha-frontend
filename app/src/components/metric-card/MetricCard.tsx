@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Details from "../details/Details";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
 
@@ -7,6 +7,17 @@ type Props = {
 };
 
 const MetricCard: React.FC<Props> = ({ data }) => {
+  const svgContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (svgContainerRef.current) {
+      svgContainerRef.current.innerHTML = "";
+      if (data.svg) {
+        svgContainerRef.current.appendChild(data.svg);
+      }
+    }
+  }, [data]);
+
   return (
     <div className="dhsc-grey-panel-container">
       <div className="govuk-grid-row">
@@ -15,8 +26,8 @@ const MetricCard: React.FC<Props> = ({ data }) => {
         </div>
       </div>
       <div className="govuk-grid-row">
-        <div className="govuk-grid-column-full">
-          <img src={data.svg} alt="" />
+        <div className="govuk-grid-column-full govuk-!-text-align-center">
+          <div ref={svgContainerRef}></div>
         </div>
       </div>
       <div className="govuk-grid-row">

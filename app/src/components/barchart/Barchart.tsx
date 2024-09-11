@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   initializeSvg,
   createXAxisScale,
@@ -12,9 +12,7 @@ import {
   renderLegend,
   addTooltip,
 } from "./barchartHelpers";
-import DownloadToCsv from "../download-to-csv/DownloadToCsv";
 import { BarchartProps } from "../../data/interfaces/BarchartData";
-import StandardButton from "../buttons/functionality/standard-button/StandardButton";
 
 const Barchart: React.FC<BarchartProps> = ({
   data,
@@ -30,8 +28,6 @@ const Barchart: React.FC<BarchartProps> = ({
   showMedian = true,
   showLegend = true,
 }) => {
-  const [showAsTable, setShowAsTable] = useState(false);
-  const toggleShowAsTable = () => setShowAsTable(!showAsTable);
   const ref = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -89,58 +85,14 @@ const Barchart: React.FC<BarchartProps> = ({
 
   return (
     <>
-      <StandardButton
-        buttonString={!showAsTable ? "View As Table" : "View As Graph"}
-        buttonFunction={toggleShowAsTable}
-      ></StandardButton>
       <div role="img" aria-labelledby="barchart-title barchart-desc">
-        {!showAsTable ? (
-          <svg ref={ref}>
-            <title id="barchart-title">{title}</title>
-            <desc id="barchart-desc">
-              A bar chart showing {title}. The x-axis represents {xLabel}, and
-              the y-axis represents {yLabel}.
-            </desc>
-          </svg>
-        ) : (
-          <div>
-            <table className="govuk-table">
-              <caption className="govuk-table__caption govuk-table__caption--m">
-                {title}
-              </caption>
-              <thead className="govuk-table__head">
-                <tr className="govuk-table__row">
-                  <th
-                    scope="col"
-                    className="govuk-table__header govuk-!-width-three-quarters"
-                  >
-                    {xLabel}
-                  </th>
-                  <th
-                    scope="col"
-                    className="govuk-table__header govuk-!-width-one-quarter"
-                  >
-                    {yLabel}
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="govuk-table__body">
-                {data.map((dataItem, index) => (
-                  <tr className="govuk-table__row" key={index}>
-                    <td className="govuk-table__cell">{dataItem.xAxisValue}</td>
-                    <td className="govuk-table__cell">{dataItem.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-        <DownloadToCsv data={data} filename={title} xLabel={xLabel}>
-          <StandardButton
-            buttonString="Download To Csv"
-            buttonFunction={() => {}}
-          ></StandardButton>
-        </DownloadToCsv>
+        <svg ref={ref}>
+          <title id="barchart-title">{title}</title>
+          <desc id="barchart-desc">
+            A bar chart showing {title}. The x-axis represents {xLabel}, and the
+            y-axis represents {yLabel}.
+          </desc>
+        </svg>
       </div>
     </>
   );

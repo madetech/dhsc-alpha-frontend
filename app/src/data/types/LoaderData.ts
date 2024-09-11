@@ -3,5 +3,5 @@ import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../interfaces
 
 export type LoaderData = {
   ascofData: AscofData[];
-  capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorkedByRegionData;
+  capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorkedByRegionData[];
 };

@@ -1,6 +1,6 @@
 export interface MetricCardData {
   title: string;
-  svg: string;
+  svg: SVGSVGElement | null;
   description: string;
   metricPageUrl: string;
   sourceUrl: string;

@@ -9,13 +9,12 @@ import HomePageMainSearch from "../../components/home-page-main-search/HomePageM
 import HomePageOrganisationFilter from "../../components/home-page-organisation-filter/HomePageOrganisationFilter";
 import MetricCard from "../../components/metric-card/MetricCard";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
-import cardPlaceHolderImage from "../../assets/images/metricCardPlaceholder.svg";
-import cardPlaceholderImageHistogram from "../../assets/images/metricCardPlaceholderHistogram.svg";
 import FavouriteMetricsPanel from "../../components/favourite-metrics-panel/FavouriteMetricsPanel";
 import HomePageDataUpdatesPanel from "../../components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
 import HomePageDataDefinitionsPanel from "../../components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../../data/types/LoaderData";
+import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/graphs/capacity-tracker/totalHoursAgencyWorkedByRegionService";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -28,29 +27,13 @@ const HomePage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
     useLoaderData() as LoaderData;
 
-  console.log(capacityTrackerTotalHoursAgencyWorkedByRegionData);
-
   const metricCardsData: Array<MetricCardData> = [
-    {
-      title: "Qol by expenditure",
-      svg: cardPlaceHolderImage,
-      description:
-        "Comparing social care quality of life to total expenditure on care at your authority",
-      sourceUrl: "#",
-      sourceLinkString: "XXX",
-      metricPageUrl: "#",
-      limitationDescription: "lorem lorem lorem lorem lorem lorem",
-    },
-    {
-      title: "Size of care providers by area",
-      svg: cardPlaceholderImageHistogram,
-      description:
-        "Care home bed capacity and the sizes of the care homes on the market",
-      sourceUrl: "#",
-      sourceLinkString: "XXX",
-      metricPageUrl: "#",
-      limitationDescription: "lorem lorem lorem lorem lorem lorem",
-    },
+    new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
+      capacityTrackerTotalHoursAgencyWorkedByRegionData
+    ).getMetricCardData(),
+    new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
+      capacityTrackerTotalHoursAgencyWorkedByRegionData
+    ).getMetricCardData(),
   ];
 
   return (
