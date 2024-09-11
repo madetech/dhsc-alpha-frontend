@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { BarchartData } from "../../data/interfaces/BarchartData";
-import { generateBarchartSvg } from "../../services/charts/BarchartService";
-import MetricDetailsFilterBar from "../metric-details-filter-bar/MetricDetailsFilterBar";
+import { BarchartData } from "../../../data/interfaces/BarchartData";
+import { generateBarchartSvg } from "../../../services/charts/BarchartService";
 import MetricDetailsDownloadAndShareBar from "../metric-details-download-and-share-bar/MetricDetailsDownloadAndShareBar";
+import MetricDetailsFilterBar from "../metric-details-filter-bar/MetricDetailsFilterBar";
 
 type Props = {
   data: BarchartData[];

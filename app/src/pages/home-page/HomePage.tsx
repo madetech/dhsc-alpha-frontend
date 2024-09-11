@@ -1,20 +1,20 @@
 import React, { FunctionComponentElement, useState } from "react";
-import Layout from "../../components/layout/Layout";
+import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
-import DataCategoriesPanel from "../../components/data-categories-panel/DataCategoriesPanel";
-import YourMetricsPanel from "../../components/your-metrics-panel/YourMetricsPanel";
-import MetadataPanel from "../../components/metadata-panel/MetadataPanel";
-import RecentPublicationsPanel from "../../components/recent-publications-panel/RecentPublicationsPanel";
-import HomePageMainSearch from "../../components/home-page-main-search/HomePageMainSearch";
-import HomePageOrganisationFilter from "../../components/home-page-organisation-filter/HomePageOrganisationFilter";
-import MetricCard from "../../components/metric-card/MetricCard";
+import HomePageDataCategoriesPanel from "../../components/home-page-components/home-page-data-categories-panel/HomePageDataCategoriesPanel";
+import HomePageYourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/HomePageYourMetricsPanel";
+import HomePageMetadataPanel from "../../components/home-page-components/home-page-metadata-panel/HomePageMetadataPanel";
+import HomePageRecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/HomePageRecentPublicationsPanel";
+import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
+import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
-import FavouriteMetricsPanel from "../../components/favourite-metrics-panel/FavouriteMetricsPanel";
-import HomePageDataUpdatesPanel from "../../components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
-import HomePageDataDefinitionsPanel from "../../components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
+import HomePageDataUpdatesPanel from "../../components/home-page-components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
+import HomePageDataDefinitionsPanel from "../../components/home-page-components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../../data/types/LoaderData";
 import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
+import MetricCard from "../../components/metric-components/metric-card/MetricCard";
+import HomePageAddFavouriteMetricsPanel from "../../components/home-page-components/home-page-add-favourite-metrics-panel/FavouriteMetricsPanel";
 
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
@@ -53,10 +53,10 @@ const HomePage: React.FC = () => {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Homepage</h1>
-              <DataCategoriesPanel />
-              <YourMetricsPanel />
-              <MetadataPanel />
-              <RecentPublicationsPanel />
+              <HomePageDataCategoriesPanel />
+              <HomePageYourMetricsPanel />
+              <HomePageMetadataPanel />
+              <HomePageRecentPublicationsPanel />
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
                 }
                 return null;
               })}
-              <FavouriteMetricsPanel />
+              <HomePageAddFavouriteMetricsPanel />
               <HomePageDataUpdatesPanel />
               <HomePageDataDefinitionsPanel />
             </>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
+import { Breadcrumb } from "../../../data/interfaces/Breadcrumb";
 
 type Props = {
   breadcrumbs: Array<Breadcrumb>;

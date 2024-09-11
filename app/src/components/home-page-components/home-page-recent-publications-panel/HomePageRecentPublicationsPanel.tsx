@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecentPublicationsPanel: React.FC = () => {
+const HomePageRecentPublicationsPanel: React.FC = () => {
   const reports: Array<string> = [
     "Sample report one",
     "Sample report two including...",
@@ -26,4 +26,4 @@ const RecentPublicationsPanel: React.FC = () => {
   );
 };
 
-export default RecentPublicationsPanel;
+export default HomePageRecentPublicationsPanel;
