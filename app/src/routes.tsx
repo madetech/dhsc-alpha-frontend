@@ -18,6 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <ProtectedRoute element={<HomePage />} />,
+    loader: async () => {
+      const capacityTrackerTotalHoursAgencyWorkedByRegion =
+        await getCapacityTrackerData("region");
+      return { capacityTrackerTotalHoursAgencyWorkedByRegion };
+    },
   },
   {
     path: "/ascof",

@@ -14,6 +14,8 @@ import cardPlaceholderImageHistogram from "../../assets/images/metricCardPlaceho
 import FavouriteMetricsPanel from "../../components/favourite-metrics-panel/FavouriteMetricsPanel";
 import HomePageDataUpdatesPanel from "../../components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
 import HomePageDataDefinitionsPanel from "../../components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
+import { useLoaderData } from "react-router-dom";
+import { LoaderData } from "../../data/types/LoaderData";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -22,6 +24,11 @@ const HomePage: React.FC = () => {
       url: "/home",
     },
   ];
+
+  const { capacityTrackerTotalHoursAgencyWorkedByRegion } =
+    useLoaderData() as LoaderData;
+
+  console.log(capacityTrackerTotalHoursAgencyWorkedByRegion);
 
   const metricCardsData: Array<MetricCardData> = [
     {

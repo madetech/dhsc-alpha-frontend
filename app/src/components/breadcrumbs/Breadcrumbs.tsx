@@ -9,8 +9,8 @@ const Breadcrumbs: React.FC<Props> = ({ breadcrumbs }) => {
   return (
     <nav className="govuk-breadcrumbs" aria-label="Breadcrumb">
       <ol className="govuk-breadcrumbs__list">
-        {breadcrumbs.map((breadcrumb) => (
-          <li className="govuk-breadcrumbs__list-item">
+        {breadcrumbs.map((breadcrumb, index) => (
+          <li key={index} className="govuk-breadcrumbs__list-item">
             <a className="govuk-breadcrumbs__link" href={breadcrumb.url}>
               {breadcrumb.text}
             </a>

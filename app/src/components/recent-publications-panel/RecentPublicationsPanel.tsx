@@ -14,8 +14,8 @@ const RecentPublicationsPanel: React.FC = () => {
         Here is a collection of information on all the data sources we hold
       </p>
       <ul className="govuk-list govuk-list--bullet">
-        {reports.map((report) => (
-          <li className="govuk-!-margin-bottom-0">
+        {reports.map((report, index) => (
+          <li key={index} className="govuk-!-margin-bottom-0">
             <a className="govuk-link" href="#">
               {report}
             </a>
