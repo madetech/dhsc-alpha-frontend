@@ -1,24 +1,17 @@
-import React from "react";
 import { generateBarchartSvg } from "../charts/BarchartService";
 import { BarchartData } from "../../data/interfaces/BarchartData";
 import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../../data/interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
-import CapacityTrackerTotalHoursAgencyWorkedByRegionDetails from "../../components/metric-components/metric-details/CapacityTrackerTotalHoursAgencyWorkedByRegionDetails";
 
 class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
   private capacityTrackerData: BarchartData[];
-  private metricDetailsComponent;
 
   constructor(data: CapacityTrackerTotalHoursAgencyWorkedByRegionData[]) {
     this.capacityTrackerData = this.transformToChartData(data);
-    this.metricDetailsComponent = this.createMetricDetailsComponent();
   }
 
-  private createMetricDetailsComponent() {
-    return React.createElement(
-      CapacityTrackerTotalHoursAgencyWorkedByRegionDetails,
-      { data: this.capacityTrackerData }
-    );
+  public getCapacityTrackerData() {
+    return this.capacityTrackerData;
   }
 
   public getMetricCardData(): MetricCardData {
@@ -43,9 +36,9 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
       svg: barchart,
       description: "lorem lorem lorem lorem lorem lorem lorem lorem",
       sourceUrl: "#",
+      metricDetailPageUrl: "metric/capacity-tracker-total-hours-by-agency",
       sourceLinkString: "XXX",
       limitationDescription: "lorem lorem lorem lorem lorem lorem",
-      component: this.metricDetailsComponent,
     };
   }
 

@@ -1,9 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import RegisterPage from "./pages/register-page/RegisterPage";
 import LoginPage from "./pages/login-page/LoginPage";
 import { getCapacityTrackerData } from "./api/api";
 import ProtectedRoute from "./components/util-components/protected-route/ProtectedRoute";
 import HomePage from "./pages/home-page/HomePage";
+import CapacityTrackerTotalHoursWorkedByAgencyPage from "./pages/metric-pages/capacity-tracker-total-hours-worked-by-agency/CapacityTrackerTotalHoursWorkedByAgencyPage";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,22 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "/metric",
+    element: <Outlet />,
+    children: [
+      {
+        path: "/metric/capacity-tracker-total-hours-by-agency",
+        element: <CapacityTrackerTotalHoursWorkedByAgencyPage />,
+        loader: async () => {
+          const capacityTrackerTotalHoursAgencyWorkedByRegionData =
+            await getCapacityTrackerData("region");
+          return { capacityTrackerTotalHoursAgencyWorkedByRegionData };
+        },
+      },
+    ],
+  },
+
   {
     path: "/home",
     element: <ProtectedRoute element={<HomePage />} />,
