@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePageMainSearch: React.FC = () => {
+const MainCategoriesSearch: React.FC = () => {
   return (
     <>
       <div className="govuk-grid-row">
@@ -48,4 +48,4 @@ const HomePageMainSearch: React.FC = () => {
   );
 };
 
-export default HomePageMainSearch;
+export default MainCategoriesSearch;

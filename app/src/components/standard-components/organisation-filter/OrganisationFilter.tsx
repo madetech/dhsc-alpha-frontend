@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePageOrganisationFilter: React.FC = () => {
+const OrganisationFilter: React.FC = () => {
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-one-half govuk-!-text-align-right">
@@ -31,4 +31,4 @@ const HomePageOrganisationFilter: React.FC = () => {
   );
 };
 
-export default HomePageOrganisationFilter;
+export default OrganisationFilter;

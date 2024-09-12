@@ -1,8 +1,6 @@
 import React, { FunctionComponentElement, useState } from "react";
 import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
-import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
-import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
 import HomePageDataUpdatesPanel from "../../components/home-page-components/home-page-data-updates-panel/HomePageDataUpdatesPanel";
 import HomePageDataDefinitionsPanel from "../../components/home-page-components/home-page-data-definitions-panel/HomePageDataDefinitionsPanel";
@@ -15,6 +13,8 @@ import DataCategoriesSidePanel from "../../components/panels/data-categories-sid
 import YourMetricsSidePanel from "../../components/panels/your-metrics-side-panel/YourMetricsSidePanel";
 import MetadataSidePanel from "../../components/panels/metadata-side-panel/MetadataSidePanel";
 import RecentPublicationsSidePanel from "../../components/panels/recent-publications-side-panel/RecentPublicationsSidePanel";
+import MainCategoriesSearch from "../../components/standard-components/main-categories-search/MainCategoriesSearch";
+import OrganisationFilter from "../../components/standard-components/organisation-filter/OrganisationFilter";
 
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
@@ -61,13 +61,13 @@ const HomePage: React.FC = () => {
           </div>
         </div>
         <div className="govuk-grid-column-two-thirds">
-          <HomePageMainSearch />
+          <MainCategoriesSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
           {isMetricSelected && selectedMetricComponent ? (
             selectedMetricComponent
           ) : (
             <>
-              <HomePageOrganisationFilter />
+              <OrganisationFilter />
               <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
               <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
