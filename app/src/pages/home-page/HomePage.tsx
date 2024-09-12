@@ -28,10 +28,14 @@ const HomePage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
     useLoaderData() as LoaderData;
 
-  const metricCardsData: Array<MetricCardData> = [
+  const capacityTrackerTotalHoursAgencyWorkedByRegionService =
     new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
       capacityTrackerTotalHoursAgencyWorkedByRegionData
-    ).getMetricCardData(),
+    );
+
+  const metricCardsData: Array<MetricCardData> = [
+    capacityTrackerTotalHoursAgencyWorkedByRegionService.getMetricCardData(),
+    capacityTrackerTotalHoursAgencyWorkedByRegionService.getMetricCardData(),
   ];
 
   return (
