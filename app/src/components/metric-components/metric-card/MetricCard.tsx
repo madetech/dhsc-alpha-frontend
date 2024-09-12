@@ -1,4 +1,4 @@
-import React, { FunctionComponentElement, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./metricCard.scss";
 import { MetricCardData } from "../../../data/interfaces/MetricCardData";
 import Details from "../../standard-components/details/Details";

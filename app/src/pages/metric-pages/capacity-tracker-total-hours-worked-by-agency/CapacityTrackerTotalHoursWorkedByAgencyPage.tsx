@@ -87,7 +87,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">
-                Percentage of total hours worked that are agency by region
+                Percentage of Total Work Hours Covered by Agency Staff
               </h1>
             </div>
           </div>
@@ -100,13 +100,14 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h2 className="govuk-heading-m">
-                Percentage of total hours worked that are agency by region
+                Percentage of Total Work Hours Covered by Agency Staff
               </h2>
               <p className="govuk-body">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+                This chart displays the proportion of total work hours covered
+                by agency staff across different regions. It highlights regional
+                variations, with some areas showing a greater reliance on agency
+                staff than others. The dotted line represents the median agency
+                coverage across all regions.
               </p>
             </div>
           </div>
