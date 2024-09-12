@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../../data/interfaces/Breadcrumb";
 import DataCategoriesSidePanel from "../../../components/panels/data-categories-side-panel/DataCategoriesSidePanel";
@@ -20,6 +20,17 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
     useLoaderData() as LoaderData;
 
+  const [selectedView, setSelectedView] = useState("barchart");
+  const [metricView, setMetricView] = useState("barchart");
+
+  const handleDropdownChange = (selectedValue: string) => {
+    setSelectedView(selectedValue);
+  };
+
+  const handleUpdateView = () => {
+    setMetricView(selectedView);
+  };
+
   const data = new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
     capacityTrackerTotalHoursAgencyWorkedByRegionData
   ).getCapacityTrackerData();
@@ -28,8 +39,8 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
     data: data,
     width: 675,
     height: 400,
-    xLabel: "Percentage of total hours worked that are agency",
-    yLabel: "Region",
+    xLabel: "Region",
+    yLabel: "Total hours worked that are agency",
     title: "",
     medianLineColor: "#000000",
     barColor: "#1d70b8",
@@ -84,7 +95,11 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
           <OrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
-          <MetricDetailsFilterBar />
+          <MetricDetailsFilterBar
+            selectedView={selectedView}
+            onDropdownChange={handleDropdownChange}
+            onButtonClick={handleUpdateView}
+          />
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">
@@ -92,11 +107,42 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="govuk-grid-row">
-            <div className="govuk-grid-column-full govuk-!-text-align-center">
-              <div ref={svgContainerRef}></div>
+          {metricView === "barchart" ? (
+            <div className="govuk-grid-row">
+              <div className="govuk-grid-column-full govuk-!-text-align-center">
+                <div ref={svgContainerRef}></div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="govuk-grid-row">
+              <div className="govuk-grid-column-full">
+                <table className="govuk-table">
+                  <thead className="govuk-table__head">
+                    <tr className="govuk-table__row">
+                      <th scope="col" className="govuk-table__header">
+                        Region
+                      </th>
+                      <th scope="col" className="govuk-table__header">
+                        Total hours worked that are agency
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="govuk-table__body">
+                    {capacityTrackerTotalHoursAgencyWorkedByRegionData.map(
+                      (entry) => (
+                        <tr className="govuk-table__row">
+                          <th scope="row" className="govuk-table__header">
+                            {entry.location_name}
+                          </th>
+                          <td className="govuk-table__cell">{entry.value}</td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
           <MetricDetailsDownloadAndShareBar />
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
