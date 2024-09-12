@@ -1,7 +1,23 @@
 import React from "react";
 import "./metricDetailsFilterBar.scss";
 
-const MetricDetailsFilterBar: React.FC = () => {
+type Props = {
+  selectedView: string;
+  onDropdownChange: (selectedValue: string) => void;
+  onButtonClick: () => void;
+};
+
+const MetricDetailsFilterBar: React.FC<Props> = ({
+  selectedView,
+  onDropdownChange,
+  onButtonClick,
+}) => {
+  const handleDropdownChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    onDropdownChange(event.target.value);
+  };
+
   return (
     <>
       <div className="govuk-grid-row">
@@ -23,16 +39,13 @@ const MetricDetailsFilterBar: React.FC = () => {
         <div className="govuk-grid-column-two-thirds">
           <div className="govuk-form-group govuk-!-margin-bottom-3">
             <select className="govuk-select dhsc-!-select-s govuk-!-margin-right-2">
-              <option>Year</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
             </select>
             <select className="govuk-select dhsc-!-select-s govuk-!-margin-right-2">
               <option>Regional</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              <option>Local Authority</option>
             </select>
             <button
               type="submit"
@@ -45,13 +58,16 @@ const MetricDetailsFilterBar: React.FC = () => {
         </div>
         <div className="govuk-grid-column-one-third govuk-!-padding-left-0">
           <div className="govuk-form-group govuk-!-margin-bottom-3">
-            <select className="govuk-select dhsc-!-select-s govuk-!-margin-right-2">
-              <option>Barchart</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <select
+              value={selectedView}
+              onChange={handleDropdownChange}
+              className="govuk-select dhsc-!-select-s govuk-!-margin-right-2"
+            >
+              <option value="barchart">Barchart</option>
+              <option value="table">Table</option>
             </select>
             <button
+              onClick={onButtonClick}
               type="submit"
               className="govuk-button govuk-button--secondary govuk-!-margin-bottom-3"
               data-module="govuk-button"

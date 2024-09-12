@@ -194,7 +194,7 @@ export function addTooltip(
     .on("mouseover", function (event, dataItem) {
       tooltip
         .style("visibility", "visible")
-        .text(`${dataItem.xAxisValue}: ${dataItem.value}`)
+        .text(`${dataItem.xAxisValue}: ${dataItem.value.toFixed(2)}`)
         .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY - 28}px`);
       d3.select(this).style("fill-opacity", 0.7);

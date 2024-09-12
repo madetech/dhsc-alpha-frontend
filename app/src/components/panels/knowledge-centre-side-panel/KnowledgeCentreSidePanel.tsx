@@ -1,17 +1,20 @@
 import React from "react";
 
-const RecentPublicationsSidePanel: React.FC = () => {
+const KnowledgeCentreSidePanel: React.FC = () => {
   const reports: Array<string> = [
-    "Sample report one",
-    "Sample report two including...",
-    "Sample report three excluding...",
+    "About",
+    "FAQ's",
+    "Webinars",
+    "Help",
+    "Forum",
   ];
 
   return (
     <div className="dhsc-grey-panel-container">
-      <h1 className="govuk-heading-s">Recent Publications</h1>
+      <h1 className="govuk-heading-s">Knowledge Centre</h1>
       <p className="govuk-body-s">
-        Here is a collection of information on all the data sources we hold
+        Here is a collection of resources, guidance, articles and webinars
+        enabling you to find answers to your questions
       </p>
       <ul className="govuk-list govuk-list--bullet">
         {reports.map((report, index) => (
@@ -26,4 +29,4 @@ const RecentPublicationsSidePanel: React.FC = () => {
   );
 };
 
-export default RecentPublicationsSidePanel;
+export default KnowledgeCentreSidePanel;

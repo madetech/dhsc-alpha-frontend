@@ -32,12 +32,14 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
     });
 
     return {
-      title: "Percentage of total hours worked that are agency by region",
+      title:
+        "Percentage of Total Work Hours Covered by Agency Staff, by Region",
       svg: barchart,
-      description: "lorem lorem lorem lorem lorem lorem lorem lorem",
+      description:
+        "The percentage of total work hours in each region that are completed by agency staff",
       sourceUrl: "#",
       metricDetailPageUrl: "metric/capacity-tracker-total-hours-by-agency",
-      sourceLinkString: "XXX",
+      sourceLinkString: "CT",
       limitationDescription: "lorem lorem lorem lorem lorem lorem",
     };
   }

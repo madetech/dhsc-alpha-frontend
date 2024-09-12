@@ -1,4 +1,4 @@
-import React, { FunctionComponentElement, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./metricCard.scss";
 import { MetricCardData } from "../../../data/interfaces/MetricCardData";
 import Details from "../../standard-components/details/Details";
@@ -69,7 +69,7 @@ const MetricCard: React.FC<Props> = ({ data }) => {
         <div className="govuk-grid-column-two-thirds">
           <p className="govuk-body-s">
             <a href="#" className="govuk-link">
-              Add to your metrics
+              Add to favourite metrics
             </a>
           </p>
         </div>
@@ -79,27 +79,6 @@ const MetricCard: React.FC<Props> = ({ data }) => {
               Share
             </a>
           </p>
-        </div>
-      </div>
-      <div className="govuk-grid-row">
-        <div className="govuk-grid-column-two-thirds">
-          <div className="govuk-form-group govuk-!-margin-bottom-2">
-            <select className="govuk-select">
-              <option>Select download type</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </select>
-          </div>
-        </div>
-        <div className="govuk-grid-column govuk-!-text-align-right">
-          <button
-            type="submit"
-            className="govuk-button govuk-!-margin-bottom-2 govuk-!-margin-right-3"
-            data-module="govuk-button"
-          >
-            Go
-          </button>
         </div>
       </div>
     </div>

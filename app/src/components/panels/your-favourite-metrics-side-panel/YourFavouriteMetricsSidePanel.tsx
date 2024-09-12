@@ -1,16 +1,18 @@
 import React from "react";
 
-const YourMetricsSidePanel: React.FC = () => {
+const YourFavouriteMetricsSidePanel: React.FC = () => {
   return (
     <div className="dhsc-blue-panel-container">
-      <h1 className="govuk-heading-m dhsc-!-text-white">Your metrics</h1>
+      <h1 className="govuk-heading-m dhsc-!-text-white">
+        Your favourite metrics
+      </h1>
       <ul className="govuk-list govuk-list--bullet">
         <li className="govuk-!-margin-bottom-0 dhsc-!-text-white">
           <a
             className="govuk-link dhsc-!-text-white govuk-!-font-weight-bold"
             href="#"
           >
-            View your metrics
+            View your favourite metrics
           </a>
         </li>
       </ul>
@@ -18,4 +20,4 @@ const YourMetricsSidePanel: React.FC = () => {
   );
 };
 
-export default YourMetricsSidePanel;
+export default YourFavouriteMetricsSidePanel;
