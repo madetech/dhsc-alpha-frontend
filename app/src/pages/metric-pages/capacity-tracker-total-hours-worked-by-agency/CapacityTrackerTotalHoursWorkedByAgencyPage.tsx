@@ -4,7 +4,6 @@ import { Breadcrumb } from "../../../data/interfaces/Breadcrumb";
 import DataCategoriesSidePanel from "../../../components/panels/data-categories-side-panel/DataCategoriesSidePanel";
 import MetadataSidePanel from "../../../components/panels/metadata-side-panel/MetadataSidePanel";
 import RecentPublicationsSidePanel from "../../../components/panels/recent-publications-side-panel/RecentPublicationsSidePanel";
-import YourMetricsSidePanel from "../../../components/panels/your-metrics-side-panel/YourMetricsSidePanel";
 import MainCategoriesSearch from "../../../components/standard-components/main-categories-search/MainCategoriesSearch";
 import OrganisationFilter from "../../../components/standard-components/organisation-filter/OrganisationFilter";
 import { useLoaderData } from "react-router-dom";
@@ -13,6 +12,7 @@ import { generateBarchartSvg } from "../../../services/charts/BarchartService";
 import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 import MetricDetailsFilterBar from "../../../components/metric-components/metric-details-filter-bar/MetricDetailsFilterBar";
 import MetricDetailsDownloadAndShareBar from "../../../components/metric-components/metric-details-download-and-share-bar/MetricDetailsDownloadAndShareBar";
+import YourFavouriteMetricsSidePanel from "../../../components/panels/your-favourite-metrics-side-panel/YourFavouriteMetricsSidePanel";
 
 const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
@@ -70,7 +70,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Metric Details</h1>
               <DataCategoriesSidePanel />
-              <YourMetricsSidePanel />
+              <YourFavouriteMetricsSidePanel />
               <MetadataSidePanel />
               <RecentPublicationsSidePanel />
             </div>

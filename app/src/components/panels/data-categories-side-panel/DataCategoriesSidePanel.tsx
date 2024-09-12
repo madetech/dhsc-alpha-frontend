@@ -2,6 +2,7 @@ import React from "react";
 
 const DataCategoriesSidePanel: React.FC = () => {
   const dataCategories: Array<string> = [
+    "ASC market supply",
     "Quality of care",
     "User outcomes",
     "Financial health of the ASC sector",

@@ -10,11 +10,11 @@ import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services
 import MetricCard from "../../components/metric-components/metric-card/MetricCard";
 import HomePageAddFavouriteMetricsPanel from "../../components/home-page-components/home-page-add-favourite-metrics-panel/FavouriteMetricsPanel";
 import DataCategoriesSidePanel from "../../components/panels/data-categories-side-panel/DataCategoriesSidePanel";
-import YourMetricsSidePanel from "../../components/panels/your-metrics-side-panel/YourMetricsSidePanel";
 import MetadataSidePanel from "../../components/panels/metadata-side-panel/MetadataSidePanel";
 import RecentPublicationsSidePanel from "../../components/panels/recent-publications-side-panel/RecentPublicationsSidePanel";
 import MainCategoriesSearch from "../../components/standard-components/main-categories-search/MainCategoriesSearch";
 import OrganisationFilter from "../../components/standard-components/organisation-filter/OrganisationFilter";
+import YourFavouriteMetricsSidePanel from "../../components/panels/your-favourite-metrics-side-panel/YourFavouriteMetricsSidePanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -45,7 +45,7 @@ const HomePage: React.FC = () => {
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Homepage</h1>
               <DataCategoriesSidePanel />
-              <YourMetricsSidePanel />
+              <YourFavouriteMetricsSidePanel />
               <MetadataSidePanel />
               <RecentPublicationsSidePanel />
             </div>
