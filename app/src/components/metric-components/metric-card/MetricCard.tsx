@@ -5,10 +5,9 @@ import Details from "../../standard-components/details/Details";
 
 type Props = {
   data: MetricCardData;
-  onHandleMetricSelect: (component: FunctionComponentElement<any>) => void;
 };
 
-const MetricCard: React.FC<Props> = ({ data, onHandleMetricSelect }) => {
+const MetricCard: React.FC<Props> = ({ data }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const MetricCard: React.FC<Props> = ({ data, onHandleMetricSelect }) => {
         <div className="govuk-grid-column-one-half">
           <p className="govuk-body-s">
             <a
-              onClick={() => onHandleMetricSelect(data.component)}
+              href={data.metricDetailPageUrl}
               className="govuk-link dhsc-view-metric-card-link"
             >
               View metric

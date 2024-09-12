@@ -1,4 +1,4 @@
-import React, { FunctionComponentElement, useState } from "react";
+import React from "react";
 import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
@@ -17,10 +17,6 @@ import MainCategoriesSearch from "../../components/standard-components/main-cate
 import OrganisationFilter from "../../components/standard-components/organisation-filter/OrganisationFilter";
 
 const HomePage: React.FC = () => {
-  const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
-  const [selectedMetricComponent, setSelectedMetricComponent] =
-    useState<FunctionComponentElement<any> | null>(null);
-
   const breadcrumbs: Array<Breadcrumb> = [
     {
       text: "Homepage",
@@ -36,11 +32,6 @@ const HomePage: React.FC = () => {
       capacityTrackerTotalHoursAgencyWorkedByRegionData
     ).getMetricCardData(),
   ];
-
-  const handleMetricSelect = (component: FunctionComponentElement<any>) => {
-    setSelectedMetricComponent(() => component);
-    setIsMetricSelected(true);
-  };
 
   return (
     <Layout
@@ -63,51 +54,34 @@ const HomePage: React.FC = () => {
         <div className="govuk-grid-column-two-thirds">
           <MainCategoriesSearch />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-3"></hr>
-          {isMetricSelected && selectedMetricComponent ? (
-            selectedMetricComponent
-          ) : (
-            <>
-              <OrganisationFilter />
-              <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
-              <div className="govuk-grid-row">
-                <div className="govuk-grid-column-full">
-                  <h3 className="govuk-heading-s">Headline metrics</h3>
-                </div>
-              </div>
-              {metricCardsData.map((_, index) => {
-                if (index % 2 === 0) {
-                  return (
-                    <div className="govuk-grid-row" key={index}>
-                      <div className="govuk-grid-column-one-half">
-                        <MetricCard
-                          data={metricCardsData[index]}
-                          onHandleMetricSelect={() =>
-                            handleMetricSelect(metricCardsData[index].component)
-                          }
-                        />
-                      </div>
-                      {metricCardsData[index + 1] && (
-                        <div className="govuk-grid-column-one-half">
-                          <MetricCard
-                            data={metricCardsData[index + 1]}
-                            onHandleMetricSelect={() =>
-                              handleMetricSelect(
-                                metricCardsData[index + 1].component
-                              )
-                            }
-                          />
-                        </div>
-                      )}
+
+          <OrganisationFilter />
+          <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-full">
+              <h3 className="govuk-heading-s">Headline metrics</h3>
+            </div>
+          </div>
+          {metricCardsData.map((_, index) => {
+            if (index % 2 === 0) {
+              return (
+                <div className="govuk-grid-row" key={index}>
+                  <div className="govuk-grid-column-one-half">
+                    <MetricCard data={metricCardsData[index]} />
+                  </div>
+                  {metricCardsData[index + 1] && (
+                    <div className="govuk-grid-column-one-half">
+                      <MetricCard data={metricCardsData[index + 1]} />
                     </div>
-                  );
-                }
-                return null;
-              })}
-              <HomePageAddFavouriteMetricsPanel />
-              <HomePageDataUpdatesPanel />
-              <HomePageDataDefinitionsPanel />
-            </>
-          )}
+                  )}
+                </div>
+              );
+            }
+            return null;
+          })}
+          <HomePageAddFavouriteMetricsPanel />
+          <HomePageDataUpdatesPanel />
+          <HomePageDataDefinitionsPanel />
         </div>
       </div>
     </Layout>
