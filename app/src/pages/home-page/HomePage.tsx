@@ -15,6 +15,7 @@ import OrganisationFilter from "../../components/standard-components/organisatio
 import YourFavouriteMetricsSidePanel from "../../components/panels/your-favourite-metrics-side-panel/YourFavouriteMetricsSidePanel";
 import DataGuideSidePanel from "../../components/panels/data-guide-side-panel/DataGuideSidePanel";
 import ReportLinksSidePanel from "../../components/panels/report-links-side-panel/ReportLinksSidePanel";
+import KnowledgeCentreSidePanel from "../../components/panels/knowledge-centre-side-panel/KnowledgeCentreSidePanel";
 
 const HomePage: React.FC = () => {
   const breadcrumbs: Array<Breadcrumb> = [
@@ -48,6 +49,7 @@ const HomePage: React.FC = () => {
               <YourFavouriteMetricsSidePanel />
               <DataGuideSidePanel />
               <ReportLinksSidePanel />
+              <KnowledgeCentreSidePanel />
             </div>
           </div>
         </div>
