@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePageDataCategoriesPanel: React.FC = () => {
+const DataCategoriesSidePanel: React.FC = () => {
   const dataCategories: Array<string> = [
     "Quality of care",
     "User outcomes",
@@ -29,4 +29,4 @@ const HomePageDataCategoriesPanel: React.FC = () => {
   );
 };
 
-export default HomePageDataCategoriesPanel;
+export default DataCategoriesSidePanel;

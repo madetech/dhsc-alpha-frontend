@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePageYourMetricsPanel: React.FC = () => {
+const YourMetricsSidePanel: React.FC = () => {
   return (
     <div className="dhsc-blue-panel-container">
       <h1 className="govuk-heading-m dhsc-!-text-white">Your metrics</h1>
@@ -18,4 +18,4 @@ const HomePageYourMetricsPanel: React.FC = () => {
   );
 };
 
-export default HomePageYourMetricsPanel;
+export default YourMetricsSidePanel;

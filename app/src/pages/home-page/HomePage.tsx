@@ -1,10 +1,6 @@
 import React, { FunctionComponentElement, useState } from "react";
 import Layout from "../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../data/interfaces/Breadcrumb";
-import HomePageDataCategoriesPanel from "../../components/home-page-components/home-page-data-categories-panel/HomePageDataCategoriesPanel";
-import HomePageYourMetricsPanel from "../../components/home-page-components/home-page-your-metrics-panel/HomePageYourMetricsPanel";
-import HomePageMetadataPanel from "../../components/home-page-components/home-page-metadata-panel/HomePageMetadataPanel";
-import HomePageRecentPublicationsPanel from "../../components/home-page-components/home-page-recent-publications-panel/HomePageRecentPublicationsPanel";
 import HomePageMainSearch from "../../components/home-page-components/home-page-main-search/HomePageMainSearch";
 import HomePageOrganisationFilter from "../../components/home-page-components/home-page-organisation-filter/HomePageOrganisationFilter";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
@@ -15,6 +11,10 @@ import { LoaderData } from "../../data/types/LoaderData";
 import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 import MetricCard from "../../components/metric-components/metric-card/MetricCard";
 import HomePageAddFavouriteMetricsPanel from "../../components/home-page-components/home-page-add-favourite-metrics-panel/FavouriteMetricsPanel";
+import DataCategoriesSidePanel from "../../components/panels/data-categories-side-panel/DataCategoriesSidePanel";
+import YourMetricsSidePanel from "../../components/panels/your-metrics-side-panel/YourMetricsSidePanel";
+import MetadataSidePanel from "../../components/panels/metadata-side-panel/MetadataSidePanel";
+import RecentPublicationsSidePanel from "../../components/panels/recent-publications-side-panel/RecentPublicationsSidePanel";
 
 const HomePage: React.FC = () => {
   const [isMetricSelected, setIsMetricSelected] = useState<boolean>(false);
@@ -53,10 +53,10 @@ const HomePage: React.FC = () => {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">Homepage</h1>
-              <HomePageDataCategoriesPanel />
-              <HomePageYourMetricsPanel />
-              <HomePageMetadataPanel />
-              <HomePageRecentPublicationsPanel />
+              <DataCategoriesSidePanel />
+              <YourMetricsSidePanel />
+              <MetadataSidePanel />
+              <RecentPublicationsSidePanel />
             </div>
           </div>
         </div>
