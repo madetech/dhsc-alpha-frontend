@@ -20,15 +20,16 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
     useLoaderData() as LoaderData;
 
-  const [selectedView, setSelectedView] = useState("barchart");
+  const [selectMetricViewValue, setSelectMetricViewValue] =
+    useState("barchart");
   const [metricView, setMetricView] = useState("barchart");
 
   const handleDropdownChange = (selectedValue: string) => {
-    setSelectedView(selectedValue);
+    setSelectMetricViewValue(selectedValue);
   };
 
   const handleUpdateView = () => {
-    setMetricView(selectedView);
+    setMetricView(selectMetricViewValue);
   };
 
   const data = new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
@@ -48,6 +49,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
     showToolTip: true,
     shortenLabels: false,
     yAxisAsPercentage: true,
+    tickCount: 8,
   });
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
@@ -96,7 +98,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <OrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
           <MetricDetailsFilterBar
-            selectedView={selectedView}
+            selectedView={selectMetricViewValue}
             onDropdownChange={handleDropdownChange}
             onButtonClick={handleUpdateView}
           />

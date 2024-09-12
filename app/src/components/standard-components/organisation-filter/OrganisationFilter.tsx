@@ -11,7 +11,7 @@ const OrganisationFilter: React.FC = () => {
       <div className="govuk-grid-column-one-quarter govuk-!-padding-left-0">
         <div className="govuk-form-group govuk-!-margin-bottom-3">
           <select className="govuk-select">
-            <option>North Lincolnshire</option>
+            <option>London</option>
             <option>Option 1</option>
             <option>Option 2</option>
             <option>Option 3</option>
