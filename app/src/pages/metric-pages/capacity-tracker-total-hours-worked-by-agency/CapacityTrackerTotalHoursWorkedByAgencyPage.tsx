@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import Layout from "../../../components/standard-components/layout/Layout";
 import { Breadcrumb } from "../../../data/interfaces/Breadcrumb";
 import DataCategoriesSidePanel from "../../../components/panels/data-categories-side-panel/DataCategoriesSidePanel";
-import MetadataSidePanel from "../../../components/panels/metadata-side-panel/MetadataSidePanel";
-import RecentPublicationsSidePanel from "../../../components/panels/recent-publications-side-panel/RecentPublicationsSidePanel";
 import MainCategoriesSearch from "../../../components/standard-components/main-categories-search/MainCategoriesSearch";
 import OrganisationFilter from "../../../components/standard-components/organisation-filter/OrganisationFilter";
 import { useLoaderData } from "react-router-dom";
@@ -13,6 +11,8 @@ import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../../servi
 import MetricDetailsFilterBar from "../../../components/metric-components/metric-details-filter-bar/MetricDetailsFilterBar";
 import MetricDetailsDownloadAndShareBar from "../../../components/metric-components/metric-details-download-and-share-bar/MetricDetailsDownloadAndShareBar";
 import YourFavouriteMetricsSidePanel from "../../../components/panels/your-favourite-metrics-side-panel/YourFavouriteMetricsSidePanel";
+import DataGuideSidePanel from "../../../components/panels/data-guide-side-panel/DataGuideSidePanel";
+import ReportLinksSidePanel from "../../../components/panels/report-links-side-panel/ReportLinksSidePanel";
 
 const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
@@ -71,8 +71,8 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               <h1 className="govuk-heading-l">Metric Details</h1>
               <DataCategoriesSidePanel />
               <YourFavouriteMetricsSidePanel />
-              <MetadataSidePanel />
-              <RecentPublicationsSidePanel />
+              <DataGuideSidePanel />
+              <ReportLinksSidePanel />
             </div>
           </div>
         </div>

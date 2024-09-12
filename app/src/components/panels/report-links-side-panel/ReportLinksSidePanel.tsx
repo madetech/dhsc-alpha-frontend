@@ -1,17 +1,18 @@
 import React from "react";
 
-const RecentPublicationsSidePanel: React.FC = () => {
+const ReportLinksSidePanel: React.FC = () => {
   const reports: Array<string> = [
+    "Report builder",
     "Sample report one",
-    "Sample report two including...",
-    "Sample report three excluding...",
+    "Sample report two",
   ];
 
   return (
     <div className="dhsc-grey-panel-container">
-      <h1 className="govuk-heading-s">Recent Publications</h1>
+      <h1 className="govuk-heading-s">Reports</h1>
       <p className="govuk-body-s">
-        Here is a collection of information on all the data sources we hold
+        Option of building your own reports as well as using pre-designed
+        reports
       </p>
       <ul className="govuk-list govuk-list--bullet">
         {reports.map((report, index) => (
@@ -26,4 +27,4 @@ const RecentPublicationsSidePanel: React.FC = () => {
   );
 };
 
-export default RecentPublicationsSidePanel;
+export default ReportLinksSidePanel;
