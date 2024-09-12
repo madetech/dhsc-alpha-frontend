@@ -14,6 +14,7 @@ import YourFavouriteMetricsSidePanel from "../../../components/panels/your-favou
 import DataGuideSidePanel from "../../../components/panels/data-guide-side-panel/DataGuideSidePanel";
 import ReportLinksSidePanel from "../../../components/panels/report-links-side-panel/ReportLinksSidePanel";
 import KnowledgeCentreSidePanel from "../../../components/panels/knowledge-centre-side-panel/KnowledgeCentreSidePanel";
+import DataLimitationsContainer from "../../../components/standard-components/data-limitations-container/DataLimitationsContainer";
 
 const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
@@ -111,7 +112,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="govuk-grid-row govuk-!-margin-bottom-9">
+          <div className="govuk-grid-row govuk-!-margin-bottom-2">
             <div className="govuk-grid-column-full">
               <p className="govuk-body">
                 <span className="govuk-!-font-weight-bold">Data Source: </span>{" "}
@@ -121,30 +122,37 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="govuk-grid-row">
+          <div className="govuk-grid-row govuk-!-margin-bottom-2">
             <div className="govuk-grid-column-full">
               <div className="dhsc-white-panel-container">
                 <div className="govuk-grid-row">
                   <div className="govuk-grid-column-full">
                     <p className="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-0 govuk-!-margin-bottom-1">
-                      Data Limitations
+                      Smart insights
                     </p>
                   </div>
                 </div>
                 <div className="govuk-grid-row govuk-!-margin-top-2">
                   <div className="govuk-grid-column-full">
                     <p className="govuk-body govuk-!-margin-bottom-0">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
+                      The relatively low proportion of agency-covered work hours
+                      in London suggests a higher reliance on permanent staff
+                      compared to other regions. This may reflect a more stable
+                      workforce or greater access to local talent, reducing the
+                      need for temporary or agency staff. However, the region's
+                      unique economic pressures and high demand for skilled
+                      workers could also be contributing factors in shaping this
+                      staffing model.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <DataLimitationsContainer
+            header="Data limitations"
+            body=" MOCK DESCRIPTION Capacity Tracker assessment frequency will depend on the information they receive and the evidence they collect. The next assessment is either planned or responsive. Their approach will be informed by risk, and they will decide the order of their planned assessments of providers based on the level of risk. There is a significant backlog in registration of new providers which results in there begin additional  providers that are not captured in the data"
+          />
         </div>
       </div>
     </Layout>
