@@ -21,7 +21,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/metric/capacity-tracker-total-hours-by-agency",
-        element: <CapacityTrackerTotalHoursWorkedByAgencyPage />,
+        element: (
+          <ProtectedRoute
+            element={<CapacityTrackerTotalHoursWorkedByAgencyPage />}
+          />
+        ),
         loader: async () => {
           const capacityTrackerTotalHoursAgencyWorkedByRegionData =
             await getCapacityTrackerData("region");
