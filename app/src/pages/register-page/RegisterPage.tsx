@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../../components/standard-components/layout/Layout";
-import ButtonWithArrow from "../../components/standard-components/buttons/navigation/button-with-arrow/ButtonWithArrow";
+import Layout from "../../components/common/layout/Layout";
+import ButtonWithArrow from "../../components/common/buttons/navigation/button-with-arrow/ButtonWithArrow";
 import "./registerPage.scss";
 
 const RegisterPage: React.FC = () => {

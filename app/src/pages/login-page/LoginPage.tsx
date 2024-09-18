@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
-import Layout from "../../components/standard-components/layout/Layout";
+import Layout from "../../components/common/layout/Layout";
 import { useNavigate } from "react-router-dom";
-import StandardButton from "../../components/standard-components/buttons/functionality/standard-button/StandardButton";
+import StandardButton from "../../components/common/buttons/functionality/standard-button/StandardButton";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
