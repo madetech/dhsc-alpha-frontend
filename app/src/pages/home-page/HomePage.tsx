@@ -35,7 +35,6 @@ const HomePage: React.FC = () => {
 
   const metricCardsData: Array<MetricCardData> = [
     capacityTrackerTotalHoursAgencyWorkedByRegionService.getMetricCardData(),
-    capacityTrackerTotalHoursAgencyWorkedByRegionService.getMetricCardData(),
   ];
 
   return (

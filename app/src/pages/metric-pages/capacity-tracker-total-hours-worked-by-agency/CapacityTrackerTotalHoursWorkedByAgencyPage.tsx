@@ -125,7 +125,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
                         Region
                       </th>
                       <th scope="col" className="govuk-table__header">
-                        Total hours worked that are agency
+                        Total hours worked that are agency %
                       </th>
                     </tr>
                   </thead>
@@ -136,7 +136,9 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
                           <th scope="row" className="govuk-table__header">
                             {entry.location_name}
                           </th>
-                          <td className="govuk-table__cell">{entry.value}</td>
+                          <td className="govuk-table__cell">
+                            {(entry.value * 100).toFixed(2) + "%"}
+                          </td>
                         </tr>
                       )
                     )}
