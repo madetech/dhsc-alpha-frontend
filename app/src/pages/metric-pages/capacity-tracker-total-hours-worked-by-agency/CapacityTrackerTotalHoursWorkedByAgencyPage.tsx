@@ -15,6 +15,8 @@ import DataGuideSidePanel from "../../../components/common/panels/data-guide-sid
 import ReportLinksSidePanel from "../../../components/common/panels/report-links-side-panel/ReportLinksSidePanel";
 import KnowledgeCentreSidePanel from "../../../components/common/panels/knowledge-centre-side-panel/KnowledgeCentreSidePanel";
 import DataLimitationsContainer from "../../../components/common/data-limitations-container/DataLimitationsContainer";
+import SmartInsights from "../../../components/common/smart-insights/SmartInsights";
+import MetricDescription from "../../../components/metric-components/metric-description/MetricDescription";
 
 const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
   const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
@@ -148,60 +150,35 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
             </div>
           )}
           <MetricDetailsDownloadAndShareBar />
-          <div className="govuk-grid-row">
-            <div className="govuk-grid-column-full">
-              <h2 className="govuk-heading-m">
-                Percentage of Total Work Hours Covered by Agency Staff
-              </h2>
-              <p className="govuk-body">
-                This chart displays the proportion of total work hours covered
+          <MetricDescription
+            title="Percentage of Total Work Hours Covered by Agency Staff"
+            body="This chart displays the proportion of total work hours covered
                 by agency staff across different regions. It highlights regional
                 variations, with some areas showing a greater reliance on agency
                 staff than others. The dotted line represents the median agency
-                coverage across all regions.
-              </p>
-            </div>
-          </div>
-          <div className="govuk-grid-row govuk-!-margin-bottom-2">
-            <div className="govuk-grid-column-full">
-              <p className="govuk-body">
-                <span className="govuk-!-font-weight-bold">Data Source: </span>{" "}
-                <a href="#" className="govuk-link">
-                  Capacity Tracker
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="govuk-grid-row govuk-!-margin-bottom-2">
-            <div className="govuk-grid-column-full">
-              <div className="dhsc-white-panel-container">
-                <div className="govuk-grid-row">
-                  <div className="govuk-grid-column-full">
-                    <p className="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-0 govuk-!-margin-bottom-1">
-                      Smart insights
-                    </p>
-                  </div>
-                </div>
-                <div className="govuk-grid-row govuk-!-margin-top-2">
-                  <div className="govuk-grid-column-full">
-                    <p className="govuk-body govuk-!-margin-bottom-0">
-                      The relatively low proportion of agency-covered work hours
-                      in London suggests a higher reliance on permanent staff
-                      compared to other regions. This may reflect a more stable
-                      workforce or greater access to local talent, reducing the
-                      need for temporary or agency staff. However, the region's
-                      unique economic pressures and high demand for skilled
-                      workers could also be contributing factors in shaping this
-                      staffing model.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                coverage across all regions."
+            dataSource="Capacity Tracker"
+          />
+          <SmartInsights
+            body="The relatively low proportion of agency-covered work hours
+                  in London suggests a higher reliance on permanent staff
+                  compared to other regions. This may reflect a more stable
+                  workforce or greater access to local talent, reducing the
+                  need for temporary or agency staff. However, the region's
+                  unique economic pressures and high demand for skilled
+                  workers could also be contributing factors in shaping this
+                  staffing model."
+          />
           <DataLimitationsContainer
             header="Data limitations"
-            body=" MOCK DESCRIPTION Capacity Tracker assessment frequency will depend on the information they receive and the evidence they collect. The next assessment is either planned or responsive. Their approach will be informed by risk, and they will decide the order of their planned assessments of providers based on the level of risk. There is a significant backlog in registration of new providers which results in there begin additional  providers that are not captured in the data"
+            body="MOCK DESCRIPTION Capacity Tracker assessment frequency will 
+                  depend on the information they receive and the evidence they 
+                  collect. The next assessment is either planned or responsive. 
+                  Their approach will be informed by risk, and they will decide 
+                  the order of their planned assessments of providers based on 
+                  the level of risk. There is a significant backlog in registration 
+                  of new providers which results in there begin additional 
+                  providers that are not captured in the data"
           />
         </div>
       </div>
