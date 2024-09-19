@@ -26,11 +26,11 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
     useState("barchart");
   const [metricView, setMetricView] = useState("barchart");
 
-  const handleDropdownChange = (selectedValue: string) => {
+  const handleMetricViewDropdownChange = (selectedValue: string) => {
     setSelectMetricViewValue(selectedValue);
   };
 
-  const handleUpdateView = () => {
+  const handleUpdateMetricView = () => {
     setMetricView(selectMetricViewValue);
   };
 
@@ -100,9 +100,9 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <OrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
           <MetricDetailsFilterBar
-            selectedView={selectMetricViewValue}
-            onDropdownChange={handleDropdownChange}
-            onButtonClick={handleUpdateView}
+            selectedMetricView={selectMetricViewValue}
+            onMetricViewDropdownChange={handleMetricViewDropdownChange}
+            onMetricViewButtonClick={handleUpdateMetricView}
           />
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">

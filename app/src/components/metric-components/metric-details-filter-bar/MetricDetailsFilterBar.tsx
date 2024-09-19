@@ -2,20 +2,20 @@ import React from "react";
 import "./metricDetailsFilterBar.scss";
 
 type Props = {
-  selectedView: string;
-  onDropdownChange: (selectedValue: string) => void;
-  onButtonClick: () => void;
+  selectedMetricView: string;
+  onMetricViewDropdownChange: (selectedMetricViewValue: string) => void;
+  onMetricViewButtonClick: () => void;
 };
 
 const MetricDetailsFilterBar: React.FC<Props> = ({
-  selectedView,
-  onDropdownChange,
-  onButtonClick,
+  selectedMetricView,
+  onMetricViewDropdownChange,
+  onMetricViewButtonClick,
 }) => {
-  const handleDropdownChange = (
+  const handleMetricViewDropdownChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    onDropdownChange(event.target.value);
+    onMetricViewDropdownChange(event.target.value);
   };
 
   return (
@@ -59,15 +59,15 @@ const MetricDetailsFilterBar: React.FC<Props> = ({
         <div className="govuk-grid-column-one-third govuk-!-padding-left-0">
           <div className="govuk-form-group govuk-!-margin-bottom-3">
             <select
-              value={selectedView}
-              onChange={handleDropdownChange}
+              value={selectedMetricView}
+              onChange={handleMetricViewDropdownChange}
               className="govuk-select dhsc-!-select-s govuk-!-margin-right-2"
             >
               <option value="barchart">Barchart</option>
               <option value="table">Table</option>
             </select>
             <button
-              onClick={onButtonClick}
+              onClick={onMetricViewButtonClick}
               type="submit"
               className="govuk-button govuk-button--secondary govuk-!-margin-bottom-3"
               data-module="govuk-button"
