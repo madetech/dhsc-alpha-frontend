@@ -29,8 +29,8 @@ const MainCategoriesSearch: React.FC = () => {
         <div className="govuk-grid-column-one-quarter govuk-!-padding-left-0">
           <div className="govuk-form-group govuk-!-margin-bottom-2">
             <select className="govuk-select">
-              {categoryOptions.map((category) => (
-                <option>{category}</option>
+              {categoryOptions.map((category, index) => (
+                <option key={index}>{category}</option>
               ))}
             </select>
           </div>

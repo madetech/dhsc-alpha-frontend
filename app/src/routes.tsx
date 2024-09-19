@@ -27,9 +27,17 @@ const router = createBrowserRouter([
           />
         ),
         loader: async () => {
-          const capacityTrackerTotalHoursAgencyWorkedByRegionData =
-            await getCapacityTrackerData("region");
-          return { capacityTrackerTotalHoursAgencyWorkedByRegionData };
+          const [
+            capacityTrackerTotalHoursAgencyWorkedByRegionData,
+            capacityTrackerTotalHoursAgencyWorkedByLaData,
+          ] = await Promise.all([
+            getCapacityTrackerData("region"),
+            getCapacityTrackerData("local_authority"),
+          ]);
+          return {
+            capacityTrackerTotalHoursAgencyWorkedByRegionData,
+            capacityTrackerTotalHoursAgencyWorkedByLaData,
+          };
         },
       },
     ],

@@ -1,22 +1,71 @@
 import { generateBarchartSvg } from "../charts/BarchartService";
 import { BarchartData } from "../../data/interfaces/BarchartData";
-import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../../data/interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
+import { CapacityTrackerTotalHoursAgencyWorked } from "../../data/interfaces/CapacityTrackerTotalHoursAgencyWorked";
 import { MetricCardData } from "../../data/interfaces/MetricCardData";
 
-class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
-  private capacityTrackerData: BarchartData[];
+class CapacityTrackerTotalHoursAgencyWorkedService {
+  private totalHoursAgencyWorkedByRegionData: BarchartData[];
+  private totalHoursAgencyWorkedByLaData: BarchartData[];
 
-  constructor(data: CapacityTrackerTotalHoursAgencyWorkedByRegionData[]) {
-    this.capacityTrackerData = this.transformToChartData(data);
+  constructor(
+    capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorked[],
+    capacityTrackerTotalHoursAgencyWorkedByLaData: CapacityTrackerTotalHoursAgencyWorked[]
+  ) {
+    this.totalHoursAgencyWorkedByRegionData = this.transformToChartData(
+      capacityTrackerTotalHoursAgencyWorkedByRegionData
+    );
+    this.totalHoursAgencyWorkedByLaData = this.transformToChartData(
+      capacityTrackerTotalHoursAgencyWorkedByLaData
+    );
   }
 
-  public getCapacityTrackerData() {
-    return this.capacityTrackerData;
+  public getTotalHoursAgencyWorkedByRegionData() {
+    return this.totalHoursAgencyWorkedByRegionData;
+  }
+
+  public getTotalHoursAgencyWorkedByLaData() {
+    return this.totalHoursAgencyWorkedByLaData;
+  }
+
+  public createByRegionBarchart(): SVGSVGElement | null {
+    return generateBarchartSvg({
+      data: this.totalHoursAgencyWorkedByRegionData,
+      width: 675,
+      height: 400,
+      xLabel: "Region",
+      yLabel: "Total hours worked that are agency",
+      title: "",
+      medianLineColor: "#000000",
+      barColor: "#1d70b8",
+      showLegend: false,
+      showToolTip: true,
+      shortenLabels: false,
+      yAxisAsPercentage: true,
+      tickCount: 8,
+    });
+  }
+
+  public createByLaBarchart(): SVGSVGElement | null {
+    return generateBarchartSvg({
+      data: this.totalHoursAgencyWorkedByLaData,
+      width: 675,
+      height: 400,
+      xLabel: "Region",
+      yLabel: "Total hours worked that are agency",
+      title: "",
+      medianLineColor: "#000000",
+      barColor: "#1d70b8",
+      showLegend: false,
+      showToolTip: true,
+      shortenLabels: false,
+      yAxisAsPercentage: true,
+      tickCount: 8,
+    });
   }
 
   public getMetricCardData(): MetricCardData {
     const barchart = generateBarchartSvg({
-      data: this.capacityTrackerData,
+      data: this.totalHoursAgencyWorkedByRegionData,
       width: 270,
       height: 200,
       xLabel: "",
@@ -45,16 +94,14 @@ class CapacityTrackerTotalHoursAgencyWorkedByRegionService {
   }
 
   private transformToChartData(
-    data: CapacityTrackerTotalHoursAgencyWorkedByRegionData[]
+    data: CapacityTrackerTotalHoursAgencyWorked[]
   ): BarchartData[] {
-    return data.map(
-      (entry: CapacityTrackerTotalHoursAgencyWorkedByRegionData) => ({
-        xAxisValue: entry.location_name,
-        metric: entry.metric,
-        value: entry.value,
-      })
-    );
+    return data.map((entry: CapacityTrackerTotalHoursAgencyWorked) => ({
+      xAxisValue: entry.location_name,
+      metric: entry.metric,
+      value: entry.value,
+    }));
   }
 }
 
-export default CapacityTrackerTotalHoursAgencyWorkedByRegionService;
+export default CapacityTrackerTotalHoursAgencyWorkedService;

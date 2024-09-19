@@ -1,5 +1,6 @@
-import { CapacityTrackerTotalHoursAgencyWorkedByRegionData } from "../interfaces/CapacityTrackerTotalHoursAgencyWorkedByRegionData";
+import { CapacityTrackerTotalHoursAgencyWorked } from "../interfaces/CapacityTrackerTotalHoursAgencyWorked";
 
 export type LoaderData = {
-  capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorkedByRegionData[];
+  capacityTrackerTotalHoursAgencyWorkedByRegionData: CapacityTrackerTotalHoursAgencyWorked[];
+  capacityTrackerTotalHoursAgencyWorkedByLaData: CapacityTrackerTotalHoursAgencyWorked[];
 };
