@@ -1,6 +1,17 @@
 import React from "react";
 
 const MainCategoriesSearch: React.FC = () => {
+  const categoryOptions: Array<string> = [
+    "All categories",
+    "ASC market supply",
+    "Quality of care",
+    "User outcomes",
+    "Financial health of the ASC sector",
+    "ASC capacity",
+    "ASC workforce",
+    "Demand and demographics",
+  ];
+
   return (
     <>
       <div className="govuk-grid-row">
@@ -18,10 +29,9 @@ const MainCategoriesSearch: React.FC = () => {
         <div className="govuk-grid-column-one-quarter govuk-!-padding-left-0">
           <div className="govuk-form-group govuk-!-margin-bottom-2">
             <select className="govuk-select">
-              <option>All categories</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              {categoryOptions.map((category) => (
+                <option>{category}</option>
+              ))}
             </select>
           </div>
         </div>

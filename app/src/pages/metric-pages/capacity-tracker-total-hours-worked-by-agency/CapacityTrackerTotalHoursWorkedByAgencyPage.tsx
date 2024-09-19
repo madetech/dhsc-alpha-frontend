@@ -149,7 +149,11 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               </div>
             </div>
           )}
-          <MetricDetailsDownloadAndShareBar />
+          <MetricDetailsDownloadAndShareBar
+            data={data}
+            filename="PercentageOfTotalWorkHoursCoveredByAgencyStaffByRegion"
+            xLabel="Region"
+          />
           <MetricDescription
             title="Percentage of Total Work Hours Covered by Agency Staff"
             body="This chart displays the proportion of total work hours covered
