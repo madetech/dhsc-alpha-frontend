@@ -51,7 +51,7 @@ const RegisterPage: React.FC = () => {
                 </a>
               </li>
               <li className="govuk-!-margin-bottom-2">
-                <a className="govuk-link" href="/about">
+                <a className="govuk-link" href="#">
                   About Us
                 </a>
               </li>
