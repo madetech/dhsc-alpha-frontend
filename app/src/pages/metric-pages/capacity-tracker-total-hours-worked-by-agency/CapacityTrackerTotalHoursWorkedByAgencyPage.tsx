@@ -24,7 +24,21 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
 
   const [selectMetricViewValue, setSelectMetricViewValue] =
     useState("barchart");
+
   const [metricView, setMetricView] = useState("barchart");
+
+  const [selectLocationLevelValue, setSelectLocationLevelValue] =
+    useState("region");
+
+  const [locationLevel, setLocationLevel] = useState("region");
+
+  const handleLocationLevelDropdownChange = (selectedValue: string) => {
+    setSelectLocationLevelValue(selectedValue);
+  };
+
+  const handleUpdateLocationLevel = () => {
+    setLocationLevel(selectLocationLevelValue);
+  };
 
   const handleMetricViewDropdownChange = (selectedValue: string) => {
     setSelectMetricViewValue(selectedValue);
@@ -100,8 +114,11 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <OrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
           <MetricDetailsFilterBar
+            selectedLocationLevel={selectLocationLevelValue}
             selectedMetricView={selectMetricViewValue}
+            onLocationLevelDropdownChange={handleLocationLevelDropdownChange}
             onMetricViewDropdownChange={handleMetricViewDropdownChange}
+            onLocationLevelButtonClick={handleUpdateLocationLevel}
             onMetricViewButtonClick={handleUpdateMetricView}
           />
           <div className="govuk-grid-row">
