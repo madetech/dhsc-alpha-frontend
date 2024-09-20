@@ -2,20 +2,32 @@ import React from "react";
 import "./metricDetailsFilterBar.scss";
 
 type Props = {
-  selectedView: string;
-  onDropdownChange: (selectedValue: string) => void;
-  onButtonClick: () => void;
+  selectedLocationLevel: string;
+  selectedMetricView: string;
+  onLocationLevelDropdownChange: (selectedLocationLevelValue: string) => void;
+  onMetricViewDropdownChange: (selectedMetricViewValue: string) => void;
+  onLocationLevelButtonClick: () => void;
+  onMetricViewButtonClick: () => void;
 };
 
 const MetricDetailsFilterBar: React.FC<Props> = ({
-  selectedView,
-  onDropdownChange,
-  onButtonClick,
+  selectedLocationLevel,
+  selectedMetricView,
+  onLocationLevelDropdownChange,
+  onMetricViewDropdownChange,
+  onLocationLevelButtonClick,
+  onMetricViewButtonClick,
 }) => {
-  const handleDropdownChange = (
+  const handleMetricViewDropdownChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    onDropdownChange(event.target.value);
+    onMetricViewDropdownChange(event.target.value);
+  };
+
+  const handleLocationLevelDropdownChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    onLocationLevelDropdownChange(event.target.value);
   };
 
   return (
@@ -43,11 +55,16 @@ const MetricDetailsFilterBar: React.FC<Props> = ({
               <option>2023</option>
               <option>2022</option>
             </select>
-            <select className="govuk-select dhsc-!-select-s govuk-!-margin-right-2">
-              <option>Regional</option>
-              <option>Local Authority</option>
+            <select
+              className="govuk-select dhsc-!-select-s govuk-!-margin-right-2"
+              value={selectedLocationLevel}
+              onChange={handleLocationLevelDropdownChange}
+            >
+              <option value="region">Regional</option>
+              <option value="localAuthority">Local Authority</option>
             </select>
             <button
+              onClick={onLocationLevelButtonClick}
               type="submit"
               className="govuk-button govuk-button--secondary govuk-!-margin-bottom-3"
               data-module="govuk-button"
@@ -59,15 +76,15 @@ const MetricDetailsFilterBar: React.FC<Props> = ({
         <div className="govuk-grid-column-one-third govuk-!-padding-left-0">
           <div className="govuk-form-group govuk-!-margin-bottom-3">
             <select
-              value={selectedView}
-              onChange={handleDropdownChange}
+              value={selectedMetricView}
+              onChange={handleMetricViewDropdownChange}
               className="govuk-select dhsc-!-select-s govuk-!-margin-right-2"
             >
               <option value="barchart">Barchart</option>
               <option value="table">Table</option>
             </select>
             <button
-              onClick={onButtonClick}
+              onClick={onMetricViewButtonClick}
               type="submit"
               className="govuk-button govuk-button--secondary govuk-!-margin-bottom-3"
               data-module="govuk-button"

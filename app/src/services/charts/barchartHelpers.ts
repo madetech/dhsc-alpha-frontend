@@ -53,13 +53,21 @@ export function createYAxisScale(
     .range([height - margin.bottom, margin.top]);
 }
 
-export function calculateMedian(
-  data: BarchartData[],
-  showMedian: boolean
-): number | null {
-  return showMedian
-    ? d3.median(data, (dataItem) => dataItem.value) ?? null
-    : null;
+export function calculateQuartiles(data: BarchartData[]) {
+  const sortedData = data.map((d) => d.value).sort((a, b) => a - b);
+
+  const median = d3.median(sortedData);
+  const q1 = d3.quantile(sortedData, 0.25);
+  const q3 = d3.quantile(sortedData, 0.75);
+
+  return {
+    median,
+    quartiles: {
+      Q1: q1 ?? 0,
+      Q2: median ?? 0,
+      Q3: q3 ?? 0,
+    },
+  };
 }
 
 export function renderBars(
@@ -67,6 +75,9 @@ export function renderBars(
   data: BarchartData[],
   xAxisScale: d3.ScaleBand<string>,
   yAxisScale: d3.ScaleLinear<number, number>,
+  quartiles: { Q1: number; Q2: number; Q3: number },
+  quartileColors: string[],
+  showQuartileRanges: boolean,
   barColor: string,
   height: number,
   margin: { top: number; right: number; bottom: number; left: number }
@@ -86,7 +97,21 @@ export function renderBars(
       const yPos = yAxisScale(dataItem.value);
       return yPos !== undefined ? height - margin.bottom - yPos : 0;
     })
-    .attr("fill", barColor);
+    .attr("fill", (dataItem) => {
+      if (showQuartileRanges) {
+        if (dataItem.value <= quartiles.Q1) {
+          return quartileColors[0];
+        } else if (dataItem.value <= quartiles.Q2) {
+          return quartileColors[1];
+        } else if (dataItem.value <= quartiles.Q3) {
+          return quartileColors[2];
+        } else {
+          return quartileColors[3];
+        }
+      } else {
+        return barColor;
+      }
+    });
 
   barRectElements.exit().remove();
 }
@@ -124,7 +149,7 @@ export function renderYAxis(
     .tickSizeOuter(0);
 
   if (yAxisAsPercentage) {
-    yAxis.tickFormat((d: any) => `${d * 100}%`);
+    yAxis.tickFormat((d: any) => `${(d * 100).toFixed(2)}%`);
   }
 
   chartSvg

@@ -6,8 +6,7 @@ import MainCategoriesSearch from "../../../components/common/main-categories-sea
 import OrganisationFilter from "../../../components/common/organisation-filter/OrganisationFilter";
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../../../data/types/LoaderData";
-import { generateBarchartSvg } from "../../../services/charts/BarchartService";
-import CapacityTrackerTotalHoursAgencyWorkedByRegionService from "../../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
+import CapacityTrackerTotalHoursAgencyWorkedService from "../../../services/capacity-tracker/CapacityTrackerTotalHoursAgencyWorkedByRegionService";
 import MetricDetailsFilterBar from "../../../components/metric-components/metric-details-filter-bar/MetricDetailsFilterBar";
 import MetricDetailsDownloadAndShareBar from "../../../components/metric-components/metric-details-download-and-share-bar/MetricDetailsDownloadAndShareBar";
 import YourFavouriteMetricsSidePanel from "../../../components/common/panels/your-favourite-metrics-side-panel/YourFavouriteMetricsSidePanel";
@@ -17,42 +16,57 @@ import KnowledgeCentreSidePanel from "../../../components/common/panels/knowledg
 import DataLimitationsContainer from "../../../components/common/data-limitations-container/DataLimitationsContainer";
 import SmartInsights from "../../../components/common/smart-insights/SmartInsights";
 import MetricDescription from "../../../components/metric-components/metric-description/MetricDescription";
+import MetricTable from "../../../components/metric-components/metric-table/MetricTable";
 
 const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
-  const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
-    useLoaderData() as LoaderData;
+  const {
+    capacityTrackerTotalHoursAgencyWorkedByRegionData,
+    capacityTrackerTotalHoursAgencyWorkedByLaData,
+  } = useLoaderData() as LoaderData;
+
+  const capacityTrackerTotalHoursAgencyWorkedService =
+    new CapacityTrackerTotalHoursAgencyWorkedService(
+      capacityTrackerTotalHoursAgencyWorkedByRegionData,
+      capacityTrackerTotalHoursAgencyWorkedByLaData
+    );
 
   const [selectMetricViewValue, setSelectMetricViewValue] =
     useState("barchart");
+
   const [metricView, setMetricView] = useState("barchart");
 
-  const handleDropdownChange = (selectedValue: string) => {
+  const [selectLocationLevelValue, setSelectLocationLevelValue] =
+    useState("region");
+
+  const [locationLevel, setLocationLevel] = useState("region");
+
+  const handleLocationLevelDropdownChange = (selectedValue: string) => {
+    setSelectLocationLevelValue(selectedValue);
+  };
+
+  const handleUpdateLocationLevel = () => {
+    setLocationLevel(selectLocationLevelValue);
+  };
+
+  const handleMetricViewDropdownChange = (selectedValue: string) => {
     setSelectMetricViewValue(selectedValue);
   };
 
-  const handleUpdateView = () => {
+  const handleUpdateMetricView = () => {
     setMetricView(selectMetricViewValue);
   };
 
-  const data = new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
-    capacityTrackerTotalHoursAgencyWorkedByRegionData
-  ).getCapacityTrackerData();
+  const getCurrentDataSet = () => {
+    return locationLevel === "region"
+      ? capacityTrackerTotalHoursAgencyWorkedService.getTotalHoursAgencyWorkedByRegionData()
+      : capacityTrackerTotalHoursAgencyWorkedService.getTotalHoursAgencyWorkedByLaData();
+  };
 
-  const barchart = generateBarchartSvg({
-    data: data,
-    width: 675,
-    height: 400,
-    xLabel: "Region",
-    yLabel: "Total hours worked that are agency",
-    title: "",
-    medianLineColor: "#000000",
-    barColor: "#1d70b8",
-    showLegend: false,
-    showToolTip: true,
-    shortenLabels: false,
-    yAxisAsPercentage: true,
-    tickCount: 8,
-  });
+  const barchart =
+    locationLevel === "region"
+      ? capacityTrackerTotalHoursAgencyWorkedService.createByRegionBarchart()
+      : capacityTrackerTotalHoursAgencyWorkedService.createByLaBarchart();
+
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,7 +76,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
         svgContainerRef.current.appendChild(barchart);
       }
     }
-  }, [data]);
+  }, [barchart]);
 
   const breadcrumbs: Array<Breadcrumb> = [
     {
@@ -100,9 +114,12 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <OrganisationFilter />
           <hr className="govuk-section-break govuk-section-break--s govuk-section-break--visible govuk-!-margin-bottom-7"></hr>
           <MetricDetailsFilterBar
-            selectedView={selectMetricViewValue}
-            onDropdownChange={handleDropdownChange}
-            onButtonClick={handleUpdateView}
+            selectedLocationLevel={selectLocationLevelValue}
+            selectedMetricView={selectMetricViewValue}
+            onLocationLevelDropdownChange={handleLocationLevelDropdownChange}
+            onMetricViewDropdownChange={handleMetricViewDropdownChange}
+            onLocationLevelButtonClick={handleUpdateLocationLevel}
+            onMetricViewButtonClick={handleUpdateMetricView}
           />
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
@@ -118,49 +135,22 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="govuk-grid-row">
-              <div className="govuk-grid-column-full">
-                <table className="govuk-table">
-                  <thead className="govuk-table__head">
-                    <tr className="govuk-table__row">
-                      <th scope="col" className="govuk-table__header">
-                        Region
-                      </th>
-                      <th scope="col" className="govuk-table__header">
-                        Total hours worked that are agency %
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="govuk-table__body">
-                    {capacityTrackerTotalHoursAgencyWorkedByRegionData.map(
-                      (entry) => (
-                        <tr className="govuk-table__row">
-                          <th scope="row" className="govuk-table__header">
-                            {entry.location_name}
-                          </th>
-                          <td className="govuk-table__cell">
-                            {(entry.value * 100).toFixed(2) + "%"}
-                          </td>
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <MetricTable
+              headers={[locationLevel, "Total hours worked that are agency %"]}
+              tableData={getCurrentDataSet()}
+            />
           )}
           <MetricDetailsDownloadAndShareBar
-            data={data}
-            filename="PercentageOfTotalWorkHoursCoveredByAgencyStaffByRegion"
-            xLabel="Region"
+            data={getCurrentDataSet()}
+            filename="PercentageOfTotalWorkHoursCoveredByAgencyStaff"
+            xLabel={locationLevel}
           />
           <MetricDescription
             title="Percentage of Total Work Hours Covered by Agency Staff"
             body="This chart displays the proportion of total work hours covered
-                by agency staff across different regions. It highlights regional
-                variations, with some areas showing a greater reliance on agency
-                staff than others. The dotted line represents the median agency
-                coverage across all regions."
+                by agency staff. It highlights variations, with some areas showing
+                a greater reliance on agency staff than others. The dotted line 
+                represents the median agency coverage across all selection locations."
             dataSource="Capacity Tracker"
           />
           <SmartInsights

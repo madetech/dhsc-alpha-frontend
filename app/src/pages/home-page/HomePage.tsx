@@ -25,12 +25,15 @@ const HomePage: React.FC = () => {
     },
   ];
 
-  const { capacityTrackerTotalHoursAgencyWorkedByRegionData } =
-    useLoaderData() as LoaderData;
+  const {
+    capacityTrackerTotalHoursAgencyWorkedByRegionData,
+    capacityTrackerTotalHoursAgencyWorkedByLaData,
+  } = useLoaderData() as LoaderData;
 
   const capacityTrackerTotalHoursAgencyWorkedByRegionService =
     new CapacityTrackerTotalHoursAgencyWorkedByRegionService(
-      capacityTrackerTotalHoursAgencyWorkedByRegionData
+      capacityTrackerTotalHoursAgencyWorkedByRegionData,
+      capacityTrackerTotalHoursAgencyWorkedByLaData
     );
 
   const metricCardsData: Array<MetricCardData> = [

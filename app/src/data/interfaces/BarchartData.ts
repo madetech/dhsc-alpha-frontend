@@ -14,6 +14,9 @@ export interface BarchartProps {
   medianLineColor?: string;
   medianLineDash?: string;
   title?: string;
+  showXValues?: boolean;
+  showQuartileRanges?: boolean;
+  highlightQuartileColors?: Array<string>;
   showMedian?: boolean;
   showLegend?: boolean;
   shortenLabels?: boolean;

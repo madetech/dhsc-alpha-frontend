@@ -3,7 +3,6 @@ import {
   initializeSvg,
   createXAxisScale,
   createYAxisScale,
-  calculateMedian,
   renderBars,
   renderXAxis,
   renderYAxis,
@@ -12,6 +11,7 @@ import {
   renderMedianLine,
   renderLegend,
   truncateLabels,
+  calculateQuartiles,
 } from "./barchartHelpers";
 
 export function generateBarchartSvg({
@@ -24,6 +24,9 @@ export function generateBarchartSvg({
   medianLineColor = "#808000",
   medianLineDash = "5,5",
   title = "Barchart",
+  showXValues = true,
+  showQuartileRanges = false,
+  highlightQuartileColors = ["#00703c", "#1d70b8", "#d4351c", "#f47738"],
   showMedian = true,
   showLegend = true,
   shortenLabels = false,
@@ -36,7 +39,7 @@ export function generateBarchartSvg({
   const dynamicMargin = {
     top: height * 0.1,
     right: width * 0.1,
-    bottom: height * 0.4,
+    bottom: showXValues ? height * 0.4 : height * 0.2,
     left: width * 0.15,
   };
 
@@ -57,18 +60,25 @@ export function generateBarchartSvg({
 
   const xAxisScale = createXAxisScale(data, width, dynamicMargin);
   const yAxisScale = createYAxisScale(data, height, dynamicMargin);
-  const median = calculateMedian(data, showMedian);
+  const { median, quartiles } = calculateQuartiles(data);
 
   renderBars(
     chartSvg,
     data,
     xAxisScale,
     yAxisScale,
+    quartiles,
+    highlightQuartileColors,
+    showQuartileRanges,
     barColor,
     height,
     dynamicMargin
   );
-  renderXAxis(chartSvg, xAxisScale, height, dynamicMargin);
+
+  if (showXValues) {
+    renderXAxis(chartSvg, xAxisScale, height, dynamicMargin);
+  }
+
   renderYAxis(
     chartSvg,
     yAxisScale,
@@ -82,7 +92,7 @@ export function generateBarchartSvg({
     addTooltip(chartSvg);
   }
 
-  if (showMedian && median !== null) {
+  if (showMedian && median) {
     renderMedianLine(
       chartSvg,
       median,
