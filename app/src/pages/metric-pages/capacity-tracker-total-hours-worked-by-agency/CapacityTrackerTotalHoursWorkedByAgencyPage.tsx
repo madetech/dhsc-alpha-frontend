@@ -124,7 +124,7 @@ const CapacityTrackerTotalHoursWorkedByAgencyPage: React.FC = () => {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-full">
               <h1 className="govuk-heading-l">
-                å Percentage of Total Work Hours Covered by Agency Staff
+                Percentage of Total Work Hours Covered by Agency Staff
               </h1>
             </div>
           </div>

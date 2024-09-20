@@ -32,7 +32,7 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
       data: this.totalHoursAgencyWorkedByRegionData,
       width: 675,
       height: 400,
-      xLabel: "Region",
+      xLabel: "Regions",
       yLabel: "Total hours worked that are agency",
       title: "",
       medianLineColor: "#000000",
@@ -50,9 +50,11 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
       data: this.totalHoursAgencyWorkedByLaData,
       width: 675,
       height: 400,
-      xLabel: "Region",
+      xLabel: "Local Authorities",
       yLabel: "Total hours worked that are agency",
       title: "",
+      showXValues: false,
+      showQuartileRanges: true,
       medianLineColor: "#000000",
       barColor: "#1d70b8",
       showLegend: false,
@@ -96,11 +98,13 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
   private transformToChartData(
     data: CapacityTrackerTotalHoursAgencyWorked[]
   ): BarchartData[] {
-    return data.map((entry: CapacityTrackerTotalHoursAgencyWorked) => ({
-      xAxisValue: entry.location_name,
-      metric: entry.metric,
-      value: entry.value,
-    }));
+    return data
+      .map((entry: CapacityTrackerTotalHoursAgencyWorked) => ({
+        xAxisValue: entry.location_name,
+        metric: entry.metric,
+        value: entry.value,
+      }))
+      .sort((a, b) => a.value - b.value);
   }
 }
 
