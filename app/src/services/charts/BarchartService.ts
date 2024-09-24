@@ -47,6 +47,20 @@ export function generateBarchartSvg({
     "http://www.w3.org/2000/svg",
     "svg"
   );
+
+  svgElement.setAttribute("role", "img");
+  svgElement.setAttribute(
+    "aria-label",
+    `Bar chart titled ${title} showing data distribution.`
+  );
+
+  const titleElement = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "title"
+  );
+  titleElement.textContent = `Bar chart titled ${title} showing data distribution`;
+  svgElement.appendChild(titleElement);
+
   const ref = { current: svgElement };
 
   const chartSvg = initializeSvg(ref, width, height);
@@ -86,7 +100,7 @@ export function generateBarchartSvg({
     tickCount,
     yAxisAsPercentage
   );
-  renderLabels(chartSvg, width, height, dynamicMargin, xLabel, yLabel, title);
+  renderLabels(chartSvg, width, height, dynamicMargin, xLabel, yLabel);
 
   if (showToolTip) {
     addTooltip(chartSvg);
