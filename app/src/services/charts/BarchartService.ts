@@ -40,7 +40,7 @@ export function generateBarchartSvg({
     top: height * 0.1,
     right: width * 0.1,
     bottom: showXValues ? height * 0.4 : height * 0.2,
-    left: width * 0.15,
+    left: width * 0.175,
   };
 
   const svgElement = document.createElementNS(
