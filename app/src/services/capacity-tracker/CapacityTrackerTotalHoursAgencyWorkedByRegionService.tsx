@@ -34,7 +34,8 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
       height: 400,
       xLabel: "Regions",
       yLabel: "Total hours worked that are agency",
-      title: "",
+      title:
+        "Percentage of Total Work Hours Covered by Agency Staff, by Region",
       medianLineColor: "#000000",
       barColor: "#1d70b8",
       showLegend: false,
@@ -52,7 +53,8 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
       height: 400,
       xLabel: "Local Authorities",
       yLabel: "Total hours worked that are agency",
-      title: "",
+      title:
+        "Percentage of Total Work Hours Covered by Agency Staff, by Local Authority",
       showXValues: false,
       showQuartileRanges: true,
       medianLineColor: "#000000",
@@ -72,7 +74,8 @@ class CapacityTrackerTotalHoursAgencyWorkedService {
       height: 200,
       xLabel: "",
       yLabel: "",
-      title: "",
+      title:
+        "Percentage of Total Work Hours Covered by Agency Staff, by Region",
       barColor: "#1d70b8",
       medianLineColor: "#000000",
       showLegend: false,

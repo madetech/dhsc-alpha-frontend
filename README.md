@@ -20,11 +20,11 @@
 This is the Repo/Code for the DHSC Data Access Platform Frontend. This application primarily utilises the following technologies:
 
 - [React](https://react.dev/)
-- [GovUk React](https://govuk-react.github.io/govuk-react/?path=/docs/welcome--docs)
+- [GOV.UK Design System](https://design-system.service.gov.uk/)
 - [Python](https://www.python.org/)
 - [Azure](https://azure.microsoft.com/en-gb) - [Web](https://azure.microsoft.com/en-gb/products/app-service/web), [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-csharp) and [Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines)
 
-With this project we aim to:
+With this project we aim to de-risk and question technical assumptions and challenges ready to create a service which:
 
 - To improve both quality and efficiency of data and insight analysis at a local, regional and national level
 - To enable better decision making across all stakeholders to improve the delivery of high-quality care across the sector
@@ -56,7 +56,7 @@ To run the application you must ensure you've followed the setup steps
 - To run the app via Docker in the project root directory run: `make docker-up`
 - To run the app via Node:
   - Navigate to app directory: `cd app`
-  - spin up the application: `npm start`
+  - spin up the application: `npm run dev`
   - To run tests (_currently there is low test coverage_) `npm test`
 
 ## Continuous Integration, Development and Deployment
@@ -69,18 +69,24 @@ This project uses Azure DevOps Pipelines for continuous integration and deployme
 - Build and Push: This steps builds a docker image and pushes to container registry
 - Deploy: This step deploys the application to Azure Web App
 
+## Function App
+
+This project also has the code for the Azure functions app which is used primary to query an Azure SQL Database holding metric data for our frontend insights to show insight. Currently no local environment has been configured
+for this function app and as a result the endpoints locally return json files given this is a simple alpha application it is unlikely this functionality will be implemented.
+
 ## Further documentation
 
-### High Level Architechture Diagram - Alpha 
+### High Level Architecture Diagram - Alpha
+
 ![Diagram of the DHSC DAP Platform Alpha Architecture](diagrams/dhsc_alpha_architecture.png)
 
+### Proposed High Level Architecture Diagram - Beta
 
-### Proposed High Level Architechture Diagram - Beta
 ![Diagram of the Proposed DHSC DAP Platform Beta Architecture](diagrams/dhsc_dap_beta.png)
+
 ### Related Repositories
 
-| Name                                                                               | Description                                                                                                                                 |
-| :--------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| [DHSC Alpha Data](https://github.com/madetech/dhsc-alpha-data)                     | Repository for Data work required for DHSC Alpha                                                                                            |
-| [DHSC Alpha Infrastructure](https://github.com/madetech/dhsc-alpha-infrastructure) | Infrastructure Repository for the DHSC Alpha Delivery                                                                                       |
-| [Govuk React](https://github.com/govuk-react/govuk-react?tab=readme-ov-file)       | An implementation of the [GOV.UK Design System](https://govuk-design-system-production.cloudapps.digital/) in [React](https://reactjs.org/) |
+| Name                                                                               | Description                                           |
+| :--------------------------------------------------------------------------------- | :---------------------------------------------------- |
+| [DHSC Alpha Data](https://github.com/madetech/dhsc-alpha-data)                     | Repository for Data work required for DHSC Alpha      |
+| [DHSC Alpha Infrastructure](https://github.com/madetech/dhsc-alpha-infrastructure) | Infrastructure Repository for the DHSC Alpha Delivery |

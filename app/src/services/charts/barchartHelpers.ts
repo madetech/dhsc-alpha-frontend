@@ -165,8 +165,7 @@ export function renderLabels(
   height: number,
   margin: { top: number; right: number; bottom: number; left: number },
   xLabel: string,
-  yLabel: string,
-  title: string
+  yLabel: string
 ): void {
   chartSvg
     .append("text")
@@ -183,16 +182,6 @@ export function renderLabels(
     .style("text-anchor", "middle")
     .text(yLabel)
     .attr("class", "y-axis-label");
-
-  chartSvg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", margin.top / 2)
-    .style("text-anchor", "middle")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text(title)
-    .attr("class", "chart-title");
 }
 
 export function addTooltip(
